@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>qnt. | Geometric Capital Helix</title>
+  <title>qnt. | Prototype 5: Liquid Glass Sovereign Suite 05 (Dodecahedron Core)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
@@ -19,13 +19,11 @@
     h1, h2, h3, .font-title {
       font-family: 'Playfair Display', serif !important;
     }
-    
-    /* TRUE LIQUID FROSTED GLASS EFFECT */
     .liquid-glass-panel {
-      background: rgba(255, 255, 255, 0.55) !important;
+      background: rgba(255,255,255,0.55) !important;
       backdrop-filter: blur(24px) saturate(180%);
       -webkit-backdrop-filter: blur(24px) saturate(180%);
-      border: 1.5px solid rgba(254, 205, 211, 0.8);
+      border: 1.5px solid rgba(254,205,211,0.8);
       border-radius: 32px;
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06), inset 0 0 0 1px rgba(255, 255, 255, 0.4);
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -35,11 +33,10 @@
       box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12), inset 0 0 0 1.5px #E11D48;
       border-color: #E11D48;
     }
-
     .glass-canvas-container {
       background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.1) 100%);
       backdrop-filter: blur(16px);
-      border: 2px solid rgba(254, 205, 211, 0.8);
+      border: 2px solid rgba(254,205,211,0.8);
       border-radius: 32px;
       position: relative;
       cursor: grab;
@@ -56,55 +53,50 @@
     <header class="flex justify-between items-center pb-8 border-b-2 border-slate-900/10 mb-12">
       <div class="flex items-center space-x-4">
         <a href="index.html" class="text-xs font-mono font-black px-4 py-2.5 rounded-xl bg-white border-2 border-slate-900 shadow-[3px_3px_0px_#000] hover:bg-black hover:text-white transition">
-          &larr; Liquid Glass Lab Hub
+          &larr; 50-Prototype Master Hub
         </a>
         <div class="text-4xl font-black font-title tracking-tighter">qnt.</div>
       </div>
       <div class="px-4 py-2.5 rounded-xl bg-white border-2 border-slate-900 text-xs font-mono font-black shadow-[3px_3px_0px_#000]">
-        LIQUID GLASS • SUITE 05
+        LIQUID GLASS SUITE #05
       </div>
     </header>
 
     <!-- HERO & 3D INTERACTIVE GLASS STAGE SPLIT -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-16">
-      
-      <!-- LEFT HERO CONTENT -->
       <div class="lg:col-span-7">
         <div class="inline-block bg-white border-2 border-slate-900 text-xs font-mono font-black px-4 py-1.5 rounded-full mb-4 shadow-[3px_3px_0px_#000]">
-          3D Double-Helix Liquid Glass Nodes Compounding Upward in Real Time
+          3D LIQUID GLASS ARCHITECTURE • Dodecahedron Core
         </div>
         <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight mb-4 leading-[1.05]">
-          Geometric Capital Helix
+          Liquid Glass Sovereign Suite 05 (Dodecahedron Core)
         </h1>
         <p class="text-sm md:text-base font-medium leading-relaxed opacity-80 mb-8 max-w-xl">
-          Architecture: <strong class="underline">15-Year Life Cycle Milestone Roadmap (Bedrock ➔ Acceleration ➔ Perpetual Sweep)</strong>. Physical glass transmission shaders running on Three.js WebGL with tactile drag &amp; inertial physics.
+          Engineered with physical optical transmission shaders (`MeshPhysicalMaterial`), Sub-surface Refraction (IOR: 1.52), and interactive gesture inertia.
         </p>
         <div class="flex gap-4">
           <a href="#tool" class="bg-black text-white font-mono font-black text-xs px-6 py-4 rounded-2xl border-2 border-black shadow-[4px_4px_0px_#E11D48] hover:bg-white hover:text-black transition">
-            Test Analytical Tool &rarr;
+            Explore 15-Year Capital Velocity Ladder &rarr;
           </a>
         </div>
       </div>
 
-      <!-- RIGHT 3D LIQUID GLASS INTERACTIVE STAGE (DRAG & ROTATE DIRECTLY ON CANVAS) -->
       <div class="lg:col-span-5 h-[380px] sm:h-[440px] glass-canvas-container shadow-2xl overflow-hidden flex flex-col justify-between p-4">
         <div class="flex justify-between items-center z-10">
-          <span class="text-[10px] font-mono font-black bg-black text-white px-2.5 py-1 rounded-lg">3D LIQUID GLASS OBJECT</span>
+          <span class="text-[10px] font-mono font-black bg-black text-white px-2.5 py-1 rounded-lg">3D LIQUID GLASS OBJECT #05</span>
           <span class="text-[10px] font-mono font-bold text-slate-600 bg-white/80 px-2 py-0.5 rounded">🖱️ Drag to Rotate 3D Glass</span>
         </div>
         
         <canvas id="canvas3d" class="w-full h-full absolute inset-0 z-0"></canvas>
 
         <div class="text-[10px] font-mono font-bold text-slate-700 bg-white/80 p-2 rounded-xl z-10 text-center">
-          Material: Transmission Glass (IOR: 1.52) • Sub-surface Refraction
+          Material: Physical Transmission Glass (IOR: 1.52) • 21st.dev Component Tokens
         </div>
       </div>
-
     </div>
 
     <!-- BESPOKE LIQUID GLASS ANALYTICAL TOOL -->
     <div id="tool" class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-      
       <div class="liquid-glass-panel p-8 lg:col-span-2">
         <div class="flex justify-between items-start mb-4">
           <div>
@@ -146,9 +138,7 @@
           Download Monograph PDF &rarr;
         </a>
       </div>
-
     </div>
-
   </div>
 
   <script>
@@ -178,32 +168,30 @@
       pt.position.set(-8, -4, 8);
       scene.add(pt);
 
-      
-          const group = new THREE.Group();
-          const gMat = new THREE.MeshPhysicalMaterial({ color: 0xF43F5E, metalness: 0.1, roughness: 0.05, transmission: 0.9, thickness: 1.5 });
-          const rMat = new THREE.MeshStandardMaterial({ color: 0xFB7185, metalness: 0.9, roughness: 0.2 });
+      const geo = new THREE.DodecahedronGeometry(3.4, 0);
+      const mat = new THREE.MeshPhysicalMaterial({
+        color: 0xFDA4AF,
+        metalness: 0.05,
+        roughness: 0.02,
+        transmission: 0.96,
+        thickness: 3.2,
+        ior: 1.52,
+        transparent: true,
+        opacity: 0.92
+      });
+      mesh = new THREE.Mesh(geo, mat);
+      scene.add(mesh);
 
-          for (let i = 0; i < 24; i++) {
-            const t = (i / 24) * Math.PI * 4;
-            const y = (i - 12) * 0.55;
-            const s1 = new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 16), gMat);
-            s1.position.set(Math.cos(t) * 2.8, y, Math.sin(t) * 2.8);
-            group.add(s1);
-            const s2 = new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 16), rMat);
-            s2.position.set(Math.cos(t + Math.PI) * 2.8, y, Math.sin(t + Math.PI) * 2.8);
-            group.add(s2);
-          }
-          mesh = group;
-          scene.add(mesh);
+      const core = new THREE.Mesh(new THREE.OctahedronGeometry(1.4, 0), new THREE.MeshStandardMaterial({ color: 0xF59E0B, metalness: 0.95, roughness: 0.1 }));
+      scene.add(core);
 
-          animateHook = (t) => {
-            if (!isDragging) {
-              group.rotation.y += 0.018;
-            }
-          };
-        
+      animateHook = (t) => {
+        if (!isDragging) {
+          mesh.rotation.x += 0.008; mesh.rotation.y += 0.012;
+          core.rotation.y -= 0.02;
+        }
+      };
 
-      // DIRECT 3D MOUSE & TOUCH INTERACTION ON THE GLASS CONTAINER
       container.addEventListener('mousedown', (e) => {
         isDragging = true;
         previousMousePosition = { x: e.clientX, y: e.clientY };

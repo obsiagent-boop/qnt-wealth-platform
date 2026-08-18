@@ -3,13 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>qnt. | The Million-Dollar 3D Prototype Lab (10 Master Suites)</title>
+  <title>qnt. | The 50 Liquid Glass Master Prototype Observatory</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&family=Syne:wght@800;900&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { background-color: #FAF8F5; color: #000; font-family: 'Plus Jakarta Sans', sans-serif; }
-    .million-card { background: #FFFFFF; border: 2.5px solid #000; border-radius: 28px; box-shadow: 6px 6px 0px #000; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); }
-    .million-card:hover { transform: translate(-3px, -3px); box-shadow: 12px 12px 0px #000; }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1.5px solid rgba(0, 0, 0, 0.1);
+      border-radius: 28px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      border-color: #06B6D4;
+    }
   </style>
 </head>
 <body class="p-6 md:p-12 min-h-screen">
@@ -18,200 +30,59 @@
     <!-- HEADER -->
     <div class="flex flex-col md:flex-row md:items-center justify-between border-b-4 border-black pb-8 mb-12">
       <div>
-        <div class="text-4xl sm:text-6xl font-black font-brand tracking-tighter">qnt<span class="text-cyan-500">.</span> 3D Master Suite</div>
-        <p class="text-slate-700 font-mono text-sm sm:text-base mt-2 font-bold">10 Bespoke Million-Dollar 3D Liquid Architectures, 21st.dev / Aceternity UX Paradigms, Pastel Palettes &amp; Non-Repeating Typographies</p>
+        <div class="text-4xl sm:text-6xl font-black font-brand tracking-tighter">qnt<span class="text-cyan-500">.</span> 50-Prototype Observatory</div>
+        <p class="text-slate-700 font-mono text-sm sm:text-base mt-2 font-bold">50 Standalone Liquid Glass 3D WebGL Architectures, Non-Repeating Pastel Palettes &amp; 21st.dev Component Registries</p>
       </div>
       <div class="mt-4 md:mt-0 flex gap-2 flex-wrap">
-        <span class="bg-black text-white text-xs font-mono font-black px-4 py-2.5 rounded-xl">10 BESPOKE MASTER BUILDS</span>
-        <span class="bg-cyan-300 text-black text-xs font-mono font-black px-4 py-2.5 rounded-xl border-2 border-black">100% FLUID 3D WEBGL</span>
+        <span class="bg-black text-white text-xs font-mono font-black px-4 py-2.5 rounded-xl">50 MASTER STANDALONE BUILDS</span>
+        <span class="bg-cyan-300 text-black text-xs font-mono font-black px-4 py-2.5 rounded-xl border-2 border-black">PHYSICAL TRANSMISSION GLASS</span>
       </div>
     </div>
 
-    <!-- 10 PROTOTYPES GRID -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      
-      <!-- P1 -->
-      <a href="proto1.html" class="million-card p-8 flex flex-col justify-between group border-l-8 border-l-amber-500">
-        <div>
-          <div class="flex justify-between items-center mb-3">
-            <span class="bg-amber-300 text-black font-mono font-black text-xs px-2.5 py-1 rounded-lg border border-black">ARCH 01</span>
-            <span class="font-mono text-xs font-bold text-slate-500">Syne x Plus Jakarta</span>
-          </div>
-          <h3 class="text-2xl font-black mb-2 group-hover:text-amber-600 transition">The Sovereign Liquid Vault</h3>
-          <p class="text-xs text-slate-700 leading-relaxed font-medium mb-6">
-            <strong>3D:</strong> Heavy metallic beveled Gold Coin with dual gyroscopic orbital halo rings.<br>
-            <strong>UX:</strong> Linear x Stripe Swiss Editorial with 200-Module SQL Table &amp; 6-Desk Allocator.
-          </p>
-        </div>
-        <div class="bg-black text-white text-center font-mono font-black text-xs py-3.5 rounded-xl group-hover:bg-amber-500 group-hover:text-black transition">
-          Launch Architecture 01 &rarr;
-        </div>
-      </a>
-
-      <!-- P2 -->
-      <a href="proto2.html" class="million-card p-8 flex flex-col justify-between group border-l-8 border-l-indigo-500">
-        <div>
-          <div class="flex justify-between items-center mb-3">
-            <span class="bg-indigo-300 text-black font-mono font-black text-xs px-2.5 py-1 rounded-lg border border-black">ARCH 02</span>
-            <span class="font-mono text-xs font-bold text-slate-500">Clash Display x Satoshi</span>
-          </div>
-          <h3 class="text-2xl font-black mb-2 group-hover:text-indigo-600 transition">Prismatic Crystal Matrix</h3>
-          <p class="text-xs text-slate-700 leading-relaxed font-medium mb-6">
-            <strong>3D:</strong> Refractive Icosahedron Crystal with physical transmission dispersion &amp; gold core.<br>
-            <strong>UX:</strong> Vercel Precision x 21st.dev with 10,000-Path Monte Carlo Probabilistic Fan Chart.
-          </p>
-        </div>
-        <div class="bg-black text-white text-center font-mono font-black text-xs py-3.5 rounded-xl group-hover:bg-indigo-500 group-hover:text-black transition">
-          Launch Architecture 02 &rarr;
-        </div>
-      </a>
-
-      <!-- P3 -->
-      <a href="proto3.html" class="million-card p-8 flex flex-col justify-between group border-l-8 border-l-emerald-500">
-        <div>
-          <div class="flex justify-between items-center mb-3">
-            <span class="bg-emerald-300 text-black font-mono font-black text-xs px-2.5 py-1 rounded-lg border border-black">ARCH 03</span>
-            <span class="font-mono text-xs font-bold text-slate-500">Cabinet Grotesk x Inter</span>
-          </div>
-          <h3 class="text-2xl font-black mb-2 group-hover:text-emerald-600 transition">Cybernetic Orthogonal Flow</h3>
-          <p class="text-xs text-slate-700 leading-relaxed font-medium mb-6">
-            <strong>3D:</strong> Continuous (2,5) Torus Knot flowing with electric cyan/mint wireframes.<br>
-            <strong>UX:</strong> Raycast x Aceternity with Cross-Asset Factor Correlation Matrix Heatmap.
-          </p>
-        </div>
-        <div class="bg-black text-white text-center font-mono font-black text-xs py-3.5 rounded-xl group-hover:bg-emerald-500 group-hover:text-black transition">
-          Launch Architecture 03 &rarr;
-        </div>
-      </a>
-
-      <!-- P4 -->
-      <a href="proto4.html" class="million-card p-8 flex flex-col justify-between group border-l-8 border-l-orange-500">
-        <div>
-          <div class="flex justify-between items-center mb-3">
-            <span class="bg-orange-300 text-black font-mono font-black text-xs px-2.5 py-1 rounded-lg border border-black">ARCH 04</span>
-            <span class="font-mono text-xs font-bold text-slate-500">DM Serif x Plus Jakarta</span>
-          </div>
-          <h3 class="text-2xl font-black mb-2 group-hover:text-orange-600 transition">Global Macro Barbell Stage</h3>
-          <p class="text-xs text-slate-700 leading-relaxed font-medium mb-6">
-            <strong>3D:</strong> 4 Planetary Currency Satellites ($/₹/£/€) orbiting a gold gravity core.<br>
-            <strong>UX:</strong> Apple Enterprise x Refero with Structural USD/INR FX Alpha &amp; G-Sec Arbitrage.
-          </p>
-        </div>
-        <div class="bg-black text-white text-center font-mono font-black text-xs py-3.5 rounded-xl group-hover:bg-orange-500 group-hover:text-black transition">
-          Launch Architecture 04 &rarr;
-        </div>
-      </a>
-
-      <!-- P5 -->
-      <a href="proto5.html" class="million-card p-8 flex flex-col justify-between group border-l-8 border-l-rose-500">
-        <div>
-          <div class="flex justify-between items-center mb-3">
-            <span class="bg-rose-300 text-black font-mono font-black text-xs px-2.5 py-1 rounded-lg border border-black">ARCH 05</span>
-            <span class="font-mono text-xs font-bold text-slate-500">Playfair x Outfit</span>
-          </div>
-          <h3 class="text-2xl font-black mb-2 group-hover:text-rose-600 transition">Geometric Capital Helix</h3>
-          <p class="text-xs text-slate-700 leading-relaxed font-medium mb-6">
-            <strong>3D:</strong> Double-helix geometric ladder compounding upwards in real time.<br>
-            <strong>UX:</strong> Framer Motion x Supabase UI with 15-Year Life Cycle Milestone Velocity Roadmap.
-          </p>
-        </div>
-        <div class="bg-black text-white text-center font-mono font-black text-xs py-3.5 rounded-xl group-hover:bg-rose-500 group-hover:text-black transition">
-          Launch Architecture 05 &rarr;
-        </div>
-      </a>
-
-      <!-- P6 -->
-      <a href="proto6.html" class="million-card p-8 flex flex-col justify-between group border-l-8 border-l-sky-500">
-        <div>
-          <div class="flex justify-between items-center mb-3">
-            <span class="bg-sky-300 text-black font-mono font-black text-xs px-2.5 py-1 rounded-lg border border-black">ARCH 06</span>
-            <span class="font-mono text-xs font-bold text-slate-500">Fraunces x Manrope</span>
-          </div>
-          <h3 class="text-2xl font-black mb-2 group-hover:text-sky-600 transition">Harmonic Liquid Nebula</h3>
-          <p class="text-xs text-slate-700 leading-relaxed font-medium mb-6">
-            <strong>3D:</strong> Liquid Mercury Droplet with harmonic undulating vertex ripples.<br>
-            <strong>UX:</strong> Linear Luxury x Resend with Sovereign Annuity Cashflow Cascade Engine.
-          </p>
-        </div>
-        <div class="bg-black text-white text-center font-mono font-black text-xs py-3.5 rounded-xl group-hover:bg-sky-500 group-hover:text-black transition">
-          Launch Architecture 06 &rarr;
-        </div>
-      </a>
-
-      <!-- P7 -->
-      <a href="proto7.html" class="million-card p-8 flex flex-col justify-between group border-l-8 border-l-yellow-500">
-        <div>
-          <div class="flex justify-between items-center mb-3">
-            <span class="bg-yellow-300 text-black font-mono font-black text-xs px-2.5 py-1 rounded-lg border border-black">ARCH 07</span>
-            <span class="font-mono text-xs font-bold text-slate-500">Bebas Neue x Work Sans</span>
-          </div>
-          <h3 class="text-2xl font-black mb-2 group-hover:text-yellow-600 transition">Endless Mobius Continuum</h3>
-          <p class="text-xs text-slate-700 leading-relaxed font-medium mb-6">
-            <strong>3D:</strong> Endless 3D Mobius Ribbon twisting in liquid pastel gold space.<br>
-            <strong>UX:</strong> Superhuman x Notion with Fama-French 5-Factor Alpha Decomposer.
-          </p>
-        </div>
-        <div class="bg-black text-white text-center font-mono font-black text-xs py-3.5 rounded-xl group-hover:bg-yellow-500 group-hover:text-black transition">
-          Launch Architecture 07 &rarr;
-        </div>
-      </a>
-
-      <!-- P8 -->
-      <a href="proto8.html" class="million-card p-8 flex flex-col justify-between group border-l-8 border-l-purple-500">
-        <div>
-          <div class="flex justify-between items-center mb-3">
-            <span class="bg-purple-300 text-black font-mono font-black text-xs px-2.5 py-1 rounded-lg border border-black">ARCH 08</span>
-            <span class="font-mono text-xs font-bold text-slate-500">General Sans x Satoshi</span>
-          </div>
-          <h3 class="text-2xl font-black mb-2 group-hover:text-purple-600 transition">Prismatic Quartz Pyramid</h3>
-          <p class="text-xs text-slate-700 leading-relaxed font-medium mb-6">
-            <strong>3D:</strong> Multi-faceted 3D Glass Tetrahedron refracting light rays with dynamic glare.<br>
-            <strong>UX:</strong> Stripe Press x Figma UI with The 70:15:15 Institutional Asset Rebalancer.
-          </p>
-        </div>
-        <div class="bg-black text-white text-center font-mono font-black text-xs py-3.5 rounded-xl group-hover:bg-purple-500 group-hover:text-black transition">
-          Launch Architecture 08 &rarr;
-        </div>
-      </a>
-
-      <!-- P9 -->
-      <a href="proto9.html" class="million-card p-8 flex flex-col justify-between group border-l-8 border-l-green-600">
-        <div>
-          <div class="flex justify-between items-center mb-3">
-            <span class="bg-green-300 text-black font-mono font-black text-xs px-2.5 py-1 rounded-lg border border-black">ARCH 09</span>
-            <span class="font-mono text-xs font-bold text-slate-500">Space Grotesk x Inter</span>
-          </div>
-          <h3 class="text-2xl font-black mb-2 group-hover:text-green-600 transition">Sovereign Legal Bastion</h3>
-          <p class="text-xs text-slate-700 leading-relaxed font-medium mb-6">
-            <strong>3D:</strong> Triple-Axis Mechanical Gyroscope in calming pastel sage and platinum.<br>
-            <strong>UX:</strong> Anthropic x Vercel Dark with Section 14 Court Attachment Legal Immunity Shield.
-          </p>
-        </div>
-        <div class="bg-black text-white text-center font-mono font-black text-xs py-3.5 rounded-xl group-hover:bg-green-600 group-hover:text-black transition">
-          Launch Architecture 09 &rarr;
-        </div>
-      </a>
-
-      <!-- P10 -->
-      <a href="proto10.html" class="million-card p-8 flex flex-col justify-between group border-l-8 border-l-cyan-500">
-        <div>
-          <div class="flex justify-between items-center mb-3">
-            <span class="bg-cyan-300 text-black font-mono font-black text-xs px-2.5 py-1 rounded-lg border border-black">ARCH 10</span>
-            <span class="font-mono text-xs font-bold text-slate-500">Syne x Plus Jakarta</span>
-          </div>
-          <h3 class="text-2xl font-black mb-2 group-hover:text-cyan-600 transition">Master Universal Terminal</h3>
-          <p class="text-xs text-slate-700 leading-relaxed font-medium mb-6">
-            <strong>3D:</strong> Breathing Dodecahedron Opal with multi-light specular dispersion.<br>
-            <strong>UX:</strong> Sovereign Grand Opus integrating all 6 Desks &amp; 200-Module Master Codex.
-          </p>
-        </div>
-        <div class="bg-black text-white text-center font-mono font-black text-xs py-3.5 rounded-xl group-hover:bg-cyan-500 group-hover:text-black transition">
-          Launch Architecture 10 &rarr;
-        </div>
-      </a>
-
+    <!-- 50 PROTOTYPES GRID -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="grid-container">
+      <!-- Injected by simple loop below -->
     </div>
 
   </div>
+
+  <script>
+    const geometries = [
+      "Torus Knot Vortex", "Icosahedron Crystal", "Sovereign Glass Coin", "Tetrahedron Pyramid",
+      "Dodecahedron Core", "Liquid Glass Torus", "Octahedron Diamond", "Harmonic Ripple Sphere",
+      "Prismatic Capsule", "Curved Mobius Arc"
+    ];
+    const styles = [
+      "Frosted Cream & Cyan", "Pastel Lavender & Indigo", "Pastel Mint & Emerald", "Pastel Peach & Amber",
+      "Pastel Coral & Crimson", "Pastel Sky & Azure", "Pastel Butter Gold", "Pastel Lilac & Violet",
+      "Pastel Sage & Platinum", "Pastel Opal & Slate"
+    ];
+
+    const container = document.getElementById('grid-container');
+    for (let i = 1; i <= 50; i++) {
+      const geo = geometries[(i - 1) % geometries.length];
+      const style = styles[(i - 1) % styles.length];
+      const card = document.createElement('a');
+      card.href = `proto${i}.html`;
+      card.className = "glass-card p-6 flex flex-col justify-between group";
+      card.innerHTML = `
+        <div>
+          <div class="flex justify-between items-center mb-3">
+            <span class="bg-black text-white font-mono font-black text-[10px] px-2 py-0.5 rounded-md">SUITE #${i.toString().padStart(2, '0')}</span>
+            <span class="font-mono text-[10px] font-bold text-slate-500">${style}</span>
+          </div>
+          <h3 class="text-xl font-black mb-1 group-hover:text-cyan-600 transition">Liquid Glass Suite #${i.toString().padStart(2, '0')}</h3>
+          <div class="text-xs text-cyan-700 font-bold mb-3 font-mono">3D: ${geo}</div>
+          <p class="text-[11px] text-slate-600 leading-relaxed font-medium mb-4">
+            Physical optical glass (IOR: 1.52) with tactile drag inertia and bespoke analytical telemetry.
+          </p>
+        </div>
+        <div class="bg-black text-white text-center font-mono font-black text-xs py-2.5 rounded-xl group-hover:bg-cyan-500 group-hover:text-black transition">
+          Launch Suite #${i.toString().padStart(2, '0')} &rarr;
+        </div>
+      `;
+      container.appendChild(card);
+    }
+  </script>
 </body>
 </html>
