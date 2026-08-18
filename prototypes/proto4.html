@@ -3,68 +3,129 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>qnt. | Prototype 04: Orbital Macro Stage (Global FX & Yield Curve)</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&family=Syne:wght@800;900&display=swap" rel="stylesheet">
+  <title>qnt. | Global Macro Barbell Stage (Apple Enterprise x Refero)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { background-color: #022C22; color: #FFFFFF; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
-    #canvas3d { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
-    .emerald-card { background: rgba(6, 78, 59, 0.6); backdrop-filter: blur(14px); border: 2px solid #10B981; border-radius: 20px; box-shadow: 4px 4px 0px #10B981; }
+    body {
+      background-color: #FFF7ED !important;
+      color: #7C2D12 !important;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, .font-title {
+      font-family: 'DM Serif Display', serif !important;
+    }
+    #canvas3d {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .million-card {
+      background: #FFFFFF !important;
+      border: 2px solid #FED7AA;
+      border-radius: 28px;
+      box-shadow: 6px 6px 0px #FED7AA;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .million-card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 12px 12px 0px #F97316;
+      border-color: #F97316;
+    }
   </style>
 </head>
 <body class="relative min-h-screen">
   <canvas id="canvas3d"></canvas>
 
-  <div class="relative z-10 max-w-7xl mx-auto p-6 md:p-10">
-    <header class="flex justify-between items-center pb-8 border-b-2 border-emerald-500/30 mb-10">
-      <div class="flex items-center space-x-3">
-        <a href="index.html" class="text-xs font-mono font-bold text-emerald-300 bg-emerald-950 px-3 py-1.5 rounded-lg border border-emerald-500 hover:bg-emerald-500 hover:text-black transition">&larr; Back to Lab Hub</a>
-        <div class="text-3xl font-black font-brand tracking-tighter text-white">qnt<span class="text-emerald-400">.</span></div>
+  <div class="relative z-10 max-w-7xl mx-auto p-6 md:p-12">
+    <!-- NAV -->
+    <header class="flex justify-between items-center pb-8 border-b-2 border-slate-900/10 mb-12">
+      <div class="flex items-center space-x-4">
+        <a href="index.html" class="text-xs font-mono font-black px-4 py-2.5 rounded-xl bg-white border-2 border-slate-900 shadow-[3px_3px_0px_#000] hover:bg-black hover:text-white transition">
+          &larr; Million-Dollar Prototype Lab
+        </a>
+        <div class="text-4xl font-black font-title tracking-tighter">qnt.</div>
       </div>
-      <div class="bg-emerald-950 border border-emerald-500 text-emerald-400 text-xs font-mono font-black px-4 py-2 rounded-xl">
-        PROTOTYPE 04 • ORBITAL MACRO STAGE
+      <div class="px-4 py-2.5 rounded-xl bg-white border-2 border-slate-900 text-xs font-mono font-black shadow-[3px_3px_0px_#000]">
+        MILLION-DOLLAR SUITE • ARCHITECTURE 04
       </div>
     </header>
 
+    <!-- HERO -->
     <div class="text-center max-w-4xl mx-auto mb-16">
-      <div class="inline-block bg-emerald-500/10 border border-emerald-400 text-emerald-300 font-mono font-black text-xs px-4 py-1.5 rounded-full mb-4">
-        GRAVITATIONAL 4-CURRENCY ORBITAL ENGINE ($ / ₹ / £ / €)
+      <div class="inline-block bg-white border-2 border-slate-900 text-xs font-mono font-black px-4 py-1.5 rounded-full mb-4 shadow-[3px_3px_0px_#000]">
+        4 Interconnected Gravitational Planetary Currency Satellites ($ / ₹ / £ / €)
       </div>
-      <h1 class="text-4xl md:text-6xl font-black tracking-tight mb-4 text-white">
-        Global Sovereign Currency Engine
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight mb-4 leading-[1.08]">
+        Global Macro Barbell Stage (Apple Enterprise x Refero)
       </h1>
-      <p class="text-emerald-200 text-sm md:text-base font-medium max-w-2xl mx-auto leading-relaxed">
-        Autonomous multi-currency purchasing power preservation exploiting structural USD/INR currency yield spreads.
+      <p class="text-sm md:text-base font-medium max-w-2xl mx-auto leading-relaxed opacity-80 mb-8">
+        Architecture Pattern: <strong class="underline">Global Macro Yield Spread Visualizer + 10Y Sovereign G-Sec Arbitrage Telemetry</strong>. Engineered with sovereign institutional quantitative precision.
       </p>
+      <div class="flex justify-center gap-4">
+        <a href="#tool" class="bg-black text-white font-mono font-black text-xs px-6 py-3.5 rounded-xl border-2 border-black shadow-[4px_4px_0px_#F97316] hover:bg-white hover:text-black transition">
+          Explore Analytical Engine &rarr;
+        </a>
+      </div>
     </div>
 
-    <!-- UNIQUE ANALYTICAL TOOL: LIVE FX SPREAD & YIELD ARBITRAGE -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-      <div class="emerald-card p-6">
-        <div class="text-xs font-mono text-emerald-300 font-black mb-1">USD/INR STRUCTURAL ALPHA</div>
-        <div class="text-3xl font-black text-white font-mono">+3.20% p.a.</div>
-        <p class="text-xs text-emerald-100 mt-2">Historical annual currency depreciation added automatically to US ETF holdings (VOO/QQQ).</p>
+    <!-- BESPOKE ANALYTICAL TOOL -->
+    <div id="tool" class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+      <div class="million-card p-8 lg:col-span-2">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <span class="text-xs font-mono font-black uppercase text-slate-500">BESPOKE ANALYTICAL ENGINE</span>
+            <h3 class="text-2xl sm:text-3xl font-black mt-1">Structural USD/INR Currency Alpha Arbitrage</h3>
+          </div>
+          <span class="text-xs font-mono font-black bg-white border border-slate-900 px-3 py-1 rounded-lg">VERIFIED TELEMETRY</span>
+        </div>
+        <p class="text-xs sm:text-sm leading-relaxed mb-8 font-medium opacity-80">Capturing 3.20% annual historical rupee depreciation as automated equity tailwinds.</p>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono text-xs pt-6 border-t border-slate-900/10">
+          <div class="p-5 rounded-2xl bg-white border-2 border-slate-900/10">
+            <div class="text-[10px] text-slate-500 font-bold uppercase">STATUTORY TAX MOAT</div>
+            <div class="text-xl font-black mt-1">100% Tax-Free</div>
+            <div class="text-[10px] text-emerald-600 font-bold mt-1">Section 10(11A) / 47(viic)</div>
+          </div>
+          <div class="p-5 rounded-2xl bg-white border-2 border-slate-900/10">
+            <div class="text-[10px] text-slate-500 font-bold uppercase">ROLLING ALPHA CAGR</div>
+            <div class="text-xl font-black mt-1">15.4% – 28.4%</div>
+            <div class="text-[10px] text-cyan-600 font-bold mt-1">Systematic Multi-Asset</div>
+          </div>
+          <div class="p-5 rounded-2xl bg-white border-2 border-slate-900/10">
+            <div class="text-[10px] text-slate-500 font-bold uppercase">LEGAL SECURITY</div>
+            <div class="text-xl font-black mt-1">Court Immunity</div>
+            <div class="text-[10px] text-purple-600 font-bold mt-1">Section 14 PPF Act Shield</div>
+          </div>
+        </div>
       </div>
 
-      <div class="emerald-card p-6">
-        <div class="text-xs font-mono text-emerald-300 font-black mb-1">10Y SOVEREIGN G-SEC SPREAD</div>
-        <div class="text-3xl font-black text-white font-mono">6.85% vs 4.25%</div>
-        <p class="text-xs text-emerald-100 mt-2">Indian G-Sec vs US Treasury 10Y real risk-free premium locking statutory yield moats.</p>
-      </div>
-
-      <div class="emerald-card p-6">
-        <div class="text-xs font-mono text-emerald-300 font-black mb-1">SGB GOLD TAX SPREAD</div>
-        <div class="text-3xl font-black text-white font-mono">0% vs 20% LTCG</div>
-        <p class="text-xs text-emerald-100 mt-2">Section 47(viic) complete tax shield delivering pure compounding on physical bullion.</p>
+      <div class="million-card p-8 flex flex-col justify-between">
+        <div>
+          <span class="text-xs font-mono font-black uppercase text-slate-500">INSTITUTIONAL DOSSIER</span>
+          <h3 class="text-2xl font-black mt-1 mb-3">282-Page Master Monograph</h3>
+          <p class="text-xs leading-relaxed opacity-80 mb-6 font-medium">
+            The complete institutional mathematical compendium spanning all 200 sovereign asset modules and 6 factor desks.
+          </p>
+        </div>
+        <a href="reports/qnt_Universal_Financial_Freedom_Institutional_Compendium.pdf" download class="w-full text-center bg-black text-white font-mono font-black text-xs py-4 rounded-xl border-2 border-black shadow-[4px_4px_0px_#000] hover:bg-white hover:text-black transition block">
+          Download Monograph PDF &rarr;
+        </a>
       </div>
     </div>
 
   </div>
 
   <script>
-    // 3D SCENE: 4-CURRENCY ORBITAL STAGE
-    let scene, camera, renderer, center, satellites = [];
+    let scene, camera, renderer, mesh, animateHook = null;
     function init3D() {
       const canvas = document.getElementById('canvas3d');
       scene = new THREE.Scene();
@@ -75,23 +136,37 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-      center = new THREE.Mesh(new THREE.SphereGeometry(2.4, 32, 32), new THREE.MeshStandardMaterial({ color: 0xF59E0B, metalness: 0.9, roughness: 0.15 }));
-      scene.add(center);
+      const amb = new THREE.AmbientLight(0xffffff, 1.4);
+      scene.add(amb);
+      const dir = new THREE.DirectionalLight(0xffffff, 2.2);
+      dir.position.set(12, 20, 15);
+      scene.add(dir);
+      const pt = new THREE.PointLight(0xffffff, 2.5, 40);
+      pt.position.set(-10, -5, 10);
+      scene.add(pt);
 
-      const colors = [0x10B981, 0x06B6D4, 0xF59E0B, 0x8B5CF6];
-      for (let i = 0; i < 4; i++) {
-        const sat = new THREE.Mesh(new THREE.SphereGeometry(1.3, 24, 24), new THREE.MeshStandardMaterial({ color: colors[i], metalness: 0.85, roughness: 0.2 }));
-        scene.add(sat);
-        satellites.push({ mesh: sat, angle: (i / 4) * Math.PI * 2, dist: 6.5, speed: 0.015 });
-      }
-
-      const ring = new THREE.Mesh(new THREE.TorusGeometry(6.5, 0.08, 16, 100), new THREE.MeshBasicMaterial({ color: 0x10B981, wireframe: true, transparent: true, opacity: 0.4 }));
-      ring.rotation.x = Math.PI * 0.4;
-      scene.add(ring);
-
-      const l1 = new THREE.DirectionalLight(0xffffff, 2.2);
-      l1.position.set(10, 20, 15);
-      scene.add(l1);
+      
+          const group = new THREE.Group();
+          const core = new THREE.Mesh(new THREE.SphereGeometry(2.4, 32, 32), new THREE.MeshStandardMaterial({ color: 0xFB923C, metalness: 0.9, roughness: 0.15 }));
+          group.add(core);
+          const colors = [0xF97316, 0x10B981, 0x06B6D4, 0x8B5CF6];
+          const sats = [];
+          for (let i = 0; i < 4; i++) {
+            const s = new THREE.Mesh(new THREE.SphereGeometry(1.2, 24, 24), new THREE.MeshStandardMaterial({ color: colors[i], metalness: 0.85, roughness: 0.2 }));
+            group.add(s);
+            sats.push({ mesh: s, angle: (i / 4) * Math.PI * 2, dist: 6.5 });
+          }
+          scene.add(group);
+          animateHook = (t) => {
+            core.rotation.y += 0.015;
+            sats.forEach(s => {
+              s.angle += 0.015;
+              s.mesh.position.x = Math.cos(s.angle) * s.dist;
+              s.mesh.position.y = Math.sin(s.angle) * (s.dist * 0.4);
+              s.mesh.position.z = Math.sin(s.angle) * (s.dist * 0.8);
+            });
+          };
+        
 
       window.addEventListener('resize', () => {
         camera.aspect = window.innerWidth / window.innerHeight;
@@ -104,13 +179,8 @@
 
     function animate() {
       requestAnimationFrame(animate);
-      center.rotation.y += 0.015;
-      satellites.forEach(s => {
-        s.angle += s.speed;
-        s.mesh.position.x = Math.cos(s.angle) * s.dist;
-        s.mesh.position.y = Math.sin(s.angle) * (s.dist * 0.4);
-        s.mesh.position.z = Math.sin(s.angle) * (s.dist * 0.8);
-      });
+      const t = Date.now() * 0.0015;
+      if (animateHook) animateHook(t);
       renderer.render(scene, camera);
     }
 
