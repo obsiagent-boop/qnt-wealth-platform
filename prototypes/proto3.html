@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>qnt. | Prototype 03: Cybernetic Knot (Correlation Matrix Heatmap)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500;700;800&family=Syne:wght@800;900&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background-color: #060811; color: #FFFFFF; font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
+    #canvas3d { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
+    .neo-card { background: #0E1326; border: 2px solid #8B5CF6; border-radius: 16px; box-shadow: 4px 4px 0px #8B5CF6; }
+  </style>
+</head>
+<body class="relative min-h-screen">
+  <canvas id="canvas3d"></canvas>
+
+  <div class="relative z-10 max-w-7xl mx-auto p-6 md:p-10">
+    <header class="flex justify-between items-center pb-8 border-b-2 border-purple-500/30 mb-10">
+      <div class="flex items-center space-x-3">
+        <a href="index.html" class="text-xs font-mono font-bold text-purple-400 bg-purple-950/80 px-3 py-1.5 rounded-lg border border-purple-500 hover:bg-purple-500 hover:text-black transition">&larr; Back to Lab Hub</a>
+        <div class="text-3xl font-black font-brand tracking-tighter text-white">qnt<span class="text-purple-400">.</span></div>
+      </div>
+      <div class="bg-purple-950 border border-purple-500 text-purple-400 text-xs font-mono font-black px-4 py-2 rounded-xl shadow-[3px_3px_0px_#8B5CF6]">
+        PROTOTYPE 03 • CYBERNETIC KNOT
+      </div>
+    </header>
+
+    <div class="text-center max-w-4xl mx-auto mb-16">
+      <div class="inline-block bg-purple-500/10 border border-purple-400 text-purple-300 font-mono font-black text-xs px-4 py-1.5 rounded-full mb-4">
+        MATHEMATICAL (2,5) TORUS KNOT &amp; FACTOR CORRELATION MATRIX
+      </div>
+      <h1 class="text-4xl md:text-6xl font-black tracking-tight mb-4 text-white">
+        Non-Linear Liquidity Vortex
+      </h1>
+      <p class="text-slate-300 text-sm md:text-base font-medium max-w-2xl mx-auto leading-relaxed">
+        Topological asset orthogonalization isolating zero-correlation cashflow streams from systemic market beta.
+      </p>
+    </div>
+
+    <!-- UNIQUE ANALYTICAL TOOL: FACTOR CORRELATION HEATMAP -->
+    <div class="neo-card p-6 md:p-8 mb-12">
+      <div class="flex flex-col md:flex-row justify-between md:items-center mb-6">
+        <div>
+          <h3 class="text-xl font-bold font-mono text-purple-400">Institutional Cross-Asset Correlation Matrix</h3>
+          <p class="text-xs text-slate-400 font-mono mt-1">Demonstrating statutory zero-correlation moats across the 6 institutional desks</p>
+        </div>
+        <span class="text-xs font-mono font-bold bg-purple-500/20 text-purple-300 px-3 py-1 rounded border border-purple-500 mt-2 md:mt-0">
+          Target Correlation &lt; 0.15
+        </span>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-center font-mono text-xs border-collapse">
+          <thead>
+            <tr class="text-slate-400 border-b border-purple-500/30">
+              <th class="p-3 text-left">Asset Class</th>
+              <th class="p-3">NIFTY 50</th>
+              <th class="p-3">SSY / PPF</th>
+              <th class="p-3">REITs (NDCF)</th>
+              <th class="p-3">SGB GOLD</th>
+              <th class="p-3">US TECH (USD)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-purple-500/20 font-bold">
+            <tr>
+              <td class="p-3 text-left text-white">Domestic Equity (Nifty)</td>
+              <td class="p-3 bg-purple-900/60 text-purple-300">1.00</td>
+              <td class="p-3 bg-emerald-900/40 text-emerald-400">0.02</td>
+              <td class="p-3 bg-blue-900/40 text-blue-400">0.24</td>
+              <td class="p-3 bg-emerald-900/60 text-emerald-300">-0.11</td>
+              <td class="p-3 bg-purple-900/30 text-purple-300">0.52</td>
+            </tr>
+            <tr>
+              <td class="p-3 text-left text-white">Sovereign EEE (PPF/SSY)</td>
+              <td class="p-3 bg-emerald-900/40 text-emerald-400">0.02</td>
+              <td class="p-3 bg-purple-900/60 text-purple-300">1.00</td>
+              <td class="p-3 bg-emerald-900/40 text-emerald-400">0.00</td>
+              <td class="p-3 bg-emerald-900/40 text-emerald-400">0.01</td>
+              <td class="p-3 bg-emerald-900/40 text-emerald-400">-0.04</td>
+            </tr>
+            <tr>
+              <td class="p-3 text-left text-white">Grade-A REITs</td>
+              <td class="p-3 bg-blue-900/40 text-blue-400">0.24</td>
+              <td class="p-3 bg-emerald-900/40 text-emerald-400">0.00</td>
+              <td class="p-3 bg-purple-900/60 text-purple-300">1.00</td>
+              <td class="p-3 bg-blue-900/30 text-blue-300">0.08</td>
+              <td class="p-3 bg-blue-900/30 text-blue-300">0.18</td>
+            </tr>
+            <tr>
+              <td class="p-3 text-left text-white">Sovereign Gold (SGB)</td>
+              <td class="p-3 bg-emerald-900/60 text-emerald-300">-0.11</td>
+              <td class="p-3 bg-emerald-900/40 text-emerald-400">0.01</td>
+              <td class="p-3 bg-blue-900/30 text-blue-300">0.08</td>
+              <td class="p-3 bg-purple-900/60 text-purple-300">1.00</td>
+              <td class="p-3 bg-emerald-900/50 text-emerald-300">-0.06</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // 3D SCENE: TORUS KNOT CAPITAL VORTEX
+    let scene, camera, renderer, knot, wireKnot;
+    function init3D() {
+      const canvas = document.getElementById('canvas3d');
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 20;
+
+      renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      const knotGeo = new THREE.TorusKnotGeometry(3.5, 1.0, 120, 24, 2, 5);
+      const knotMat = new THREE.MeshStandardMaterial({ color: 0xF59E0B, metalness: 0.9, roughness: 0.15 });
+      knot = new THREE.Mesh(knotGeo, knotMat);
+      scene.add(knot);
+
+      const wireMat = new THREE.MeshBasicMaterial({ color: 0x8B5CF6, wireframe: true, transparent: true, opacity: 0.4 });
+      wireKnot = new THREE.Mesh(knotGeo, wireMat);
+      wireKnot.scale.set(1.08, 1.08, 1.08);
+      scene.add(wireKnot);
+
+      const l1 = new THREE.DirectionalLight(0xffffff, 2.0);
+      l1.position.set(10, 20, 15);
+      scene.add(l1);
+
+      const pLight = new THREE.PointLight(0x8B5CF6, 3.5, 40);
+      pLight.position.set(-10, -5, 10);
+      scene.add(pLight);
+
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      animate();
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      knot.rotation.x += 0.008;
+      knot.rotation.y += 0.012;
+      wireKnot.rotation.x -= 0.006;
+      wireKnot.rotation.y -= 0.01;
+      renderer.render(scene, camera);
+    }
+
+    window.addEventListener('DOMContentLoaded', init3D);
+  </script>
+</body>
+</html>
