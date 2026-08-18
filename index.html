@@ -163,8 +163,26 @@
 </head>
 <body class="bg-canvas bg-grid-cream liquid-mesh-light min-h-screen text-ink-950">
 
-  <!-- 3D WEBGL REAL-TIME FLOATING GOLDEN '$' SCENE CANVAS -->
+  <!-- 3D WEBGL REAL-TIME FLOATING SCENE CANVAS -->
   <canvas id="webgl-canvas"></canvas>
+
+  <!-- LIVE 3D PROTOTYPE SELECTOR DOCK (STICKY BOTTOM-RIGHT) -->
+  <div class="fixed bottom-6 right-6 z-50 bg-white border-4 border-black p-3 rounded-2xl shadow-[6px_6px_0px_#000] max-w-xs sm:max-w-sm">
+    <div class="flex items-center justify-between mb-2">
+      <span class="text-[10px] font-mono font-black text-black uppercase bg-cyan-bright px-2 py-0.5 rounded border border-black">3D PROTOTYPE SELECTOR</span>
+      <span id="active-proto-badge" class="text-[10px] font-mono font-black text-emerald-700">PROTO 1 ACTIVE</span>
+    </div>
+    <div class="grid grid-cols-5 gap-1.5 font-mono text-xs font-black">
+      <button onclick="switchPrototype(1)" id="pbtn-1" class="py-2 rounded-lg bg-black text-white border-2 border-black shadow-[2px_2px_0px_#0891B2] transition">P1</button>
+      <button onclick="switchPrototype(2)" id="pbtn-2" class="py-2 rounded-lg bg-[#F4EFEA] text-black border-2 border-black hover:bg-black hover:text-white transition">P2</button>
+      <button onclick="switchPrototype(3)" id="pbtn-3" class="py-2 rounded-lg bg-[#F4EFEA] text-black border-2 border-black hover:bg-black hover:text-white transition">P3</button>
+      <button onclick="switchPrototype(4)" id="pbtn-4" class="py-2 rounded-lg bg-[#F4EFEA] text-black border-2 border-black hover:bg-black hover:text-white transition">P4</button>
+      <button onclick="switchPrototype(5)" id="pbtn-5" class="py-2 rounded-lg bg-[#F4EFEA] text-black border-2 border-black hover:bg-black hover:text-white transition">P5</button>
+    </div>
+    <div id="proto-desc" class="text-[10px] font-mono text-ink-700 mt-2 font-bold leading-tight">
+      P1: Kinetic Sovereign Gold Dollar Coin with Dual Gyroscopic Halos.
+    </div>
+  </div>
 
   <!-- SLIDE-OUT LEFT SIDEBAR DRAWER -->
   <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden"></div>
@@ -270,12 +288,12 @@
       </div>
     </header>
 
-    <!-- HERO SECTION WITH CINEMATIC 3D FLOATING GOLDEN '$' COIN & ORBITAL SHARDS -->
+    <!-- HERO SECTION WITH CINEMATIC 3D WEBGL HERO -->
     <section class="relative pt-12 pb-16 px-4 sm:px-6 max-w-7xl mx-auto text-center">
       
       <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white border-2 border-black text-black text-xs font-mono font-black mb-6 shadow-[3px_3px_0px_#000]">
         <span class="w-2.5 h-2.5 rounded-full bg-cyan-bright animate-ping"></span>
-        <span>CINEMATIC 3D LIQUID CAPITAL ENGINE ($ USD / ₹ INR / £ GBP / € EUR)</span>
+        <span id="hero-badge-title">PROTOTYPE 1: KINETIC SOVEREIGN GOLD DOLLAR COIN</span>
       </div>
 
       <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight max-w-5xl mx-auto leading-[1.06] mb-6 text-black font-brand">
@@ -921,9 +939,9 @@
 
   </div>
 
-  <!-- JAVASCRIPT & THREE.JS ULTRA-ATTRACTIVE 3D GOLDEN '$' COIN & ORBITAL SHARDS ENGINE -->
+  <!-- JAVASCRIPT: 5 DISTINCT 3D PROTOTYPE ENGINES IN ONE SEAMLESS RUNTIME -->
   <script>
-    // 1. SUPABASE CLIENT INITIALIZATION
+    // 1. SUPABASE CLIENT
     const SUPABASE_URL = "https://dsxnkiuhjtkngeoijviw.supabase.co";
     const SUPABASE_ANON_KEY = "sb_publishable_HIe2mPGwJTQM3hR4tQfIqQ_5mKzH3Mr";
     let supabaseClient = null;
@@ -938,160 +956,57 @@
         try {
           let rowData = {};
           if (tableName === 'sponsorship_inquiries') {
-            rowData = {
-              company_name: document.getElementById('sp-company').value,
-              contact_email: document.getElementById('sp-email').value,
-              placement: document.getElementById('sp-placement').value
-            };
+            rowData = { company_name: document.getElementById('sp-company').value, contact_email: document.getElementById('sp-email').value, placement: document.getElementById('sp-placement').value };
           } else if (tableName === 'researcher_applications') {
-            rowData = {
-              researcher_name: document.getElementById('res-name').value,
-              contact: document.getElementById('res-contact').value,
-              strategy_overview: document.getElementById('res-overview').value
-            };
+            rowData = { researcher_name: document.getElementById('res-name').value, contact: document.getElementById('res-contact').value, strategy_overview: document.getElementById('res-overview').value };
           } else if (tableName === 'ghost_studio_orders') {
-            rowData = {
-              service_scope: document.getElementById('gh-service').value,
-              client_contact: document.getElementById('gh-contact').value,
-              project_details: document.getElementById('gh-details').value
-            };
+            rowData = { service_scope: document.getElementById('gh-service').value, client_contact: document.getElementById('gh-contact').value, project_details: document.getElementById('gh-details').value };
           } else if (tableName === 'job_postings') {
-            rowData = {
-              job_title: document.getElementById('jb-title').value,
-              apply_url: document.getElementById('jb-url').value,
-              compensation: document.getElementById('jb-comp').value
-            };
+            rowData = { job_title: document.getElementById('jb-title').value, apply_url: document.getElementById('jb-url').value, compensation: document.getElementById('jb-comp').value };
           }
           await supabaseClient.from(tableName).insert([rowData]);
-          console.log('Saved to Supabase database:', tableName, rowData);
-        } catch (err) {
-          console.log('Supabase insert note:', err);
-        }
+        } catch (err) { console.log('Supabase note:', err); }
       }
     }
 
-    // 2. ULTRA-ATTRACTIVE THREE.JS 3D GOLDEN '$' COIN WITH ORBITAL PARTICLES & DYNAMIC LIGHTING
-    let scene, camera, renderer, masterCoinGroup, haloRing1, haloRing2, floatingShards = [];
+    // 2. MASTER 3D PROTOTYPE RUNTIME
+    let scene, camera, renderer, active3DGroup, activeProto = 1;
     let mouseX = 0, mouseY = 0, targetRotationX = 0, targetRotationY = 0;
+    let protoAnimateHook = null;
+
+    const prototypeConfigs = {
+      1: { title: "PROTOTYPE 1: KINETIC SOVEREIGN GOLD DOLLAR COIN", desc: "Heavy metallic beveled gold coin with dual counter-rotating gyroscopic halos & floating quantum shards." },
+      2: { title: "PROTOTYPE 2: HOLOGRAPHIC QUANTUM CRYSTAL DOLLAR", desc: "Refractive 3D icosahedral glass crystal with chromatic dispersion, floating inside an emerald laser sphere." },
+      3: { title: "PROTOTYPE 3: CYBERNETIC TORUS KNOT CAPITAL VORTEX", desc: "Complex mathematical (3,5) Torus Knot flowing with electric cyan/gold liquidity and orbiting asset rings." },
+      4: { title: "PROTOTYPE 4: MULTI-CURRENCY BARBELL ORBITAL STAGE", desc: "4 Interconnected 3D metallic currency spheres (USD, INR, GBP, EUR) balancing on dynamic gravitational axes." },
+      5: { title: "PROTOTYPE 5: GEOMETRIC CAPITAL DNA GROWTH SPIRAL", desc: "Double-helix 3D geometric ladder compounding upwards in real-time with gold and cyan factor rungs." }
+    };
 
     function init3D() {
       const canvas = document.getElementById('webgl-canvas');
       scene = new THREE.Scene();
       camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-      camera.position.z = 22;
+      camera.position.z = 24;
 
       renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true, powerPreference: "high-performance" });
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-      masterCoinGroup = new THREE.Group();
-
-      // Premium High-Shine Metallic Gold Material
-      const goldCoinMaterial = new THREE.MeshStandardMaterial({
-        color: 0xF59E0B,
-        metalness: 0.92,
-        roughness: 0.18,
-        wireframe: false
-      });
-
-      // Electric Cyan Edge Bevel Material
-      const cyanRimMaterial = new THREE.MeshStandardMaterial({
-        color: 0x06B6D4,
-        metalness: 0.80,
-        roughness: 0.25,
-        wireframe: false
-      });
-
-      // 1. Central Sovereign Coin Base (Beveled Cylinder)
-      const coinBaseGeo = new THREE.CylinderGeometry(5.2, 5.2, 0.65, 64);
-      const coinBase = new THREE.Mesh(coinBaseGeo, goldCoinMaterial);
-      coinBase.rotation.x = Math.PI * 0.5;
-      masterCoinGroup.add(coinBase);
-
-      // Outer Cyan Beveled Rim
-      const rimGeo = new THREE.TorusGeometry(5.25, 0.25, 16, 100);
-      const rimMesh = new THREE.Mesh(rimGeo, cyanRimMaterial);
-      masterCoinGroup.add(rimMesh);
-
-      // Inner Coin Inset Ring
-      const innerRingGeo = new THREE.TorusGeometry(4.4, 0.12, 16, 100);
-      const innerRingMesh = new THREE.Mesh(innerRingGeo, goldCoinMaterial);
-      masterCoinGroup.add(innerRingMesh);
-
-      // 2. High-Relief 3D Embossed '$' Symbol (Front & Back)
-      function createDollarSign(zOffset) {
-        const dGroup = new THREE.Group();
-
-        // Top Loop
-        const topArc = new THREE.TorusGeometry(1.4, 0.32, 16, 40, Math.PI * 1.35);
-        const topM = new THREE.Mesh(topArc, cyanRimMaterial);
-        topM.position.set(0, 1.1, 0);
-        topM.rotation.z = Math.PI * 0.32;
-        dGroup.add(topM);
-
-        // Bottom Loop
-        const btmArc = new THREE.TorusGeometry(1.4, 0.32, 16, 40, Math.PI * 1.35);
-        const btmM = new THREE.Mesh(btmArc, cyanRimMaterial);
-        btmM.position.set(0, -1.1, 0);
-        btmM.rotation.z = Math.PI * 1.32;
-        dGroup.add(btmM);
-
-        // Vertical Bar
-        const barGeo = new THREE.CylinderGeometry(0.24, 0.24, 5.4, 24);
-        const barM = new THREE.Mesh(barGeo, cyanRimMaterial);
-        dGroup.add(barM);
-
-        dGroup.position.z = zOffset;
-        return dGroup;
-      }
-
-      masterCoinGroup.add(createDollarSign(0.40));
-      masterCoinGroup.add(createDollarSign(-0.40));
-
-      // 3. Dual Gyroscopic Orbital Halos
-      const haloGeo1 = new THREE.TorusGeometry(7.8, 0.08, 16, 120);
-      const haloMat1 = new THREE.MeshBasicMaterial({ color: 0x06B6D4, wireframe: true, transparent: true, opacity: 0.45 });
-      haloRing1 = new THREE.Mesh(haloGeo1, haloMat1);
-      masterCoinGroup.add(haloRing1);
-
-      const haloGeo2 = new THREE.TorusGeometry(9.2, 0.06, 16, 120);
-      const haloMat2 = new THREE.MeshBasicMaterial({ color: 0xF59E0B, wireframe: true, transparent: true, opacity: 0.35 });
-      haloRing2 = new THREE.Mesh(haloGeo2, haloMat2);
-      masterCoinGroup.add(haloRing2);
-
-      // 4. Floating Geometric Quantum Shards
-      const shardMat = new THREE.MeshStandardMaterial({ color: 0x06B6D4, metalness: 0.9, roughness: 0.1, transparent: true, opacity: 0.7 });
-      for (let i = 0; i < 12; i++) {
-        const shardGeo = new THREE.OctahedronGeometry(0.35 + Math.random() * 0.3, 0);
-        const shard = new THREE.Mesh(shardGeo, shardMat);
-        const angle = (i / 12) * Math.PI * 2;
-        const radius = 6.8 + Math.random() * 2.5;
-        shard.position.set(Math.cos(angle) * radius, Math.sin(angle) * radius, (Math.random() - 0.5) * 4);
-        masterCoinGroup.add(shard);
-        floatingShards.push({ mesh: shard, speed: 0.01 + Math.random() * 0.015, angle: angle, radius: radius });
-      }
-
-      masterCoinGroup.position.set(0, 0, -2);
-      scene.add(masterCoinGroup);
-
-      // 5. Studio Studio Key & Rim Lights
+      // Studio Lighting System
       const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
       scene.add(ambientLight);
-
       const keyLight = new THREE.DirectionalLight(0xfff7ed, 2.2);
       keyLight.position.set(12, 18, 15);
       scene.add(keyLight);
-
-      const rimCyanLight = new THREE.PointLight(0x06B6D4, 3.5, 40);
+      const rimCyanLight = new THREE.PointLight(0x06B6D4, 3.5, 45);
       rimCyanLight.position.set(-14, -8, 8);
       scene.add(rimCyanLight);
-
-      const goldSpot = new THREE.PointLight(0xF59E0B, 2.5, 30);
-      goldSpot.position.set(10, -10, 5);
+      const goldSpot = new THREE.PointLight(0xF59E0B, 2.8, 35);
+      goldSpot.position.set(12, -10, 6);
       scene.add(goldSpot);
 
       // Subtle Background Dust
-      const pCount = 280;
+      const pCount = 250;
       const pGeo = new THREE.BufferGeometry();
       const pPos = new Float32Array(pCount * 3);
       for (let i = 0; i < pCount * 3; i += 3) {
@@ -1101,11 +1016,12 @@
       }
       pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
       const pMat = new THREE.PointsMaterial({ color: 0x0891b2, size: 0.5, transparent: true, opacity: 0.35 });
-      const particles = new THREE.Points(pGeo, pMat);
-      scene.add(particles);
+      scene.add(new THREE.Points(pGeo, pMat));
 
       document.addEventListener('mousemove', onDocumentMouseMove);
       window.addEventListener('resize', onWindowResize);
+
+      loadPrototype(1);
       animate3D();
     }
 
@@ -1120,33 +1036,232 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
+    // BUILDER FOR PROTOTYPE 1 (Kinetic Sovereign Gold Dollar Coin)
+    function buildProto1() {
+      const group = new THREE.Group();
+      const goldMat = new THREE.MeshStandardMaterial({ color: 0xF59E0B, metalness: 0.92, roughness: 0.18 });
+      const cyanRimMat = new THREE.MeshStandardMaterial({ color: 0x06B6D4, metalness: 0.80, roughness: 0.25 });
+
+      const coinBaseGeo = new THREE.CylinderGeometry(5.2, 5.2, 0.65, 64);
+      const coinBase = new THREE.Mesh(coinBaseGeo, goldMat);
+      coinBase.rotation.x = Math.PI * 0.5;
+      group.add(coinBase);
+
+      const rimGeo = new THREE.TorusGeometry(5.25, 0.25, 16, 100);
+      group.add(new THREE.Mesh(rimGeo, cyanRimMat));
+
+      function createDollar(zOff) {
+        const d = new THREE.Group();
+        const topArc = new THREE.TorusGeometry(1.4, 0.32, 16, 40, Math.PI * 1.35);
+        const tM = new THREE.Mesh(topArc, cyanRimMat);
+        tM.position.set(0, 1.1, 0); tM.rotation.z = Math.PI * 0.32; d.add(tM);
+        const btmArc = new THREE.TorusGeometry(1.4, 0.32, 16, 40, Math.PI * 1.35);
+        const bM = new THREE.Mesh(btmArc, cyanRimMat);
+        bM.position.set(0, -1.1, 0); bM.rotation.z = Math.PI * 1.32; d.add(bM);
+        const bar = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.24, 5.4, 24), cyanRimMat);
+        d.add(bar);
+        d.position.z = zOff;
+        return d;
+      }
+      group.add(createDollar(0.40));
+      group.add(createDollar(-0.40));
+
+      const halo1 = new THREE.Mesh(new THREE.TorusGeometry(7.8, 0.08, 16, 120), new THREE.MeshBasicMaterial({ color: 0x06B6D4, wireframe: true, transparent: true, opacity: 0.45 }));
+      const halo2 = new THREE.Mesh(new THREE.TorusGeometry(9.2, 0.06, 16, 120), new THREE.MeshBasicMaterial({ color: 0xF59E0B, wireframe: true, transparent: true, opacity: 0.35 }));
+      group.add(halo1); group.add(halo2);
+
+      protoAnimateHook = (t) => {
+        group.rotation.y += 0.012;
+        group.position.y = Math.sin(t * 1.5) * 0.45;
+        halo1.rotation.y += 0.018;
+        halo2.rotation.y -= 0.014;
+      };
+      return group;
+    }
+
+    // BUILDER FOR PROTOTYPE 2 (Holographic Quantum Crystal Dollar)
+    function buildProto2() {
+      const group = new THREE.Group();
+      const crystalMat = new THREE.MeshPhysicalMaterial({
+        color: 0x06B6D4,
+        metalness: 0.1,
+        roughness: 0.05,
+        transmission: 0.9,
+        thickness: 2.5,
+        transparent: true,
+        opacity: 0.85
+      });
+      const coreGoldMat = new THREE.MeshStandardMaterial({ color: 0xF59E0B, metalness: 0.95, roughness: 0.1 });
+
+      const crystal = new THREE.Mesh(new THREE.IcosahedronGeometry(4.8, 0), crystalMat);
+      group.add(crystal);
+
+      // Embedded Gold Octahedron Core
+      const core = new THREE.Mesh(new THREE.OctahedronGeometry(2.5, 0), coreGoldMat);
+      group.add(core);
+
+      // Orbital Holographic Rings
+      const ring1 = new THREE.Mesh(new THREE.TorusGeometry(7.0, 0.12, 16, 80), new THREE.MeshStandardMaterial({ color: 0x10B981, metalness: 0.8 }));
+      ring1.rotation.x = Math.PI * 0.3;
+      group.add(ring1);
+
+      protoAnimateHook = (t) => {
+        crystal.rotation.x += 0.008;
+        crystal.rotation.y += 0.014;
+        core.rotation.y -= 0.02;
+        ring1.rotation.z += 0.015;
+        group.position.y = Math.sin(t * 1.8) * 0.5;
+      };
+      return group;
+    }
+
+    // BUILDER FOR PROTOTYPE 3 (Cybernetic Torus Knot Capital Vortex)
+    function buildProto3() {
+      const group = new THREE.Group();
+      const knotMat = new THREE.MeshStandardMaterial({
+        color: 0xF59E0B,
+        metalness: 0.90,
+        roughness: 0.15,
+        wireframe: false
+      });
+      const wireMat = new THREE.MeshBasicMaterial({ color: 0x06B6D4, wireframe: true, transparent: true, opacity: 0.4 });
+
+      const knotGeo = new THREE.TorusKnotGeometry(3.6, 1.1, 120, 24, 2, 5);
+      const knot = new THREE.Mesh(knotGeo, knotMat);
+      group.add(knot);
+
+      const wireKnot = new THREE.Mesh(knotGeo, wireMat);
+      wireKnot.scale.set(1.08, 1.08, 1.08);
+      group.add(wireKnot);
+
+      protoAnimateHook = (t) => {
+        knot.rotation.x += 0.01;
+        knot.rotation.y += 0.015;
+        wireKnot.rotation.x -= 0.008;
+        wireKnot.rotation.y -= 0.012;
+        group.position.y = Math.sin(t * 1.2) * 0.4;
+      };
+      return group;
+    }
+
+    // BUILDER FOR PROTOTYPE 4 (Multi-Currency Barbell Orbital Stage)
+    function buildProto4() {
+      const group = new THREE.Group();
+      const goldMat = new THREE.MeshStandardMaterial({ color: 0xF59E0B, metalness: 0.9, roughness: 0.2 });
+      const cyanMat = new THREE.MeshStandardMaterial({ color: 0x06B6D4, metalness: 0.85, roughness: 0.15 });
+      const emeraldMat = new THREE.MeshStandardMaterial({ color: 0x10B981, metalness: 0.85, roughness: 0.2 });
+      const purpleMat = new THREE.MeshStandardMaterial({ color: 0x8B5CF6, metalness: 0.85, roughness: 0.2 });
+
+      // Central Quantum Core
+      const center = new THREE.Mesh(new THREE.SphereGeometry(2.4, 32, 32), goldMat);
+      group.add(center);
+
+      // 4 Orbital Satellite Spheres ($ USD, ₹ INR, £ GBP, € EUR)
+      const satellites = [
+        { mesh: new THREE.Mesh(new THREE.SphereGeometry(1.4, 24, 24), emeraldMat), angle: 0, dist: 6.5, speed: 0.02 },
+        { mesh: new THREE.Mesh(new THREE.SphereGeometry(1.4, 24, 24), cyanMat), angle: Math.PI * 0.5, dist: 6.5, speed: 0.02 },
+        { mesh: new THREE.Mesh(new THREE.SphereGeometry(1.4, 24, 24), goldMat), angle: Math.PI, dist: 6.5, speed: 0.02 },
+        { mesh: new THREE.Mesh(new THREE.SphereGeometry(1.4, 24, 24), purpleMat), angle: Math.PI * 1.5, dist: 6.5, speed: 0.02 }
+      ];
+
+      satellites.forEach(s => group.add(s.mesh));
+
+      // Orbital Track Rings
+      const track = new THREE.Mesh(new THREE.TorusGeometry(6.5, 0.06, 16, 100), new THREE.MeshBasicMaterial({ color: 0x06B6D4, wireframe: true, transparent: true, opacity: 0.4 }));
+      track.rotation.x = Math.PI * 0.4;
+      group.add(track);
+
+      protoAnimateHook = (t) => {
+        center.rotation.y += 0.015;
+        satellites.forEach(s => {
+          s.angle += s.speed;
+          s.mesh.position.x = Math.cos(s.angle) * s.dist;
+          s.mesh.position.y = Math.sin(s.angle) * (s.dist * 0.4);
+          s.mesh.position.z = Math.sin(s.angle) * (s.dist * 0.8);
+          s.mesh.rotation.y += 0.03;
+        });
+        group.position.y = Math.sin(t * 1.6) * 0.45;
+      };
+      return group;
+    }
+
+    // BUILDER FOR PROTOTYPE 5 (Geometric Capital DNA Growth Spiral)
+    function buildProto5() {
+      const group = new THREE.Group();
+      const goldMat = new THREE.MeshStandardMaterial({ color: 0xF59E0B, metalness: 0.9, roughness: 0.2 });
+      const cyanMat = new THREE.MeshStandardMaterial({ color: 0x06B6D4, metalness: 0.85, roughness: 0.2 });
+
+      const nodeCount = 28;
+      const rungs = [];
+      for (let i = 0; i < nodeCount; i++) {
+        const t = (i / nodeCount) * Math.PI * 4;
+        const y = (i - nodeCount / 2) * 0.65;
+        const radius = 3.8;
+
+        const sphere1 = new THREE.Mesh(new THREE.SphereGeometry(0.4, 16, 16), goldMat);
+        sphere1.position.set(Math.cos(t) * radius, y, Math.sin(t) * radius);
+        group.add(sphere1);
+
+        const sphere2 = new THREE.Mesh(new THREE.SphereGeometry(0.4, 16, 16), cyanMat);
+        sphere2.position.set(Math.cos(t + Math.PI) * radius, y, Math.sin(t + Math.PI) * radius);
+        group.add(sphere2);
+
+        // Connecting Rung
+        const rungGeo = new THREE.CylinderGeometry(0.08, 0.08, radius * 2, 8);
+        const rung = new THREE.Mesh(rungGeo, new THREE.MeshBasicMaterial({ color: 0x334155, transparent: true, opacity: 0.5 }));
+        rung.position.set(0, y, 0);
+        rung.rotation.z = Math.PI * 0.5;
+        rung.rotation.y = -t;
+        group.add(rung);
+      }
+
+      protoAnimateHook = (t) => {
+        group.rotation.y += 0.015;
+        group.position.y = Math.sin(t * 1.4) * 0.4;
+      };
+      return group;
+    }
+
+    function loadPrototype(id) {
+      if (active3DGroup) {
+        scene.remove(active3DGroup);
+      }
+      activeProto = id;
+      if (id === 1) active3DGroup = buildProto1();
+      else if (id === 2) active3DGroup = buildProto2();
+      else if (id === 3) active3DGroup = buildProto3();
+      else if (id === 4) active3DGroup = buildProto4();
+      else if (id === 5) active3DGroup = buildProto5();
+
+      active3DGroup.position.set(0, 0, -2);
+      scene.add(active3DGroup);
+
+      // Update UI labels
+      const cfg = prototypeConfigs[id];
+      document.getElementById('hero-badge-title').innerText = cfg.title;
+      document.getElementById('active-proto-badge').innerText = `PROTO ${id} ACTIVE`;
+      document.getElementById('proto-desc').innerText = `P${id}: ${cfg.desc}`;
+
+      for (let i = 1; i <= 5; i++) {
+        const btn = document.getElementById(`pbtn-${i}`);
+        if (i === id) {
+          btn.className = "py-2 rounded-lg bg-black text-white border-2 border-black shadow-[2px_2px_0px_#0891B2] transition";
+        } else {
+          btn.className = "py-2 rounded-lg bg-[#F4EFEA] text-black border-2 border-black hover:bg-black hover:text-white transition";
+        }
+      }
+    }
+
+    function switchPrototype(id) {
+      loadPrototype(id);
+    }
+
     function animate3D() {
       requestAnimationFrame(animate3D);
-
       const time = Date.now() * 0.0015;
-
-      // Smooth Coin Spin & Harmonic Floating Wave
-      masterCoinGroup.rotation.y += 0.012;
-      masterCoinGroup.position.y = Math.sin(time * 1.5) * 0.45;
-      masterCoinGroup.rotation.z = Math.sin(time * 0.8) * 0.08;
-
-      // Gyroscopic Orbital Counter-Rotations
-      haloRing1.rotation.x = Math.PI * 0.35 + Math.sin(time) * 0.2;
-      haloRing1.rotation.y += 0.018;
-
-      haloRing2.rotation.x = -Math.PI * 0.25 + Math.cos(time * 0.9) * 0.2;
-      haloRing2.rotation.y -= 0.014;
-
-      // Floating Shards Revolution
-      floatingShards.forEach(s => {
-        s.angle += s.speed;
-        s.mesh.position.x = Math.cos(s.angle) * s.radius;
-        s.mesh.position.y = Math.sin(s.angle) * s.radius;
-        s.mesh.rotation.x += 0.02;
-        s.mesh.rotation.y += 0.03;
-      });
-
-      // Smooth Spring Mouse Inertia
+      if (protoAnimateHook) {
+        protoAnimateHook(time);
+      }
       targetRotationY += (mouseX * 0.8 - targetRotationY) * 0.05;
       targetRotationX += (mouseY * 0.8 - targetRotationX) * 0.05;
       camera.position.x = targetRotationY * 8;
