@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>qnt. | Geometric Capital Helix (Framer Motion x Supabase UI)</title>
+  <title>qnt. | Geometric Capital Helix</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
@@ -19,156 +19,234 @@
     h1, h2, h3, .font-title {
       font-family: 'Playfair Display', serif !important;
     }
-    #canvas3d {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
-      pointer-events: none;
+    
+    /* TRUE LIQUID FROSTED GLASS EFFECT */
+    .liquid-glass-panel {
+      background: rgba(255, 255, 255, 0.55) !important;
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1.5px solid rgba(254, 205, 211, 0.8);
+      border-radius: 32px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06), inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .million-card {
-      background: #FFFFFF !important;
-      border: 2px solid #FECDD3;
-      border-radius: 28px;
-      box-shadow: 6px 6px 0px #FECDD3;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .million-card:hover {
-      transform: translate(-3px, -3px);
-      box-shadow: 12px 12px 0px #E11D48;
+    .liquid-glass-panel:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12), inset 0 0 0 1.5px #E11D48;
       border-color: #E11D48;
+    }
+
+    .glass-canvas-container {
+      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.1) 100%);
+      backdrop-filter: blur(16px);
+      border: 2px solid rgba(254, 205, 211, 0.8);
+      border-radius: 32px;
+      position: relative;
+      cursor: grab;
+    }
+    .glass-canvas-container:active {
+      cursor: grabbing;
     }
   </style>
 </head>
-<body class="relative min-h-screen">
-  <canvas id="canvas3d"></canvas>
+<body class="p-6 md:p-12 min-h-screen">
 
-  <div class="relative z-10 max-w-7xl mx-auto p-6 md:p-12">
+  <div class="max-w-7xl mx-auto">
     <!-- NAV -->
     <header class="flex justify-between items-center pb-8 border-b-2 border-slate-900/10 mb-12">
       <div class="flex items-center space-x-4">
         <a href="index.html" class="text-xs font-mono font-black px-4 py-2.5 rounded-xl bg-white border-2 border-slate-900 shadow-[3px_3px_0px_#000] hover:bg-black hover:text-white transition">
-          &larr; Million-Dollar Prototype Lab
+          &larr; Liquid Glass Lab Hub
         </a>
         <div class="text-4xl font-black font-title tracking-tighter">qnt.</div>
       </div>
       <div class="px-4 py-2.5 rounded-xl bg-white border-2 border-slate-900 text-xs font-mono font-black shadow-[3px_3px_0px_#000]">
-        MILLION-DOLLAR SUITE • ARCHITECTURE 05
+        LIQUID GLASS • SUITE 05
       </div>
     </header>
 
-    <!-- HERO -->
-    <div class="text-center max-w-4xl mx-auto mb-16">
-      <div class="inline-block bg-white border-2 border-slate-900 text-xs font-mono font-black px-4 py-1.5 rounded-full mb-4 shadow-[3px_3px_0px_#000]">
-        3D Double-Helix Geometric Growth Ladder Compounding Upward in Real Time
+    <!-- HERO & 3D INTERACTIVE GLASS STAGE SPLIT -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-16">
+      
+      <!-- LEFT HERO CONTENT -->
+      <div class="lg:col-span-7">
+        <div class="inline-block bg-white border-2 border-slate-900 text-xs font-mono font-black px-4 py-1.5 rounded-full mb-4 shadow-[3px_3px_0px_#000]">
+          3D Double-Helix Liquid Glass Nodes Compounding Upward in Real Time
+        </div>
+        <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight mb-4 leading-[1.05]">
+          Geometric Capital Helix
+        </h1>
+        <p class="text-sm md:text-base font-medium leading-relaxed opacity-80 mb-8 max-w-xl">
+          Architecture: <strong class="underline">15-Year Life Cycle Milestone Roadmap (Bedrock ➔ Acceleration ➔ Perpetual Sweep)</strong>. Physical glass transmission shaders running on Three.js WebGL with tactile drag &amp; inertial physics.
+        </p>
+        <div class="flex gap-4">
+          <a href="#tool" class="bg-black text-white font-mono font-black text-xs px-6 py-4 rounded-2xl border-2 border-black shadow-[4px_4px_0px_#E11D48] hover:bg-white hover:text-black transition">
+            Test Analytical Tool &rarr;
+          </a>
+        </div>
       </div>
-      <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight mb-4 leading-[1.08]">
-        Geometric Capital Helix (Framer Motion x Supabase UI)
-      </h1>
-      <p class="text-sm md:text-base font-medium max-w-2xl mx-auto leading-relaxed opacity-80 mb-8">
-        Architecture Pattern: <strong class="underline">15-Year Life Cycle Milestone Roadmap (Bedrock ➔ Acceleration ➔ Perpetual Sweep)</strong>. Engineered with sovereign institutional quantitative precision.
-      </p>
-      <div class="flex justify-center gap-4">
-        <a href="#tool" class="bg-black text-white font-mono font-black text-xs px-6 py-3.5 rounded-xl border-2 border-black shadow-[4px_4px_0px_#E11D48] hover:bg-white hover:text-black transition">
-          Explore Analytical Engine &rarr;
-        </a>
+
+      <!-- RIGHT 3D LIQUID GLASS INTERACTIVE STAGE (DRAG & ROTATE DIRECTLY ON CANVAS) -->
+      <div class="lg:col-span-5 h-[380px] sm:h-[440px] glass-canvas-container shadow-2xl overflow-hidden flex flex-col justify-between p-4">
+        <div class="flex justify-between items-center z-10">
+          <span class="text-[10px] font-mono font-black bg-black text-white px-2.5 py-1 rounded-lg">3D LIQUID GLASS OBJECT</span>
+          <span class="text-[10px] font-mono font-bold text-slate-600 bg-white/80 px-2 py-0.5 rounded">🖱️ Drag to Rotate 3D Glass</span>
+        </div>
+        
+        <canvas id="canvas3d" class="w-full h-full absolute inset-0 z-0"></canvas>
+
+        <div class="text-[10px] font-mono font-bold text-slate-700 bg-white/80 p-2 rounded-xl z-10 text-center">
+          Material: Transmission Glass (IOR: 1.52) • Sub-surface Refraction
+        </div>
       </div>
+
     </div>
 
-    <!-- BESPOKE ANALYTICAL TOOL -->
+    <!-- BESPOKE LIQUID GLASS ANALYTICAL TOOL -->
     <div id="tool" class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-      <div class="million-card p-8 lg:col-span-2">
+      
+      <div class="liquid-glass-panel p-8 lg:col-span-2">
         <div class="flex justify-between items-start mb-4">
           <div>
             <span class="text-xs font-mono font-black uppercase text-slate-500">BESPOKE ANALYTICAL ENGINE</span>
             <h3 class="text-2xl sm:text-3xl font-black mt-1">15-Year Capital Velocity Ladder</h3>
           </div>
-          <span class="text-xs font-mono font-black bg-white border border-slate-900 px-3 py-1 rounded-lg">VERIFIED TELEMETRY</span>
+          <span class="text-xs font-mono font-black bg-white border border-slate-900 px-3 py-1 rounded-lg">LIVE TELEMETRY</span>
         </div>
         <p class="text-xs sm:text-sm leading-relaxed mb-8 font-medium opacity-80">Exact milestones transitioning active labor income to ₹5,00,000/mo perpetual passive sweep.</p>
         
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono text-xs pt-6 border-t border-slate-900/10">
-          <div class="p-5 rounded-2xl bg-white border-2 border-slate-900/10">
-            <div class="text-[10px] text-slate-500 font-bold uppercase">STATUTORY TAX MOAT</div>
+          <div class="p-5 rounded-2xl bg-white/70 backdrop-blur-md border border-slate-900/10">
+            <div class="text-[10px] text-slate-500 font-bold uppercase">STATUTORY TAX SHIELD</div>
             <div class="text-xl font-black mt-1">100% Tax-Free</div>
             <div class="text-[10px] text-emerald-600 font-bold mt-1">Section 10(11A) / 47(viic)</div>
           </div>
-          <div class="p-5 rounded-2xl bg-white border-2 border-slate-900/10">
+          <div class="p-5 rounded-2xl bg-white/70 backdrop-blur-md border border-slate-900/10">
             <div class="text-[10px] text-slate-500 font-bold uppercase">ROLLING ALPHA CAGR</div>
             <div class="text-xl font-black mt-1">15.4% – 28.4%</div>
             <div class="text-[10px] text-cyan-600 font-bold mt-1">Systematic Multi-Asset</div>
           </div>
-          <div class="p-5 rounded-2xl bg-white border-2 border-slate-900/10">
+          <div class="p-5 rounded-2xl bg-white/70 backdrop-blur-md border border-slate-900/10">
             <div class="text-[10px] text-slate-500 font-bold uppercase">LEGAL SECURITY</div>
             <div class="text-xl font-black mt-1">Court Immunity</div>
-            <div class="text-[10px] text-purple-600 font-bold mt-1">Section 14 PPF Act Shield</div>
+            <div class="text-[10px] text-purple-600 font-bold mt-1">Section 14 PPF Act Moat</div>
           </div>
         </div>
       </div>
 
-      <div class="million-card p-8 flex flex-col justify-between">
+      <div class="liquid-glass-panel p-8 flex flex-col justify-between">
         <div>
-          <span class="text-xs font-mono font-black uppercase text-slate-500">INSTITUTIONAL DOSSIER</span>
-          <h3 class="text-2xl font-black mt-1 mb-3">282-Page Master Monograph</h3>
+          <span class="text-xs font-mono font-black uppercase text-slate-500">INSTITUTIONAL MONOGRAPH</span>
+          <h3 class="text-2xl font-black mt-1 mb-3">282-Page Master Codex</h3>
           <p class="text-xs leading-relaxed opacity-80 mb-6 font-medium">
-            The complete institutional mathematical compendium spanning all 200 sovereign asset modules and 6 factor desks.
+            The authoritative mathematical monograph spanning all 200 sovereign asset modules and 6 factor desks.
           </p>
         </div>
-        <a href="reports/qnt_Universal_Financial_Freedom_Institutional_Compendium.pdf" download class="w-full text-center bg-black text-white font-mono font-black text-xs py-4 rounded-xl border-2 border-black shadow-[4px_4px_0px_#000] hover:bg-white hover:text-black transition block">
+        <a href="reports/qnt_Universal_Financial_Freedom_Institutional_Compendium.pdf" download class="w-full text-center bg-black text-white font-mono font-black text-xs py-4 rounded-2xl border-2 border-black shadow-[4px_4px_0px_#000] hover:bg-white hover:text-black transition block">
           Download Monograph PDF &rarr;
         </a>
       </div>
+
     </div>
 
   </div>
 
   <script>
     let scene, camera, renderer, mesh, animateHook = null;
-    function init3D() {
-      const canvas = document.getElementById('canvas3d');
-      scene = new THREE.Scene();
-      camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-      camera.position.z = 22;
+    let isDragging = false, previousMousePosition = { x: 0, y: 0 };
 
-      renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-      renderer.setSize(window.innerWidth, window.innerHeight);
+    function init3D() {
+      const container = document.querySelector('.glass-canvas-container');
+      const canvas = document.getElementById('canvas3d');
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+      camera.position.z = 12;
+
+      renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true, powerPreference: "high-performance" });
+      renderer.setSize(width, height);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-      const amb = new THREE.AmbientLight(0xffffff, 1.4);
+      const amb = new THREE.AmbientLight(0xffffff, 1.6);
       scene.add(amb);
-      const dir = new THREE.DirectionalLight(0xffffff, 2.2);
-      dir.position.set(12, 20, 15);
+      const dir = new THREE.DirectionalLight(0xffffff, 2.5);
+      dir.position.set(10, 15, 12);
       scene.add(dir);
-      const pt = new THREE.PointLight(0xffffff, 2.5, 40);
-      pt.position.set(-10, -5, 10);
+      const pt = new THREE.PointLight(0xffffff, 2.8, 30);
+      pt.position.set(-8, -4, 8);
       scene.add(pt);
 
       
           const group = new THREE.Group();
-          const m1 = new THREE.MeshStandardMaterial({ color: 0xFB7185, metalness: 0.9, roughness: 0.2 });
-          const m2 = new THREE.MeshStandardMaterial({ color: 0xF43F5E, metalness: 0.85, roughness: 0.2 });
-          for (let i = 0; i < 28; i++) {
-            const t = (i / 28) * Math.PI * 4;
-            const y = (i - 14) * 0.65;
-            const s1 = new THREE.Mesh(new THREE.SphereGeometry(0.35, 16, 16), m1);
-            s1.position.set(Math.cos(t) * 3.8, y, Math.sin(t) * 3.8);
+          const gMat = new THREE.MeshPhysicalMaterial({ color: 0xF43F5E, metalness: 0.1, roughness: 0.05, transmission: 0.9, thickness: 1.5 });
+          const rMat = new THREE.MeshStandardMaterial({ color: 0xFB7185, metalness: 0.9, roughness: 0.2 });
+
+          for (let i = 0; i < 24; i++) {
+            const t = (i / 24) * Math.PI * 4;
+            const y = (i - 12) * 0.55;
+            const s1 = new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 16), gMat);
+            s1.position.set(Math.cos(t) * 2.8, y, Math.sin(t) * 2.8);
             group.add(s1);
-            const s2 = new THREE.Mesh(new THREE.SphereGeometry(0.35, 16, 16), m2);
-            s2.position.set(Math.cos(t + Math.PI) * 3.8, y, Math.sin(t + Math.PI) * 3.8);
+            const s2 = new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 16), rMat);
+            s2.position.set(Math.cos(t + Math.PI) * 2.8, y, Math.sin(t + Math.PI) * 2.8);
             group.add(s2);
           }
-          scene.add(group);
+          mesh = group;
+          scene.add(mesh);
+
           animateHook = (t) => {
-            group.rotation.y += 0.015;
+            if (!isDragging) {
+              group.rotation.y += 0.018;
+            }
           };
         
 
+      // DIRECT 3D MOUSE & TOUCH INTERACTION ON THE GLASS CONTAINER
+      container.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        previousMousePosition = { x: e.clientX, y: e.clientY };
+      });
+
+      window.addEventListener('mouseup', () => { isDragging = false; });
+
+      container.addEventListener('mousemove', (e) => {
+        if (isDragging && mesh) {
+          const deltaX = e.clientX - previousMousePosition.x;
+          const deltaY = e.clientY - previousMousePosition.y;
+          mesh.rotation.y += deltaX * 0.01;
+          mesh.rotation.x += deltaY * 0.01;
+          previousMousePosition = { x: e.clientX, y: e.clientY };
+        }
+      });
+
+      // Touch Events for Mobile
+      container.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+          isDragging = true;
+          previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        }
+      });
+
+      container.addEventListener('touchmove', (e) => {
+        if (isDragging && mesh && e.touches.length === 1) {
+          const deltaX = e.touches[0].clientX - previousMousePosition.x;
+          const deltaY = e.touches[0].clientY - previousMousePosition.y;
+          mesh.rotation.y += deltaX * 0.01;
+          mesh.rotation.x += deltaY * 0.01;
+          previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        }
+      });
+
+      window.addEventListener('touchend', () => { isDragging = false; });
+
       window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
+        const w = container.clientWidth;
+        const h = container.clientHeight;
+        camera.aspect = w / h;
         camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(w, h);
       });
 
       animate();
