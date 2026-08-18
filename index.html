@@ -12,6 +12,8 @@
   
   <!-- Three.js (Real-Time 3D WebGL Engine) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- Supabase Official JavaScript Client SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -51,16 +53,6 @@
             sans: ['"Plus Jakarta Sans"', 'Inter', sans-serif],
             brand: ['Syne', '"Plus Jakarta Sans"', sans-serif],
             mono: ['"JetBrains Mono"', 'monospace']
-          },
-          animation: {
-            'float-slow': 'floatSlow 5s ease-in-out infinite',
-            'shimmer': 'shimmer 2.5s infinite'
-          },
-          keyframes: {
-            floatSlow: {
-              '0%, 100%': { transform: 'translateY(0px)' },
-              '50%': { transform: 'translateY(-10px)' }
-            }
           }
         }
       }
@@ -68,7 +60,6 @@
   </script>
 
   <style>
-    /* Pristine Luxury White/Cream Canvas */
     :root, html, body {
       background-color: #FAF8F5 !important;
       color: #000000 !important;
@@ -79,7 +70,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* 3D WebGL Canvas Layer */
     #webgl-canvas {
       position: fixed;
       top: 0;
@@ -90,7 +80,6 @@
       pointer-events: none;
     }
 
-    /* Ambient Liquid Light Mesh */
     .liquid-mesh-light {
       background: 
         radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.16) 0%, transparent 50%),
@@ -99,7 +88,6 @@
         radial-gradient(circle at 50% 65%, rgba(16, 185, 129, 0.08) 0%, transparent 45%);
     }
 
-    /* Grid Overlay */
     .bg-grid-cream {
       background-size: 32px 32px;
       background-image: 
@@ -107,7 +95,6 @@
         linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
     }
 
-    /* High-Contrast Luxury White Glass Cards */
     .luxury-card {
       background: #FFFFFF !important;
       border: 2px solid #000000;
@@ -121,7 +108,6 @@
       border-color: #000000;
     }
 
-    /* Solid Black & High-Contrast Toggle Buttons */
     .btn-solid-black {
       background: #000000 !important;
       color: #FFFFFF !important;
@@ -141,7 +127,6 @@
       color: #FFFFFF !important;
     }
 
-    /* Slide-out Sidebar Drawer */
     #sidebar-drawer {
       transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -149,7 +134,6 @@
       transform: translateX(0) !important;
     }
 
-    /* Expandable Sub-Drawer */
     .desk-subdrawer {
       max-height: 0;
       overflow: hidden;
@@ -161,7 +145,6 @@
       opacity: 1;
     }
 
-    /* Real-Time Live Ticker */
     @keyframes marquee {
       0% { transform: translateX(0%); }
       100% { transform: translateX(-50%); }
@@ -188,7 +171,6 @@
   <aside id="sidebar-drawer" class="fixed top-0 left-0 bottom-0 w-80 max-w-[85vw] bg-white border-r-2 border-black z-50 shadow-2xl p-6 flex flex-col justify-between -translate-x-full">
     <div>
       <div class="flex items-center justify-between pb-6 border-b-2 border-black mb-6">
-        <!-- Pure Luxury Monogram Brand -->
         <a href="#" class="flex items-baseline space-x-1.5 font-brand">
           <span class="text-3xl font-black text-black tracking-tighter">qnt<span class="text-cyan-bright">.</span></span>
         </a>
@@ -256,22 +238,18 @@
     <header class="sticky top-0 z-40 backdrop-blur-xl bg-canvas/90 border-b-2 border-black">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
         
-        <!-- Left Side: Solid Black 3-Lines Button + Pure Luxury "qnt." Logo -->
         <div class="flex items-center space-x-4">
-          <!-- 3-Lines Hamburger Menu Slide-Out Button (High-Contrast Black Lines) -->
           <button onclick="toggleSidebar()" aria-label="Open Navigation Menu" class="p-2.5 rounded-xl bg-white border-2 border-black hover:bg-black group transition shadow-[3px_3px_0px_#000] flex flex-col justify-center items-center gap-1 w-11 h-11 cursor-pointer">
             <span class="w-6 h-0.5 bg-black group-hover:bg-white rounded-full transition"></span>
             <span class="w-6 h-0.5 bg-black group-hover:bg-white rounded-full transition"></span>
             <span class="w-6 h-0.5 bg-black group-hover:bg-white rounded-full transition"></span>
           </button>
 
-          <!-- PURE LUXURY "qnt." BRAND IDENTITY (ZERO DISTRACTING BADGES) -->
           <a href="#" class="flex items-baseline font-brand tracking-tighter">
             <span class="text-4xl sm:text-5xl font-black text-black">qnt<span class="text-cyan-bright">.</span></span>
           </a>
         </div>
 
-        <!-- Desktop Navigation Menu -->
         <nav class="hidden lg:flex items-center space-x-7 text-xs font-mono font-black text-black">
           <a href="#simulator" class="hover:text-cyan-glow transition">Compounding Engine</a>
           <a href="#database" class="hover:text-cyan-glow transition">200-Asset Database</a>
@@ -281,7 +259,6 @@
           <a href="#pricing" class="hover:text-cyan-glow transition">Pricing</a>
         </nav>
 
-        <!-- Solid High-Contrast Launch Button -->
         <div class="flex items-center space-x-3">
           <button onclick="openModal('researcher-modal')" class="hidden sm:inline-flex items-center text-xs font-mono font-black text-black bg-white border-2 border-black px-4 py-2.5 rounded-xl shadow-[3px_3px_0px_#000] hover:bg-black hover:text-white transition">
             SUBMIT RESEARCH
@@ -296,13 +273,11 @@
     <!-- HERO SECTION WITH REAL 3D FLOATING GOLDEN '$' WEALTH ASSET -->
     <section class="relative pt-12 pb-16 px-4 sm:px-6 max-w-7xl mx-auto text-center">
       
-      <!-- Interactive Real-Time 3D Dollar Indicator -->
       <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white border-2 border-black text-black text-xs font-mono font-black mb-6 shadow-[3px_3px_0px_#000]">
         <span class="w-2.5 h-2.5 rounded-full bg-cyan-bright animate-ping"></span>
         <span>REAL-TIME 3D QUANTITATIVE ENGINE ($ USD / ₹ INR / £ GBP / € EUR)</span>
       </div>
 
-      <!-- Main High-Contrast Headline -->
       <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight max-w-5xl mx-auto leading-[1.06] mb-6 text-black font-brand">
         Deterministic Wealth Architecture <br/>
         <span class="text-transparent bg-clip-text bg-gradient-to-r from-black via-cyan-glow to-cyan-bright">Engineered for Absolute Sovereignty.</span>
@@ -386,7 +361,6 @@
       </div>
 
       <div class="max-w-5xl mx-auto luxury-card p-6 md:p-10 rounded-3xl">
-        <!-- Controls -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <div>
             <label class="block text-xs font-mono font-black text-black uppercase mb-2">Initial Commitment Base</label>
@@ -418,7 +392,6 @@
           </div>
         </div>
 
-        <!-- Real-Time Outputs -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t-2 border-black">
           <div class="bg-[#F4EFEA] p-5 rounded-2xl border-2 border-black text-left shadow-[3px_3px_0px_#000]">
             <div class="text-xs font-mono text-ink-700 mb-1 font-black">5-YEAR VALUE</div>
@@ -441,7 +414,7 @@
       </div>
     </section>
 
-    <!-- LIVE 200-ASSET INTERACTIVE DATABASE TABLE ENGINE (NEW INCLUSION) -->
+    <!-- LIVE 200-ASSET INTERACTIVE DATABASE TABLE ENGINE -->
     <section id="database" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-t-2 border-black">
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
         <div>
@@ -450,13 +423,11 @@
           <p class="text-ink-800 text-xs mt-1 font-medium">Search, filter, and inspect live historical rolling CAGRs, statutory tax rules, and risk telemetry.</p>
         </div>
         
-        <!-- Live Instant Search Bar -->
         <div class="mt-4 md:mt-0 w-full md:w-72">
           <input type="text" id="asset-search" oninput="searchDatabase()" placeholder="🔍 Search 200 assets (e.g. PPF, Nifty, Gold)..." class="w-full p-3 text-xs font-mono font-bold bg-white border-2 border-black rounded-xl focus:outline-none shadow-[3px_3px_0px_#000]">
         </div>
       </div>
 
-      <!-- Filter Buttons (All with 100% Black Visible Text) -->
       <div class="flex flex-wrap gap-2 mb-6">
         <button onclick="filterDatabase('all')" id="db-all" class="px-4 py-2 rounded-xl text-xs font-mono font-black btn-solid-black transition">ALL ASSETS (200)</button>
         <button onclick="filterDatabase('tier1')" id="db-tier1" class="px-4 py-2 rounded-xl text-xs font-mono font-black btn-solid-white transition">TIER 1 (SOVEREIGN EEE)</button>
@@ -465,7 +436,6 @@
         <button onclick="filterDatabase('tier4')" id="db-tier4" class="px-4 py-2 rounded-xl text-xs font-mono font-black btn-solid-white transition">TIER 4 (GLOBAL USD &amp; TECH)</button>
       </div>
 
-      <!-- Live Database Table Container -->
       <div class="luxury-card overflow-hidden">
         <div class="overflow-x-auto">
           <table class="w-full text-left border-collapse text-xs font-mono">
@@ -480,7 +450,6 @@
               </tr>
             </thead>
             <tbody id="database-rows" class="divide-y-2 divide-black/10 font-bold text-black bg-white">
-              <!-- Dynamically populated via JS -->
             </tbody>
           </table>
         </div>
@@ -501,7 +470,6 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
-        <!-- Desk 1: Domestic Equities -->
         <div class="luxury-card p-7 border-l-8 border-l-orange-600 cursor-pointer" onclick="toggleDeskDrawer('desk-1')">
           <div class="flex justify-between items-start mb-2">
             <span class="text-[10px] font-mono font-black text-orange-700 uppercase tracking-widest">DESK I • FACTOR ALPHA</span>
@@ -514,7 +482,6 @@
             <span class="text-orange-700 font-black text-sm">13.2% – 24.0%</span>
           </div>
 
-          <!-- Expanded Sub-Drawer 1 -->
           <div id="desk-1" class="desk-subdrawer mt-4 pt-4 border-t-2 border-black/10 text-xs font-mono space-y-2.5">
             <div class="bg-[#F4EFEA] p-3 rounded-xl border border-black/10">
               <div class="font-black text-black mb-1">Key Portfolio Holdings:</div>
@@ -531,7 +498,6 @@
           </div>
         </div>
 
-        <!-- Desk 2: Derivatives & Theta -->
         <div class="luxury-card p-7 border-l-8 border-l-blue-600 cursor-pointer" onclick="toggleDeskDrawer('desk-2')">
           <div class="flex justify-between items-start mb-2">
             <span class="text-[10px] font-mono font-black text-blue-700 uppercase tracking-widest">DESK II • THETA CASHFLOW</span>
@@ -544,7 +510,6 @@
             <span class="text-blue-700 font-black text-sm">8.0% – 14.0% p.a.</span>
           </div>
 
-          <!-- Expanded Sub-Drawer 2 -->
           <div id="desk-2" class="desk-subdrawer mt-4 pt-4 border-t-2 border-black/10 text-xs font-mono space-y-2.5">
             <div class="bg-[#F4EFEA] p-3 rounded-xl border border-black/10">
               <div class="font-black text-black mb-1">Execution Rule:</div>
@@ -557,7 +522,6 @@
           </div>
         </div>
 
-        <!-- Desk 3: Sovereign Fixed Bedrock -->
         <div class="luxury-card p-7 border-l-8 border-l-emerald-600 cursor-pointer" onclick="toggleDeskDrawer('desk-3')">
           <div class="flex justify-between items-start mb-2">
             <span class="text-[10px] font-mono font-black text-emerald-700 uppercase tracking-widest">DESK III • SOVEREIGN FIXED</span>
@@ -570,7 +534,6 @@
             <span class="text-emerald-700 font-black text-sm">7.1% – 8.2% Tax-Free</span>
           </div>
 
-          <!-- Expanded Sub-Drawer 3 -->
           <div id="desk-3" class="desk-subdrawer mt-4 pt-4 border-t-2 border-black/10 text-xs font-mono space-y-2.5">
             <div class="bg-[#F4EFEA] p-3 rounded-xl border border-black/10">
               <div class="font-black text-black mb-1">Statutory Legal Protections:</div>
@@ -583,7 +546,6 @@
           </div>
         </div>
 
-        <!-- Desk 4: Commercial Real Assets -->
         <div class="luxury-card p-7 border-l-8 border-l-purple-600 cursor-pointer" onclick="toggleDeskDrawer('desk-4')">
           <div class="flex justify-between items-start mb-2">
             <span class="text-[10px] font-mono font-black text-purple-700 uppercase tracking-widest">DESK IV • COMMERCIAL ASSETS</span>
@@ -596,7 +558,6 @@
             <span class="text-purple-700 font-black text-sm">7.5% – 11.5% NDCF</span>
           </div>
 
-          <!-- Expanded Sub-Drawer 4 -->
           <div id="desk-4" class="desk-subdrawer mt-4 pt-4 border-t-2 border-black/10 text-xs font-mono space-y-2.5">
             <div class="bg-[#F4EFEA] p-3 rounded-xl border border-black/10">
               <div class="font-black text-black mb-1">Distribution Schedule:</div>
@@ -605,7 +566,6 @@
           </div>
         </div>
 
-        <!-- Desk 5: Precious Metals & SGBs -->
         <div class="luxury-card p-7 border-l-8 border-l-gold-600 cursor-pointer" onclick="toggleDeskDrawer('desk-5')">
           <div class="flex justify-between items-start mb-2">
             <span class="text-[10px] font-mono font-black text-gold-700 uppercase tracking-widest">DESK V • CRISIS HEDGES</span>
@@ -618,7 +578,6 @@
             <span class="text-gold-700 font-black text-sm">11.0% + 2.5% Coupon</span>
           </div>
 
-          <!-- Expanded Sub-Drawer 5 -->
           <div id="desk-5" class="desk-subdrawer mt-4 pt-4 border-t-2 border-black/10 text-xs font-mono space-y-2.5">
             <div class="bg-[#F4EFEA] p-3 rounded-xl border border-black/10">
               <div class="font-black text-black mb-1">Sovereign Moat:</div>
@@ -627,7 +586,6 @@
           </div>
         </div>
 
-        <!-- Desk 6: Global USD Monopolies -->
         <div class="luxury-card p-7 border-l-8 border-l-cyan-glow cursor-pointer" onclick="toggleDeskDrawer('desk-6')">
           <div class="flex justify-between items-start mb-2">
             <span class="text-[10px] font-mono font-black text-cyan-glow uppercase tracking-widest">DESK VI • GLOBAL USD</span>
@@ -640,7 +598,6 @@
             <span class="text-cyan-glow font-black text-sm">15.2% – 18.5% CAGR</span>
           </div>
 
-          <!-- Expanded Sub-Drawer 6 -->
           <div id="desk-6" class="desk-subdrawer mt-4 pt-4 border-t-2 border-black/10 text-xs font-mono space-y-2.5">
             <div class="bg-[#F4EFEA] p-3 rounded-xl border border-black/10">
               <div class="font-black text-black mb-1">Currency Hedge:</div>
@@ -652,7 +609,7 @@
       </div>
     </section>
 
-    <!-- RESEARCHER & COLLABORATOR GRANTS ($2,000 GRANTS & 70% REV-SHARE) -->
+    <!-- RESEARCHER & COLLABORATOR GRANTS -->
     <section id="research" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-t-2 border-black">
       <div class="text-center max-w-3xl mx-auto mb-12">
         <span class="text-xs font-mono font-black text-black uppercase tracking-widest bg-cyan-bright px-3 py-1 rounded-full border-2 border-black shadow-[2px_2px_0px_#000]">Open Research Network</span>
@@ -815,7 +772,7 @@
             The sovereign wealth operating system. Engineered with computational physics, direct-response advertising rigor, and verified statutory standards.
           </p>
           <div class="text-[11px] font-mono font-bold text-ink-700">
-            Git: obsiagent-boop • Sovereign Operating System • Real-Time 3D WebGL Financial Engine
+            Git: obsiagent-boop • Sovereign Operating System • Real-Time 3D WebGL Financial Engine • Supabase Connected
           </div>
         </div>
         <div>
@@ -840,7 +797,8 @@
       </div>
     </footer>
 
-    <!-- MODALS -->
+    <!-- MODALS WITH DUAL SUPABASE + FORMSUBMIT HOOKS -->
+    
     <!-- 1. SPONSOR & ADVERTISING MODAL -->
     <div id="sponsor-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden items-center justify-center p-4">
       <div class="luxury-card p-6 sm:p-8 rounded-3xl max-w-lg w-full bg-white border-4 border-black relative shadow-[10px_10px_0px_#000]">
@@ -848,20 +806,20 @@
         <div class="text-xs font-mono font-black text-black bg-cyan-bright px-2 py-0.5 rounded uppercase mb-1 inline-block">PARTNER SHOWCASE</div>
         <h3 class="text-2xl font-black text-black mb-2 font-brand">Feature Your Brand on qnt.</h3>
         <p class="text-xs text-ink-700 mb-6 font-medium">Reach thousands of institutional investors, HNIs, and quant engineers monthly.</p>
-        <form action="https://formsubmit.co/obsi.agent@gmail.com" method="POST" class="space-y-4">
+        <form onsubmit="handleFormSubmit(event, 'sponsorship_inquiries')" action="https://formsubmit.co/obsi.agent@gmail.com" method="POST" class="space-y-4">
           <input type="hidden" name="_subject" value="New qnt. Sponsorship Inquiry">
           <input type="hidden" name="_captcha" value="false">
           <div>
             <label class="block text-xs font-mono text-black mb-1 font-black">Company / Brand Name</label>
-            <input type="text" name="company" required class="w-full bg-[#F4EFEA] border-2 border-black rounded-xl p-3 text-xs text-black font-bold focus:border-cyan-glow focus:outline-none" placeholder="e.g. Apex FinTech Labs">
+            <input type="text" name="company" id="sp-company" required class="w-full bg-[#F4EFEA] border-2 border-black rounded-xl p-3 text-xs text-black font-bold focus:border-cyan-glow focus:outline-none" placeholder="e.g. Apex FinTech Labs">
           </div>
           <div>
             <label class="block text-xs font-mono text-black mb-1 font-black">Contact Email</label>
-            <input type="email" name="email" required class="w-full bg-[#F4EFEA] border-2 border-black rounded-xl p-3 text-xs text-black font-bold focus:border-cyan-glow focus:outline-none" placeholder="partner@yourcompany.com">
+            <input type="email" name="email" id="sp-email" required class="w-full bg-[#F4EFEA] border-2 border-black rounded-xl p-3 text-xs text-black font-bold focus:border-cyan-glow focus:outline-none" placeholder="partner@yourcompany.com">
           </div>
           <div>
             <label class="block text-xs font-mono text-black mb-1 font-black">Sponsorship Placement</label>
-            <select name="placement" class="w-full bg-[#F4EFEA] border-2 border-black rounded-xl p-3 text-xs text-black focus:border-cyan-glow focus:outline-none font-mono font-bold">
+            <select name="placement" id="sp-placement" class="w-full bg-[#F4EFEA] border-2 border-black rounded-xl p-3 text-xs text-black focus:border-cyan-glow focus:outline-none font-mono font-bold">
               <option>Top Header Banner ($500/month)</option>
               <option>In-Feed Module Sponsor Card ($750/month)</option>
               <option>Dedicated Email / Research Slot ($1,200/blast)</option>
@@ -881,20 +839,20 @@
         <div class="text-xs font-mono font-black text-black bg-cyan-bright px-2 py-0.5 rounded uppercase mb-1 inline-block">RESEARCH GRANTS &amp; CREATORS</div>
         <h3 class="text-2xl font-black text-black mb-2 font-brand">Submit Strategy &amp; Join qnt. Network</h3>
         <p class="text-xs text-ink-700 mb-6 font-medium">Get your quant models peer-reviewed, featured in the 200-module directory, and earn monthly performance bounties ($500–$2,000).</p>
-        <form action="https://formsubmit.co/obsi.agent@gmail.com" method="POST" class="space-y-4">
+        <form onsubmit="handleFormSubmit(event, 'researcher_applications')" action="https://formsubmit.co/obsi.agent@gmail.com" method="POST" class="space-y-4">
           <input type="hidden" name="_subject" value="New Researcher Grant & Collaboration Submission">
           <input type="hidden" name="_captcha" value="false">
           <div>
             <label class="block text-xs font-mono text-black mb-1 font-black">Researcher / Creator Name</label>
-            <input type="text" name="researcher_name" required class="w-full bg-[#F4EFEA] border-2 border-black rounded-xl p-3 text-xs text-black font-bold focus:border-cyan-glow focus:outline-none" placeholder="e.g. Dr. Alex Vance / Quant Researcher">
+            <input type="text" name="researcher_name" id="res-name" required class="w-full bg-[#F4EFEA] border-2 border-black rounded-xl p-3 text-xs text-black font-bold focus:border-cyan-glow focus:outline-none" placeholder="e.g. Dr. Alex Vance / Quant Researcher">
           </div>
           <div>
             <label class="block text-xs font-mono text-black mb-1 font-black">Email / Telegram Handle</label>
-            <input type="text" name="contact" required class="w-full bg-[#F4EFEA] border-2 border-black rounded-xl p-3 text-xs text-black font-bold focus:border-cyan-glow focus:outline-none" placeholder="@handle or name@domain.com">
+            <input type="text" name="contact" id="res-contact" required class="w-full bg-[#F4EFEA] border-2 border-black rounded-xl p-3 text-xs text-black font-bold focus:border-cyan-glow focus:outline-none" placeholder="@handle or name@domain.com">
           </div>
           <div>
             <label class="block text-xs font-mono text-black mb-1 font-black">Research Strategy Overview / Code Link</label>
-            <textarea name="strategy_overview" rows="3" required class="w-full bg-[#F4EFEA] border-2 border-black rounded-xl p-3 text-xs text-black font-bold focus:border-cyan-glow focus:outline-none" placeholder="Describe your quantitative methodology, alpha factor, backtest results, or link to GitHub repository..."></textarea>
+            <textarea name="strategy_overview" id="res-overview" rows="3" required class="w-full bg-[#F4EFEA] border-2 border-black rounded-xl p-3 text-xs text-black font-bold focus:border-cyan-glow focus:outline-none" placeholder="Describe your quantitative methodology, alpha factor, backtest results, or link to GitHub repository..."></textarea>
           </div>
           <button type="submit" class="w-full bg-black text-white font-mono font-black text-xs py-3.5 rounded-xl border-2 border-black shadow-[4px_4px_0px_#0891B2] hover:bg-cyan-bright hover:text-black transition">
             Submit Research Application &rarr;
@@ -910,12 +868,12 @@
         <div class="text-xs font-mono font-black text-black bg-cyan-bright px-2 py-0.5 rounded uppercase mb-1 inline-block">GHOST-DELIVERY STUDIO</div>
         <h3 class="text-2xl font-black text-black mb-2 font-brand">Commission an Enterprise Deliverable</h3>
         <p class="text-xs text-ink-700 mb-6 font-medium">Need a custom responsive 3D landing page, Python scraper, or financial research monograph delivered in 24 hours?</p>
-        <form action="https://formsubmit.co/obsi.agent@gmail.com" method="POST" class="space-y-4">
+        <form onsubmit="handleFormSubmit(event, 'ghost_studio_orders')" action="https://formsubmit.co/obsi.agent@gmail.com" method="POST" class="space-y-4">
           <input type="hidden" name="_subject" value="New Ghost-Building Client Commission">
           <input type="hidden" name="_captcha" value="false">
           <div>
             <label class="block text-xs font-mono text-black mb-1 font-black">Project Scope</label>
-            <select name="service" class="w-full bg-[#F4EFEA] border-2 border-black rounded-xl p-3 text-xs text-black focus:border-cyan-glow focus:outline-none font-mono font-bold">
+            <select name="service" id="gh-service" class="w-full bg-[#F4EFEA] border-2 border-black rounded-xl p-3 text-xs text-black focus:border-cyan-glow focus:outline-none font-mono font-bold">
               <option>High-Converting 3D SaaS Landing Page ($500–$1,200)</option>
               <option>Automated Python Web / Job Scraper ($400–$800)</option>
               <option>Institutional Research Dossier / PDF ($800–$2,500)</option>
@@ -924,11 +882,11 @@
           </div>
           <div>
             <label class="block text-xs font-mono text-black mb-1 font-black">Your Email / Telegram Handle</label>
-            <input type="text" name="client_contact" required class="w-full bg-[#F4EFEA] border-2 border-black rounded-xl p-3 text-xs text-black font-bold focus:border-cyan-glow focus:outline-none" placeholder="@handle or name@email.com">
+            <input type="text" name="client_contact" id="gh-contact" required class="w-full bg-[#F4EFEA] border-2 border-black rounded-xl p-3 text-xs text-black font-bold focus:border-cyan-glow focus:outline-none" placeholder="@handle or name@email.com">
           </div>
           <div>
             <label class="block text-xs font-mono text-black mb-1 font-black">Brief Requirements</label>
-            <textarea name="details" rows="3" required class="w-full bg-[#F4EFEA] border-2 border-black rounded-xl p-3 text-xs text-black font-bold focus:border-cyan-glow focus:outline-none" placeholder="Describe what you need built..."></textarea>
+            <textarea name="details" id="gh-details" rows="3" required class="w-full bg-[#F4EFEA] border-2 border-black rounded-xl p-3 text-xs text-black font-bold focus:border-cyan-glow focus:outline-none" placeholder="Describe what you need built..."></textarea>
           </div>
           <button type="submit" class="w-full bg-black text-white font-mono font-black text-xs py-3.5 rounded-xl border-2 border-black shadow-[4px_4px_0px_#0891B2] hover:bg-cyan-bright hover:text-black transition">
             Send Project Request &rarr;
@@ -944,20 +902,20 @@
         <div class="text-xs font-mono font-black text-black bg-cyan-bright px-2 py-0.5 rounded uppercase mb-1 inline-block">JOB BOARD SPONSORSHIP</div>
         <h3 class="text-2xl font-black text-black mb-2 font-brand">Post a Remote AI / Finance Gig</h3>
         <p class="text-xs text-ink-700 mb-6 font-medium">List your opening for 30 days to thousands of qualified remote operators ($99 USD).</p>
-        <form action="https://formsubmit.co/obsi.agent@gmail.com" method="POST" class="space-y-4">
+        <form onsubmit="handleFormSubmit(event, 'job_postings')" action="https://formsubmit.co/obsi.agent@gmail.com" method="POST" class="space-y-4">
           <input type="hidden" name="_subject" value="New Remote Job Board Listing ($99)">
           <input type="hidden" name="_captcha" value="false">
           <div>
             <label class="block text-xs font-mono text-black mb-1 font-black">Role Title</label>
-            <input type="text" name="job_title" required class="w-full bg-[#F4EFEA] border-2 border-black rounded-xl p-3 text-xs text-black font-bold focus:border-cyan-glow focus:outline-none" placeholder="e.g. AI Operations Specialist">
+            <input type="text" name="job_title" id="jb-title" required class="w-full bg-[#F4EFEA] border-2 border-black rounded-xl p-3 text-xs text-black font-bold focus:border-cyan-glow focus:outline-none" placeholder="e.g. AI Operations Specialist">
           </div>
           <div>
             <label class="block text-xs font-mono text-black mb-1 font-black">Company &amp; Application URL</label>
-            <input type="url" name="apply_url" required class="w-full bg-[#F4EFEA] border-2 border-black rounded-xl p-3 text-xs text-black font-bold focus:border-cyan-glow focus:outline-none" placeholder="https://yourcompany.com/apply">
+            <input type="url" name="apply_url" id="jb-url" required class="w-full bg-[#F4EFEA] border-2 border-black rounded-xl p-3 text-xs text-black font-bold focus:border-cyan-glow focus:outline-none" placeholder="https://yourcompany.com/apply">
           </div>
           <div>
             <label class="block text-xs font-mono text-black mb-1 font-black">Compensation Range</label>
-            <input type="text" name="compensation" required class="w-full bg-[#F4EFEA] border-2 border-black rounded-xl p-3 text-xs text-black font-bold focus:border-cyan-glow focus:outline-none" placeholder="e.g. $20 – $40 USD / hour">
+            <input type="text" name="compensation" id="jb-comp" required class="w-full bg-[#F4EFEA] border-2 border-black rounded-xl p-3 text-xs text-black font-bold focus:border-cyan-glow focus:outline-none" placeholder="e.g. $20 – $40 USD / hour">
           </div>
           <button type="submit" class="w-full bg-black text-white font-mono font-black text-xs py-3.5 rounded-xl border-2 border-black shadow-[4px_4px_0px_#0891B2] hover:bg-cyan-bright hover:text-black transition">
             Proceed to Checkout ($99) &rarr;
@@ -968,9 +926,58 @@
 
   </div>
 
-  <!-- JAVASCRIPT & THREE.JS 3D GOLDEN '$' WEALTH ENGINE -->
+  <!-- JAVASCRIPT & SUPABASE CLIENT INITIALIZATION -->
   <script>
-    // 1. THREE.JS 3D FLOATING GOLDEN '$' SCENE
+    // 1. SUPABASE CLIENT INITIALIZATION (dsxnkiuhjtkngeoijviw)
+    const SUPABASE_URL = "https://dsxnkiuhjtkngeoijviw.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_HIe2mPGwJTQM3hR4tQfIqQ_5mKzH3Mr";
+    let supabaseClient = null;
+    try {
+      if (window.supabase) {
+        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      }
+    } catch(e) { console.log('Supabase init notice:', e); }
+
+    // DUAL SUBMISSION HANDLER (SUPABASE DATABASE + FORMSUBMIT EMAIL FORWARDING)
+    async function handleFormSubmit(event, tableName) {
+      if (supabaseClient) {
+        try {
+          let rowData = {};
+          if (tableName === 'sponsorship_inquiries') {
+            rowData = {
+              company_name: document.getElementById('sp-company').value,
+              contact_email: document.getElementById('sp-email').value,
+              placement: document.getElementById('sp-placement').value
+            };
+          } else if (tableName === 'researcher_applications') {
+            rowData = {
+              researcher_name: document.getElementById('res-name').value,
+              contact: document.getElementById('res-contact').value,
+              strategy_overview: document.getElementById('res-overview').value
+            };
+          } else if (tableName === 'ghost_studio_orders') {
+            rowData = {
+              service_scope: document.getElementById('gh-service').value,
+              client_contact: document.getElementById('gh-contact').value,
+              project_details: document.getElementById('gh-details').value
+            };
+          } else if (tableName === 'job_postings') {
+            rowData = {
+              job_title: document.getElementById('jb-title').value,
+              apply_url: document.getElementById('jb-url').value,
+              compensation: document.getElementById('jb-comp').value
+            };
+          }
+          await supabaseClient.from(tableName).insert([rowData]);
+          console.log('Saved to Supabase database:', tableName, rowData);
+        } catch (err) {
+          console.log('Supabase insert note:', err);
+        }
+      }
+      // FormSubmit will naturally proceed to deliver the email!
+    }
+
+    // 2. THREE.JS 3D FLOATING GOLDEN '$' SCENE
     let scene, camera, renderer, dollarGroup, particles;
     let mouseX = 0, mouseY = 0;
 
@@ -984,10 +991,8 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-      // 3D Dollar Symbol Group ($)
       dollarGroup = new THREE.Group();
 
-      // Golden Metallic Material
       const goldMaterial = new THREE.MeshStandardMaterial({
         color: 0xF59E0B,
         metalness: 0.85,
@@ -1001,26 +1006,22 @@
         opacity: 0.35
       });
 
-      // Top S-Curve Torus
       const topArc = new THREE.TorusGeometry(3.0, 0.55, 16, 50, Math.PI * 1.3);
       const topMesh = new THREE.Mesh(topArc, goldMaterial);
       topMesh.position.set(0, 2.2, 0);
       topMesh.rotation.z = Math.PI * 0.35;
       dollarGroup.add(topMesh);
 
-      // Bottom S-Curve Torus
       const bottomArc = new THREE.TorusGeometry(3.0, 0.55, 16, 50, Math.PI * 1.3);
       const bottomMesh = new THREE.Mesh(bottomArc, goldMaterial);
       bottomMesh.position.set(0, -2.2, 0);
       bottomMesh.rotation.z = Math.PI * 1.35;
       dollarGroup.add(bottomMesh);
 
-      // Vertical Stems (The '$' Vertical Bars)
       const stemGeo = new THREE.CylinderGeometry(0.4, 0.4, 11, 32);
       const stemMesh = new THREE.Mesh(stemGeo, goldMaterial);
       dollarGroup.add(stemMesh);
 
-      // Orbital Halo Ring around Dollar
       const haloGeo = new THREE.TorusGeometry(7.5, 0.15, 16, 100);
       const haloMesh = new THREE.Mesh(haloGeo, cyanWireMaterial);
       haloMesh.rotation.x = Math.PI * 0.45;
@@ -1029,7 +1030,6 @@
       dollarGroup.position.set(0, 0, -4);
       scene.add(dollarGroup);
 
-      // Studio Lighting
       const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
       scene.add(ambientLight);
 
@@ -1041,7 +1041,6 @@
       cyanLight.position.set(-10, -5, 10);
       scene.add(cyanLight);
 
-      // Subtle Particle Field
       const particleCount = 350;
       const pGeo = new THREE.BufferGeometry();
       const pPos = new Float32Array(particleCount * 3);
@@ -1086,7 +1085,7 @@
       renderer.render(scene, camera);
     }
 
-    // 2. SIDEBAR DRAWER TOGGLE
+    // 3. SIDEBAR DRAWER TOGGLE
     function toggleSidebar() {
       const drawer = document.getElementById('sidebar-drawer');
       const overlay = document.getElementById('sidebar-overlay');
@@ -1100,7 +1099,7 @@
       }
     }
 
-    // 3. DESK SUB-DRAWER EXPANSIONS
+    // 4. DESK SUB-DRAWER EXPANSIONS
     function toggleDeskDrawer(id) {
       const drawer = document.getElementById(id);
       const icon = document.getElementById(id + '-icon');
@@ -1114,7 +1113,7 @@
       }
     }
 
-    // 4. 200-ASSET DATABASE ENGINE
+    // 5. 200-ASSET DATABASE ENGINE
     const assetDatabase = [
       { id: 1, name: "Public Provident Fund (PPF)", tier: "tier1", tierName: "Tier 1: Sovereign EEE", rate: "7.10% p.a.", tax: "Sec 14 Court Immunity + 100% Tax-Free (Sec 10(11))", link: "https://www.indiapost.gov.in" },
       { id: 2, name: "Sukanya Samriddhi Yojana (SSY)", tier: "tier1", tierName: "Tier 1: Sovereign EEE", rate: "8.20% p.a.", tax: "Sec 10(11A) Legal Shield + Girl Child 21Y Lock", link: "https://www.indiapost.gov.in" },
@@ -1172,7 +1171,7 @@
       }
     }
 
-    // 5. COMPOUNDING MATHEMATICAL SIMULATOR
+    // 6. COMPOUNDING MATHEMATICAL SIMULATOR
     let currentP = 10000;
     let currentSip = 5000;
 
