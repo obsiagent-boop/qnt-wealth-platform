@@ -3,43 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>qnt. | Dribbble 3D Suite #50: Funky Gravity Physics Playground</title>
+  <title>qnt. | 3D Interactive Art Icon Suite #50</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
-      background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 50%, #F8FAFC 100%);
-      color: #0F172A;
-      font-family: 'Cormorant Garamond', serif;
+      background: linear-gradient(135deg, #FFF1F2 0%, #FECDD3 50%, #FFF1F2 100%);
+      color: #881337;
+      font-family: 'Outfit', sans-serif;
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
     }
 
-    .dribbble-blob-1 {
+    .art-blob-1 {
       position: fixed;
       top: -10%;
       left: 15%;
       width: 500px;
       height: 500px;
-      background: radial-gradient(circle, #0EA5E9 0%, transparent 70%);
-      filter: blur(80px);
+      background: radial-gradient(circle, #E11D48 0%, transparent 70%);
+      filter: blur(85px);
       opacity: 0.5;
       z-index: 0;
       animation: blobMove 16s ease-in-out infinite alternate;
       pointer-events: none;
     }
-    .dribbble-blob-2 {
+    .art-blob-2 {
       position: fixed;
       bottom: -10%;
       right: 10%;
       width: 550px;
       height: 550px;
       background: radial-gradient(circle, #F59E0B 0%, transparent 70%);
-      filter: blur(90px);
+      filter: blur(95px);
       opacity: 0.4;
       z-index: 0;
       animation: blobMove 20s ease-in-out infinite alternate-reverse;
@@ -48,18 +48,18 @@
 
     @keyframes blobMove {
       0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(80px, 60px) scale(1.15); }
+      100% { transform: translate(90px, 70px) scale(1.15); }
     }
 
     h1, h2, h3, .font-title {
-      font-family: 'Cinzel Decorative', serif !important;
+      font-family: 'Playfair Display', serif !important;
     }
 
-    .dribbble-glass-card {
+    .art-glass-card {
       background: rgba(255, 255, 255, 0.35) !important;
       backdrop-filter: blur(32px) saturate(210%) brightness(108%);
       -webkit-backdrop-filter: blur(32px) saturate(210%) brightness(108%);
-      border: 1.5px solid rgba(226, 232, 240, 0.8);
+      border: 1.5px solid rgba(254, 205, 211, 0.8);
       border-radius: 36px;
       box-shadow: 
         0 30px 70px -15px rgba(0, 0, 0, 0.15),
@@ -67,15 +67,15 @@
         inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.08);
       transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .dribbble-glass-card:hover {
+    .art-glass-card:hover {
       transform: translateY(-5px);
       box-shadow: 
         0 40px 90px -15px rgba(0, 0, 0, 0.22),
-        inset 0 0 0 1.5px #0EA5E9;
-      border-color: #0EA5E9;
+        inset 0 0 0 1.5px #E11D48;
+      border-color: #E11D48;
     }
 
-    .dribbble-3d-stage {
+    .art-3d-stage {
       background: rgba(255, 255, 255, 0.18);
       backdrop-filter: blur(24px) saturate(200%);
       -webkit-backdrop-filter: blur(24px) saturate(200%);
@@ -86,19 +86,18 @@
       position: relative;
       overflow: hidden;
     }
-    .dribbble-3d-stage:active {
+    .art-3d-stage:active {
       cursor: grabbing;
     }
   </style>
 </head>
 <body class="p-6 md:p-12">
 
-  <div class="dribbble-blob-1"></div>
-  <div class="dribbble-blob-2"></div>
+  <div class="art-blob-1"></div>
+  <div class="art-blob-2"></div>
 
   <div class="max-w-7xl mx-auto relative z-10">
     
-    <!-- TOP BAR -->
     <header class="flex justify-between items-center pb-8 border-b border-black/10 mb-12">
       <div class="flex items-center space-x-4">
         <a href="index.html" class="text-xs font-mono font-black px-4 py-2.5 rounded-2xl bg-white/40 backdrop-blur-md border border-white/70 shadow hover:bg-black hover:text-white transition">
@@ -107,22 +106,21 @@
         <div class="text-4xl font-black font-title tracking-tighter">qnt.</div>
       </div>
       <div class="px-4 py-2 rounded-2xl bg-white/40 backdrop-blur-md border border-white/70 text-xs font-mono font-black shadow-sm">
-        MAGNETIC BOUNCING COINS #50
+        3D ART ICON • SOVEREIGN PILLAR #50
       </div>
     </header>
 
-    <!-- HERO & 3D INTERACTIVE STAGE -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-16">
       
       <div class="lg:col-span-7">
         <div class="inline-block bg-white/50 backdrop-blur-md border border-white/80 text-xs font-mono font-black px-4 py-1.5 rounded-full mb-4 shadow-sm">
-          DRIBBLE INSPIRATION • MAGNETIC BOUNCING COINS
+          3D INTERACTIVE ART SCULPTURE • 3D ART ICON • SOVEREIGN PILLAR #50
         </div>
         <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight mb-4 leading-[1.05]">
-          Funky Gravity Physics Playground
+          The Doric Sovereign Monolith (3D Quartz Pillar & Gold Coin) #50
         </h1>
         <p class="text-sm md:text-base font-medium leading-relaxed opacity-85 mb-8 max-w-xl">
-          Floating multi-asset magnetic spheres & gold coins bouncing organically with dynamic spring repulsion.
+          Classical Doric architectural pillar in quartz frosted glass holding a spinning 3D sovereign bullion coin.
         </p>
         <div class="flex gap-4">
           <a href="#tool" class="bg-black text-white font-mono font-black text-xs px-7 py-4 rounded-2xl border-2 border-black shadow-xl hover:bg-white hover:text-black transition">
@@ -131,26 +129,24 @@
         </div>
       </div>
 
-      <!-- 3D DRIBBLE STAGE CONTAINER -->
-      <div class="lg:col-span-5 h-[400px] sm:h-[460px] dribbble-3d-stage shadow-2xl flex flex-col justify-between p-5">
+      <div class="lg:col-span-5 h-[400px] sm:h-[460px] art-3d-stage shadow-2xl flex flex-col justify-between p-5">
         <div class="flex justify-between items-center z-10">
-          <span class="text-[10px] font-mono font-black bg-black text-white px-3 py-1 rounded-xl">DRIBBLE 3D WEAPON</span>
-          <span class="text-[10px] font-mono font-bold text-slate-800 bg-white/70 backdrop-blur-md px-2.5 py-1 rounded-xl border border-white">🖱️ Drag to Spin in 3D</span>
+          <span class="text-[10px] font-mono font-black bg-black text-white px-3 py-1 rounded-xl">3D ART ICON</span>
+          <span class="text-[10px] font-mono font-bold text-slate-800 bg-white/70 backdrop-blur-md px-2.5 py-1 rounded-xl border border-white">🖱️ Drag to Spin Art in 3D</span>
         </div>
         
         <canvas id="canvas3d" class="w-full h-full absolute inset-0 z-0"></canvas>
 
         <div class="text-[10px] font-mono font-bold text-slate-800 bg-white/70 backdrop-blur-md p-3 rounded-2xl z-10 text-center border border-white">
-          Transmission: 0.95 • IOR: 1.52 • Chromatic Iridescence Shader
+          Transmission: 0.98 • IOR: 1.54 • Pure Kinetic Three.js Extruded Art
         </div>
       </div>
 
     </div>
 
-    <!-- BESPOKE LIQUID GLASS ANALYTICAL TOOL -->
     <div id="tool" class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
       
-      <div class="dribbble-glass-card p-8 sm:p-10 lg:col-span-2">
+      <div class="art-glass-card p-8 sm:p-10 lg:col-span-2">
         <div class="flex justify-between items-start mb-4">
           <div>
             <span class="text-xs font-mono font-black uppercase text-slate-500">BESPOKE ANALYTICAL ENGINE</span>
@@ -159,7 +155,7 @@
           <span class="text-xs font-mono font-black bg-white/60 border border-black/10 px-3 py-1 rounded-xl">LIVE TELEMETRY</span>
         </div>
         <p class="text-xs sm:text-sm leading-relaxed mb-8 font-medium opacity-85">
-          Synchronizing 200 sovereign instruments, multi-factor momentum, commercial real assets, and automated cashflow harvesting into an institutional standard.
+          Synchronizing 200 sovereign instruments, multi-factor momentum, commercial real assets, and automated cashflow harvesting.
         </p>
         
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono text-xs pt-6 border-t border-black/10">
@@ -181,7 +177,7 @@
         </div>
       </div>
 
-      <div class="dribbble-glass-card p-8 sm:p-10 flex flex-col justify-between">
+      <div class="art-glass-card p-8 sm:p-10 flex flex-col justify-between">
         <div>
           <span class="text-xs font-mono font-black uppercase text-slate-500">INSTITUTIONAL MONOGRAPH</span>
           <h3 class="text-2xl font-black mt-1 mb-3">282-Page Master Codex</h3>
@@ -203,7 +199,7 @@
     let isDragging = false, previousMousePosition = { x: 0, y: 0 };
 
     function init3D() {
-      const container = document.querySelector('.dribbble-3d-stage');
+      const container = document.querySelector('.art-3d-stage');
       const canvas = document.getElementById('canvas3d');
       const width = container.clientWidth;
       const height = container.clientHeight;
@@ -216,7 +212,7 @@
       renderer.setSize(width, height);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-      // STUDIO LIGHTING
+      // STUDIO LIGHTS
       const amb = new THREE.AmbientLight(0xffffff, 1.8);
       scene.add(amb);
       const dir = new THREE.DirectionalLight(0xffffff, 2.5);
@@ -231,34 +227,26 @@
 
       
           const group = new THREE.Group();
-          const glassMat = new THREE.MeshPhysicalMaterial({ color: 0xBAE6FD, metalness: 0.1, roughness: 0.05, transmission: 0.95, thickness: 2.0, ior: 1.5 });
-          const colors = [0xF59E0B, 0x10B981, 0x06B6D4, 0x8B5CF6, 0xEC4899, 0x3B82F6];
-          const balls = [];
+          const pillarGeo = new THREE.CylinderGeometry(1.6, 2.0, 6.0, 24);
+          const pillarMat = new THREE.MeshPhysicalMaterial({ color: 0xFDA4AF, metalness: 0.1, roughness: 0.05, transmission: 0.95, thickness: 3.0 });
+          const pillar = new THREE.Mesh(pillarGeo, pillarMat);
+          pillar.position.set(0, -1.0, 0);
+          group.add(pillar);
 
-          for (let i = 0; i < 8; i++) {
-            const rad = 0.7 + Math.random() * 0.5;
-            const mat = i % 2 === 0 ? glassMat : new THREE.MeshStandardMaterial({ color: colors[i % colors.length], metalness: 0.9, roughness: 0.15 });
-            const ball = new THREE.Mesh(new THREE.SphereGeometry(rad, 24, 24), mat);
-            const a = (i / 8) * Math.PI * 2;
-            ball.position.set(Math.cos(a) * 3.5, (Math.random() - 0.5) * 4.0, Math.sin(a) * 3.5);
-            group.add(ball);
-            balls.push({ mesh: ball, angle: a, speed: 0.015 + Math.random() * 0.02, rad: rad, yOffset: Math.random() * Math.PI * 2 });
-          }
+          const coinGeo = new THREE.CylinderGeometry(2.2, 2.2, 0.35, 32);
+          const coinMat = new THREE.MeshStandardMaterial({ color: 0xF59E0B, metalness: 0.95, roughness: 0.1 });
+          const coin = new THREE.Mesh(coinGeo, coinMat);
+          coin.position.set(0, 2.6, 0);
+          coin.rotation.x = Math.PI * 0.5;
+          group.add(coin);
 
           mesh = group;
           scene.add(mesh);
 
           animateHook = (t) => {
             if (!isDragging) {
-              group.rotation.y += 0.008;
-              balls.forEach(b => {
-                b.angle += b.speed;
-                b.mesh.position.x = Math.cos(b.angle) * 3.8;
-                b.mesh.position.z = Math.sin(b.angle) * 3.8;
-                b.mesh.position.y = Math.sin(t * 2.5 + b.yOffset) * 1.8;
-                b.mesh.rotation.x += 0.02;
-                b.mesh.rotation.y += 0.03;
-              });
+              group.rotation.y += 0.01;
+              coin.rotation.z += 0.025;
             }
           };
         
