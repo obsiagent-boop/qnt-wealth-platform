@@ -3,229 +3,173 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>qnt. | Liquid Glass Suite #28: Liquid Glass Sovereign Suite 28 (Undulating Liquid Glass Sphere)</title>
+  <title>qnt. | Dribbble 3D Suite #28</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@700,600&f[]=satoshi@500,700&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,900&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    :root {
-      --bg-gradient: linear-gradient(135deg, #FAF5FF 0%, #E9D5FF 50%, #FAF5FF 100%);
-    }
-    
     body {
-      background: linear-gradient(135deg, #FAF5FF 0%, #E9D5FF 50%, #FAF5FF 100%);
-      color: #581C87;
-      font-family: 'Satoshi', sans-serif;
+      background: linear-gradient(135deg, #F0FDF4 0%, #A7F3D0 50%, #F0FDF4 100%);
+      color: #064E3B;
+      font-family: 'Inter', sans-serif;
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
     }
 
-    /* LIQUID AURORA BACKGROUND BLOBS BEHIND GLASS */
-    .liquid-blob-1 {
+    .dribbble-blob-1 {
       position: fixed;
       top: -10%;
-      left: 10%;
-      width: 550px;
-      height: 550px;
-      background: radial-gradient(circle, #9333EA 0%, transparent 70%);
+      left: 15%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, #10B981 0%, transparent 70%);
       filter: blur(80px);
-      opacity: 0.45;
+      opacity: 0.5;
       z-index: 0;
-      animation: floatBlob1 18s ease-in-out infinite alternate;
+      animation: blobMove 16s ease-in-out infinite alternate;
       pointer-events: none;
     }
-    .liquid-blob-2 {
+    .dribbble-blob-2 {
       position: fixed;
       bottom: -10%;
-      right: 5%;
-      width: 600px;
-      height: 600px;
+      right: 10%;
+      width: 550px;
+      height: 550px;
       background: radial-gradient(circle, #F59E0B 0%, transparent 70%);
       filter: blur(90px);
-      opacity: 0.35;
+      opacity: 0.4;
       z-index: 0;
-      animation: floatBlob2 22s ease-in-out infinite alternate;
-      pointer-events: none;
-    }
-    .liquid-blob-3 {
-      position: fixed;
-      top: 40%;
-      right: 35%;
-      width: 450px;
-      height: 450px;
-      background: radial-gradient(circle, #EC4899 0%, transparent 70%);
-      filter: blur(85px);
-      opacity: 0.25;
-      z-index: 0;
-      animation: floatBlob3 15s ease-in-out infinite alternate;
+      animation: blobMove 20s ease-in-out infinite alternate-reverse;
       pointer-events: none;
     }
 
-    @keyframes floatBlob1 {
+    @keyframes blobMove {
       0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(120px, 80px) scale(1.15); }
-    }
-    @keyframes floatBlob2 {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(-100px, -90px) scale(1.2); }
-    }
-    @keyframes floatBlob3 {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(-60px, 100px) scale(0.9); }
+      100% { transform: translate(80px, 60px) scale(1.15); }
     }
 
     h1, h2, h3, .font-title {
-      font-family: 'General Sans', sans-serif !important;
+      font-family: 'Cabinet Grotesk', sans-serif !important;
     }
 
-    /* AUTHENTIC LIQUID FROSTED GLASS PANELS (APPLE VISIONOS / AWWWARDS STANDARD) */
-    .liquid-glass-card {
-      background: rgba(255, 255, 255, 0.3) !important;
-      backdrop-filter: blur(28px) saturate(200%) brightness(105%);
-      -webkit-backdrop-filter: blur(28px) saturate(200%) brightness(105%);
-      border: 1.5px solid rgba(255, 255, 255, 0.65);
+    .dribbble-glass-card {
+      background: rgba(255, 255, 255, 0.45) !important;
+      backdrop-filter: blur(32px) saturate(210%) brightness(108%);
+      -webkit-backdrop-filter: blur(32px) saturate(210%) brightness(108%);
+      border: 1.5px solid rgba(255, 255, 255, 0.8);
       border-radius: 36px;
       box-shadow: 
-        0 30px 60px -12px rgba(0, 0, 0, 0.08),
-        0 18px 36px -18px rgba(0, 0, 0, 0.05),
-        inset 0 1px 1px 0 rgba(255, 255, 255, 0.9),
-        inset 0 -1px 2px 0 rgba(0, 0, 0, 0.05);
+        0 30px 70px -15px rgba(0, 0, 0, 0.15),
+        inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.8),
+        inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.08);
       transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      z-index: 10;
     }
-    .liquid-glass-card:hover {
+    .dribbble-glass-card:hover {
       transform: translateY(-5px);
       box-shadow: 
-        0 40px 80px -15px rgba(0, 0, 0, 0.14),
-        inset 0 0 0 1.5px #9333EA,
-        inset 0 1px 2px 0 rgba(255, 255, 255, 1);
-      border-color: #9333EA;
+        0 40px 90px -15px rgba(0, 0, 0, 0.22),
+        inset 0 0 0 1.5px #10B981;
+      border-color: #10B981;
     }
 
-    /* 3D LIQUID GLASS STAGE CONTAINER */
-    .glass-canvas-stage {
-      background: rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(24px) saturate(190%);
-      -webkit-backdrop-filter: blur(24px) saturate(190%);
-      border: 2px solid rgba(255, 255, 255, 0.7);
+    .dribbble-3d-stage {
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(24px) saturate(200%);
+      -webkit-backdrop-filter: blur(24px) saturate(200%);
+      border: 2px solid rgba(255, 255, 255, 0.6);
       border-radius: 36px;
-      box-shadow: 
-        0 30px 60px rgba(0, 0, 0, 0.08),
-        inset 0 2px 4px rgba(255, 255, 255, 0.9);
-      position: relative;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12), inset 0 2px 3px rgba(255, 255, 255, 0.9);
       cursor: grab;
+      position: relative;
       overflow: hidden;
     }
-    .glass-canvas-stage:active {
+    .dribbble-3d-stage:active {
       cursor: grabbing;
-    }
-
-    /* CHROMATIC GLASS SHINE BUTTON */
-    .btn-liquid-glass {
-      background: rgba(255, 255, 255, 0.4);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1.5px solid rgba(255, 255, 255, 0.8);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.06), inset 0 1px 1px rgba(255,255,255,0.9);
-      transition: all 0.25s ease;
-    }
-    .btn-liquid-glass:hover {
-      background: rgba(0, 0, 0, 0.9);
-      color: #FFFFFF !important;
-      border-color: #000000;
-      transform: translateY(-2px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
     }
   </style>
 </head>
 <body class="p-6 md:p-12">
 
-  <!-- VIBRANT LIQUID AURORA GRADIENT BLOBS (CREATING THE REFRACTION UNDER GLASS) -->
-  <div class="liquid-blob-1"></div>
-  <div class="liquid-blob-2"></div>
-  <div class="liquid-blob-3"></div>
+  <div class="dribbble-blob-1"></div>
+  <div class="dribbble-blob-2"></div>
 
   <div class="max-w-7xl mx-auto relative z-10">
     
-    <!-- TOP NAV -->
     <header class="flex justify-between items-center pb-8 border-b border-black/10 mb-12">
       <div class="flex items-center space-x-4">
-        <a href="index.html" class="text-xs font-mono font-black px-4 py-2.5 rounded-2xl btn-liquid-glass">
+        <a href="index.html" class="text-xs font-mono font-black px-4 py-2.5 rounded-2xl bg-white/40 backdrop-blur-md border border-white/70 shadow hover:bg-black hover:text-white transition">
           &larr; 50-Prototype Master Hub
         </a>
         <div class="text-4xl font-black font-title tracking-tighter">qnt.</div>
       </div>
-      <div class="px-4 py-2 rounded-2xl bg-white/50 backdrop-blur-xl border border-white/80 text-xs font-mono font-black shadow-sm">
-        LIQUID GLASS SUITE #28
+      <div class="px-4 py-2 rounded-2xl bg-white/40 backdrop-blur-md border border-white/70 text-xs font-mono font-black shadow-sm">
+        DRIBBLE TRENDING #28
       </div>
     </header>
 
-    <!-- HERO & 3D INTERACTIVE GLASS STAGE -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-16">
       
-      <!-- HERO PROSE -->
       <div class="lg:col-span-7">
-        <div class="inline-block bg-white/60 backdrop-blur-md border border-white/90 text-xs font-mono font-black px-4 py-1.5 rounded-full mb-4 shadow-sm">
-          3D LIQUID GLASS REFRACTION • Undulating Liquid Glass Sphere
+        <div class="inline-block bg-white/50 backdrop-blur-md border border-white/80 text-xs font-mono font-black px-4 py-1.5 rounded-full mb-4 shadow-sm">
+          DRIBBLE INSPIRATION ARCHITECTURE • DRIBBLE TRENDING #28
         </div>
         <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight mb-4 leading-[1.05]">
-          Liquid Glass Sovereign Suite 28 (Undulating Liquid Glass Sphere)
+          Dribbble Gold #03: Neomorphic Liquid Glass Switch & Wealth Pill #28
         </h1>
         <p class="text-sm md:text-base font-medium leading-relaxed opacity-85 mb-8 max-w-xl">
-          Engineered with authentic <strong>Physical Glass Optical Transmission (`MeshPhysicalMaterial`)</strong>, Chromatic Aberration Dispersion, and responsive gesture inertia.
+          Translucent glass toggle capsule containing floating glowing factor spheres with realistic refractive optics.
         </p>
         <div class="flex gap-4">
           <a href="#tool" class="bg-black text-white font-mono font-black text-xs px-7 py-4 rounded-2xl border-2 border-black shadow-xl hover:bg-white hover:text-black transition">
-            Explore Dynamic 70:15:15 Portfolio Rebalancer &rarr;
+            Test Analytical Tool &rarr;
           </a>
         </div>
       </div>
 
-      <!-- 3D INTERACTIVE TACTILE GLASS CANVAS STAGE -->
-      <div class="lg:col-span-5 h-[400px] sm:h-[460px] glass-canvas-stage shadow-2xl flex flex-col justify-between p-5">
+      <div class="lg:col-span-5 h-[400px] sm:h-[460px] dribbble-3d-stage shadow-2xl flex flex-col justify-between p-5">
         <div class="flex justify-between items-center z-10">
-          <span class="text-[10px] font-mono font-black bg-black text-white px-3 py-1 rounded-xl shadow">3D OPTICAL GLASS</span>
-          <span class="text-[10px] font-mono font-bold text-slate-800 bg-white/70 backdrop-blur-md px-2.5 py-1 rounded-xl border border-white">🖱️ Drag to Rotate in 3D</span>
+          <span class="text-[10px] font-mono font-black bg-black text-white px-3 py-1 rounded-xl">DRIBBLE 3D WEAPON</span>
+          <span class="text-[10px] font-mono font-bold text-slate-800 bg-white/70 backdrop-blur-md px-2.5 py-1 rounded-xl border border-white">🖱️ Drag to Spin in 3D</span>
         </div>
         
         <canvas id="canvas3d" class="w-full h-full absolute inset-0 z-0"></canvas>
 
         <div class="text-[10px] font-mono font-bold text-slate-800 bg-white/70 backdrop-blur-md p-3 rounded-2xl z-10 text-center border border-white">
-          Transmission: 0.98 • IOR: 1.54 (Crown Glass) • Sub-Surface Refraction
+          Transmission: 0.95 • IOR: 1.52 • Chromatic Iridescence Shader
         </div>
       </div>
 
     </div>
 
-    <!-- BESPOKE LIQUID GLASS ANALYTICAL TOOL -->
     <div id="tool" class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
       
-      <div class="liquid-glass-card p-8 sm:p-10 lg:col-span-2">
+      <div class="dribbble-glass-card p-8 sm:p-10 lg:col-span-2">
         <div class="flex justify-between items-start mb-4">
           <div>
             <span class="text-xs font-mono font-black uppercase text-slate-500">BESPOKE ANALYTICAL ENGINE</span>
-            <h3 class="text-2xl sm:text-3xl font-black mt-1">Dynamic 70:15:15 Portfolio Rebalancer</h3>
+            <h3 class="text-2xl sm:text-3xl font-black mt-1">Deterministic Wealth Architecture</h3>
           </div>
-          <span class="text-xs font-mono font-black bg-white/80 border border-black/10 px-3 py-1 rounded-xl">LIVE TELEMETRY</span>
+          <span class="text-xs font-mono font-black bg-white/60 border border-black/10 px-3 py-1 rounded-xl">LIVE TELEMETRY</span>
         </div>
-        <p class="text-xs sm:text-sm leading-relaxed mb-8 font-medium opacity-85">Quarterly automated drift triggers enforcing disciplined asset-class allocations.</p>
+        <p class="text-xs sm:text-sm leading-relaxed mb-8 font-medium opacity-85">
+          Synchronizing 200 sovereign instruments, multi-factor momentum, commercial real assets, and automated cashflow harvesting.
+        </p>
         
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono text-xs pt-6 border-t border-black/10">
-          <div class="p-5 rounded-2xl bg-white/60 backdrop-blur-md border border-white/80 shadow-sm">
+          <div class="p-5 rounded-2xl bg-white/50 backdrop-blur-md border border-white/70 shadow-sm">
             <div class="text-[10px] text-slate-500 font-bold uppercase">STATUTORY TAX MOAT</div>
             <div class="text-xl font-black mt-1">100% Tax-Free</div>
             <div class="text-[10px] text-emerald-700 font-bold mt-1">Section 10(11A) / 47(viic)</div>
           </div>
-          <div class="p-5 rounded-2xl bg-white/60 backdrop-blur-md border border-white/80 shadow-sm">
+          <div class="p-5 rounded-2xl bg-white/50 backdrop-blur-md border border-white/70 shadow-sm">
             <div class="text-[10px] text-slate-500 font-bold uppercase">ROLLING ALPHA CAGR</div>
             <div class="text-xl font-black mt-1">15.4% – 28.4%</div>
             <div class="text-[10px] text-cyan-700 font-bold mt-1">Systematic Multi-Asset</div>
           </div>
-          <div class="p-5 rounded-2xl bg-white/60 backdrop-blur-md border border-white/80 shadow-sm">
+          <div class="p-5 rounded-2xl bg-white/50 backdrop-blur-md border border-white/70 shadow-sm">
             <div class="text-[10px] text-slate-500 font-bold uppercase">LEGAL SECURITY</div>
             <div class="text-xl font-black mt-1">Court Immunity</div>
             <div class="text-[10px] text-purple-700 font-bold mt-1">Section 14 PPF Act Moat</div>
@@ -233,7 +177,7 @@
         </div>
       </div>
 
-      <div class="liquid-glass-card p-8 sm:p-10 flex flex-col justify-between">
+      <div class="dribbble-glass-card p-8 sm:p-10 flex flex-col justify-between">
         <div>
           <span class="text-xs font-mono font-black uppercase text-slate-500">INSTITUTIONAL MONOGRAPH</span>
           <h3 class="text-2xl font-black mt-1 mb-3">282-Page Master Codex</h3>
@@ -255,7 +199,7 @@
     let isDragging = false, previousMousePosition = { x: 0, y: 0 };
 
     function init3D() {
-      const container = document.querySelector('.glass-canvas-stage');
+      const container = document.querySelector('.dribbble-3d-stage');
       const canvas = document.getElementById('canvas3d');
       const width = container.clientWidth;
       const height = container.clientHeight;
@@ -268,7 +212,6 @@
       renderer.setSize(width, height);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-      // STUDIO LIGHTING SETUP
       const amb = new THREE.AmbientLight(0xffffff, 1.8);
       scene.add(amb);
       const dir = new THREE.DirectionalLight(0xffffff, 2.5);
@@ -281,36 +224,38 @@
       pt2.position.set(8, -6, 6);
       scene.add(pt2);
 
-      // THREE.JS PHYSICAL GLASS SHADER
-      const geo = new THREE.SphereGeometry(3.2, 32, 32);
-      const mat = new THREE.MeshPhysicalMaterial({
-        color: 0xD8B4FE,
-        metalness: 0.05,
-        roughness: 0.02,
-        transmission: 0.98,
-        thickness: 3.5,
-        ior: 1.54,
-        reflectivity: 0.9,
-        clearcoat: 1.0,
-        clearcoatRoughness: 0.05,
-        transparent: true,
-        opacity: 0.95
-      });
-      mesh = new THREE.Mesh(geo, mat);
-      scene.add(mesh);
+      
+          const group = new THREE.Group();
+          const capGeo = new THREE.CylinderGeometry(1.8, 1.8, 5.0, 32);
+          const capMat = new THREE.MeshPhysicalMaterial({
+            color: 0x6EE7B7, metalness: 0.1, roughness: 0.05,
+            transmission: 0.95, thickness: 2.5, ior: 1.5, transparent: true, opacity: 0.85
+          });
+          const cap = new THREE.Mesh(capGeo, capMat);
+          cap.rotation.z = Math.PI * 0.5;
+          group.add(cap);
 
-      // Internal Specular Gold Node
-      const core = new THREE.Mesh(new THREE.OctahedronGeometry(1.4, 0), new THREE.MeshStandardMaterial({ color: 0xF59E0B, metalness: 0.95, roughness: 0.1 }));
-      scene.add(core);
+          const s1 = new THREE.Mesh(new THREE.SphereGeometry(1.2, 24, 24), new THREE.MeshStandardMaterial({ color: 0x10B981, metalness: 0.9, roughness: 0.1 }));
+          s1.position.set(-1.2, 0, 0);
+          group.add(s1);
 
-      animateHook = (t) => {
-        if (!isDragging) {
-          mesh.rotation.y += 0.01; mesh.rotation.x += 0.008;
-          core.rotation.y -= 0.02;
-        }
-      };
+          const s2 = new THREE.Mesh(new THREE.SphereGeometry(1.2, 24, 24), new THREE.MeshStandardMaterial({ color: 0xF59E0B, metalness: 0.9, roughness: 0.1 }));
+          s2.position.set(1.2, 0, 0);
+          group.add(s2);
 
-      // INTERACTIVE TACTILE ROTATION
+          mesh = group;
+          scene.add(mesh);
+
+          animateHook = (t) => {
+            if (!isDragging) {
+              group.rotation.y = Math.sin(t * 1.5) * 0.4;
+              group.rotation.x = Math.cos(t * 1.2) * 0.2;
+              s1.position.x = -1.2 + Math.sin(t * 2) * 0.3;
+              s2.position.x = 1.2 - Math.sin(t * 2) * 0.3;
+            }
+          };
+        
+
       container.addEventListener('mousedown', (e) => {
         isDragging = true;
         previousMousePosition = { x: e.clientX, y: e.clientY };
@@ -328,7 +273,6 @@
         }
       });
 
-      // Mobile Touch Support
       container.addEventListener('touchstart', (e) => {
         if (e.touches.length === 1) {
           isDragging = true;
