@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>qnt. | Pastel Opal Liquid Nebula Core (PASTEL OPAL • PROTO 15)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@800;900&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #F8FAFC !important;
+      color: #0F172A !important;
+      font-family: 'JetBrains Mono', monospace;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, .font-title {
+      font-family: 'Plus Jakarta Sans', sans-serif !important;
+    }
+    #canvas3d {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .pastel-card {
+      background: #FFFFFF !important;
+      border: 2.5px solid #E2E8F0;
+      border-radius: 24px;
+      box-shadow: 6px 6px 0px #E2E8F0;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .pastel-card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 10px 10px 0px #0EA5E9;
+      border-color: #0EA5E9;
+    }
+  </style>
+</head>
+<body class="relative min-h-screen">
+  <canvas id="canvas3d"></canvas>
+
+  <div class="relative z-10 max-w-7xl mx-auto p-6 md:p-12">
+    <!-- NAV -->
+    <header class="flex justify-between items-center pb-8 border-b-2 border-slate-900/10 mb-12">
+      <div class="flex items-center space-x-4">
+        <a href="index.html" class="text-xs font-mono font-bold px-4 py-2 rounded-xl bg-white border-2 border-slate-900 shadow-[3px_3px_0px_#000] hover:bg-black hover:text-white transition">
+          &larr; Prototype Lab Hub
+        </a>
+        <div class="text-4xl font-black font-title tracking-tighter">qnt.</div>
+      </div>
+      <div class="px-4 py-2 rounded-xl bg-white border-2 border-slate-900 text-xs font-mono font-black shadow-[3px_3px_0px_#000]">
+        PASTEL OPAL • PROTO 15
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <div class="text-center max-w-4xl mx-auto mb-16">
+      <div class="inline-block bg-white border-2 border-slate-900 text-xs font-mono font-black px-4 py-1.5 rounded-full mb-4 shadow-[2px_2px_0px_#000]">
+        Breathing 3D Geometric Opal with dynamic multi-light dispersion and interactive inertia.
+      </div>
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight mb-4">
+        Pastel Opal Liquid Nebula Core
+      </h1>
+      <p class="text-sm md:text-base font-medium max-w-2xl mx-auto leading-relaxed opacity-80">
+        Deterministic quantitative wealth architecture running in real-time 3D pastel space with zero-void institutional engineering.
+      </p>
+    </div>
+
+    <!-- BESPOKE ANALYTICAL TOOL -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+      <div class="pastel-card p-8 md:col-span-2">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <span class="text-xs font-mono font-black uppercase text-slate-500">BESPOKE ANALYTICAL ENGINE</span>
+            <h3 class="text-2xl font-black mt-1">200-Module Master Quantitative Codex Engine</h3>
+          </div>
+          <span class="text-xs font-mono font-black bg-white border border-slate-900 px-3 py-1 rounded-lg">LIVE METRIC</span>
+        </div>
+        <p class="text-xs leading-relaxed mb-6 font-medium opacity-80">Unified institutional interface spanning all 200 sovereign assets with instant filtering.</p>
+        
+        <div class="grid grid-cols-3 gap-4 font-mono text-xs pt-4 border-t border-slate-900/10">
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="text-[10px] text-slate-500">STATUTORY SHIELD</div>
+            <div class="text-lg font-black mt-1">100% Tax-Free</div>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="text-[10px] text-slate-500">ROLLING CAGR</div>
+            <div class="text-lg font-black mt-1">15.4% – 28.4%</div>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="text-[10px] text-slate-500">99% VaR MOAT</div>
+            <div class="text-lg font-black mt-1">Sub-12% Drawdown</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pastel-card p-8 flex flex-col justify-between">
+        <div>
+          <span class="text-xs font-mono font-black uppercase text-slate-500">CODEX ACCESS</span>
+          <h3 class="text-xl font-black mt-1 mb-3">Institutional Compendium</h3>
+          <p class="text-xs leading-relaxed opacity-80 mb-6">
+            The definitive 282-page mathematical monograph covering all 200 sovereign asset modules and 6 institutional desks.
+          </p>
+        </div>
+        <a href="reports/qnt_Universal_Financial_Freedom_Institutional_Compendium.pdf" download class="w-full text-center bg-black text-white font-mono font-black text-xs py-3.5 rounded-xl border-2 border-black shadow-[4px_4px_0px_#000] hover:bg-white hover:text-black transition block">
+          Download Monograph PDF &rarr;
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let scene, camera, renderer, mesh, animateHook = null;
+    function init3D() {
+      const canvas = document.getElementById('canvas3d');
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 20;
+
+      renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // Studio Lights
+      const amb = new THREE.AmbientLight(0xffffff, 1.4);
+      scene.add(amb);
+      const dir = new THREE.DirectionalLight(0xffffff, 2.0);
+      dir.position.set(10, 20, 15);
+      scene.add(dir);
+      const point = new THREE.PointLight(0xffffff, 2.5, 40);
+      point.position.set(-10, -5, 10);
+      scene.add(point);
+
+      
+          const geo = new THREE.DodecahedronGeometry(4.2, 0);
+          const mat = new THREE.MeshPhysicalMaterial({ color: 0xBAE6FD, metalness: 0.1, roughness: 0.1, transmission: 0.85, thickness: 2.5 });
+          mesh = new THREE.Mesh(geo, mat);
+          scene.add(mesh);
+          const core = new THREE.Mesh(new THREE.IcosahedronGeometry(2.0, 0), new THREE.MeshStandardMaterial({ color: 0x38BDF8, metalness: 0.9, roughness: 0.1 }));
+          scene.add(core);
+          animateHook = (t) => {
+            mesh.rotation.x += 0.008;
+            mesh.rotation.y += 0.012;
+            core.rotation.y -= 0.02;
+          };
+        
+
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      animate();
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const t = Date.now() * 0.0015;
+      if (animateHook) animateHook(t);
+      renderer.render(scene, camera);
+    }
+
+    window.addEventListener('DOMContentLoaded', init3D);
+  </script>
+</body>
+</html>
