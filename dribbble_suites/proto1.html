@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>qnt. | Dribbble Master Prototype 01 (Intelliphy Hex-Prism Architecture)</title>
+  
+  <!-- Premium Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700;800&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Three.js (Real-Time 3D WebGL Engine) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandBlue: '#002BFF',
+            dribbbleBg: '#A4B4CB',
+            dribbbleDark: '#010B1E',
+            dribbbleCard: 'rgba(255, 255, 255, 0.15)',
+            dribbbleBorder: 'rgba(255, 255, 255, 0.3)'
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+            brand: ['Syne', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg-dribbble: #9EAFCA;
+    }
+    body {
+      background-color: #9EAFCA;
+      color: #FFFFFF;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+    }
+    .bracket-label {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: capitalize;
+    }
+    .glass-border-box {
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+    .parabolic-curve {
+      stroke-dasharray: 4, 4;
+      animation: dash 30s linear infinite;
+    }
+    @keyframes dash {
+      to { stroke-dashoffset: -1000; }
+    }
+    .btn-explore-blue {
+      background-color: #002BFF;
+      color: #FFFFFF;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-explore-blue:hover {
+      background-color: #001FCC;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 43, 255, 0.35);
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- TOP HEADER (EXACT DRIBBLE NAVIGATION) -->
+  <header class="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between border-b border-white/20">
+    <div class="flex items-center space-x-3">
+      <a href="index.html" class="text-xs font-mono font-bold bg-white/20 hover:bg-white/40 text-white px-3 py-1.5 rounded-lg transition mr-2">&larr; Lab Hub</a>
+      <div class="flex items-center space-x-2">
+        <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+        <span class="font-brand font-black text-2xl tracking-tighter">qnt<span class="text-brandBlue font-mono">.</span></span>
+      </div>
+    </div>
+
+    <nav class="hidden md:flex items-center space-x-8 text-xs font-semibold text-white/80">
+      <a href="#about" class="hover:text-white transition">Advantages</a>
+      <a href="#performance" class="hover:text-white transition">Service price</a>
+      <a href="#roadmap" class="hover:text-white transition">Roadmap</a>
+      <a href="#database" class="hover:text-white transition">200 Assets</a>
+      <a href="#stats" class="hover:text-white transition">Institutional</a>
+    </nav>
+
+    <div class="flex items-center space-x-4">
+      <a href="#simulator" class="btn-explore-blue text-xs font-bold px-5 py-2.5 rounded-full flex items-center space-x-2 shadow-lg">
+        <span>Get started</span>
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 16 16 12 12 8"></polyline><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION WITH CENTRAL 3D HEXAGONAL LIQUID PRISM -->
+  <section class="max-w-7xl mx-auto px-6 pt-12 pb-24">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
+      
+      <!-- LEFT HERO TITLE -->
+      <div class="lg:col-span-5 pt-4">
+        <h1 class="text-4xl sm:text-6xl font-normal tracking-tight text-white leading-[1.08] mb-8 font-sans">
+          Revolutionizing Wealth <br/>
+          Scalability and <br/>
+          Sovereignty
+        </h1>
+
+        <div class="space-y-6 pt-4 border-t border-white/20">
+          <div>
+            <div class="bracket-label mb-1">[ About ]</div>
+            <p class="text-xs text-white/80 font-medium leading-relaxed max-w-sm">
+              High-performance quantitative software framework to schedule multi-asset capital across sovereign EEE moats and deliver unprecedented CAGR on deterministic portfolios.
+            </p>
+          </div>
+
+          <div>
+            <div class="bracket-label mb-2">[ Asset Selection ]</div>
+            <div class="grid grid-cols-2 gap-2 text-xs font-medium text-white/90">
+              <div class="flex items-center space-x-1.5"><span class="w-1.5 h-1.5 rounded-full bg-white"></span><span>SSY 8.20% EEE</span></div>
+              <div class="flex items-center space-x-1.5"><span class="w-1.5 h-1.5 rounded-full bg-white"></span><span>PPF Sec 14 Shield</span></div>
+              <div class="flex items-center space-x-1.5"><span class="w-1.5 h-1.5 rounded-full bg-white"></span><span>Nifty Momentum 30</span></div>
+              <div class="flex items-center space-x-1.5"><span class="w-1.5 h-1.5 rounded-full bg-white"></span><span>REIT 90% NDCF</span></div>
+              <div class="flex items-center space-x-1.5"><span class="w-1.5 h-1.5 rounded-full bg-white"></span><span>SGB Gold 2.5% Coupon</span></div>
+              <div class="flex items-center space-x-1.5"><span class="w-1.5 h-1.5 rounded-full bg-white"></span><span>US Tech (VOO/SMH)</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CENTER: 3D HEXAGONAL LIQUID GLASS PRISM (EXACT ANATOLIY DEMYANCHUK 3D ASSET) -->
+      <div class="lg:col-span-4 h-[380px] sm:h-[440px] relative flex items-center justify-center">
+        <canvas id="hero-3d-canvas" class="w-full h-full cursor-grab active:cursor-grabbing"></canvas>
+      </div>
+
+      <!-- RIGHT HERO PANEL: EXPLORE BLUE PILL & DESK FILTERS -->
+      <div class="lg:col-span-3 pt-4 flex flex-col justify-between h-full">
+        <div class="btn-explore-blue p-8 rounded-3xl mb-6 flex flex-col justify-between h-52 shadow-2xl">
+          <div class="text-2xl font-bold font-sans">Explore</div>
+          <p class="text-xs text-white/80 leading-relaxed font-medium">
+            High-performance mathematical models to orchestrate institutional alpha and deliver guaranteed compounding.
+          </p>
+        </div>
+
+        <div class="pt-4 border-t border-white/20">
+          <div class="bracket-label mb-2">[ Service Type ]</div>
+          <div class="space-y-1.5 text-xs text-white/90 font-medium">
+            <div class="flex items-center space-x-1.5"><span class="w-1.5 h-1.5 rounded-full bg-white"></span><span>200-Module SQL Database</span></div>
+            <div class="flex items-center space-x-1.5"><span class="w-1.5 h-1.5 rounded-full bg-white"></span><span>6-Desk Institutional Matrix</span></div>
+            <div class="flex items-center space-x-1.5"><span class="w-1.5 h-1.5 rounded-full bg-white"></span><span>282-Page Master Codex PDF</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- SECTION 2: HIGH PERFORMANCE CIRCULAR RAY TELEMETRY & RAY DIAGRAM -->
+  <section id="performance" class="max-w-7xl mx-auto px-6 py-16 border-t border-white/20">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-12">
+      
+      <div class="lg:col-span-5">
+        <h2 class="text-3xl sm:text-5xl font-normal text-white mb-6">High Performance</h2>
+      </div>
+
+      <div class="lg:col-span-7">
+        <p class="text-xs sm:text-sm text-white/80 leading-relaxed max-w-xl font-medium mb-6">
+          High-performance software framework to schedule quantitative workload to geo-distributed sovereign assets and deliver unprecedented risk-adjusted alpha on heterogeneous capital markets.
+        </p>
+
+        <div class="grid grid-cols-2 gap-6 pt-4 border-t border-white/20">
+          <div>
+            <div class="bracket-label mb-1">[ Capital at Any Scale ]</div>
+            <div class="text-xs text-white/70 font-medium">₹1,000 to ₹10+ Crores deterministic execution</div>
+          </div>
+          <div>
+            <div class="bracket-label mb-1">[ Affordability &amp; Moats ]</div>
+            <div class="text-xs text-white/70 font-medium">0% Commission, 100% Tax-Free under Section 10(11)</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CIRCULAR RAY TELEMETRY DIAGRAM (EXACT DRIBBLE ASSET) -->
+    <div class="flex justify-center py-8">
+      <svg class="w-72 h-72 sm:w-96 sm:h-96 text-white/80" viewBox="0 0 400 400" fill="none" stroke="currentColor">
+        <circle cx="200" cy="200" r="30" stroke-width="1.5"></circle>
+        <circle cx="200" cy="200" r="10" stroke-width="1.5"></circle>
+        <!-- 24 Radial Ray Fins -->
+        <g stroke-width="1" opacity="0.6">
+          <line x1="200" y1="170" x2="200" y2="40"></line>
+          <line x1="200" y1="230" x2="200" y2="360"></line>
+          <line x1="170" y1="200" x2="40" y2="200"></line>
+          <line x1="230" y1="200" x2="360" y2="200"></line>
+          <line x1="178" y1="178" x2="87" y2="87"></line>
+          <line x1="222" y1="222" x2="313" y2="313"></line>
+          <line x1="178" y1="222" x2="87" y2="313"></line>
+          <line x1="222" y1="178" x2="313" y2="87"></line>
+          <line x1="188" y1="172" x2="135" y2="55"></line>
+          <line x1="212" y1="228" x2="265" y2="345"></line>
+          <line x1="172" y1="188" x2="55" y2="135"></line>
+          <line x1="228" y1="212" x2="345" y2="265"></line>
+          <line x1="212" y1="172" x2="265" y2="55"></line>
+          <line x1="188" y1="228" x2="135" y2="345"></line>
+          <line x1="228" y1="188" x2="345" y2="135"></line>
+          <line x1="172" y1="212" x2="55" y2="265"></line>
+        </g>
+        <circle cx="200" cy="200" r="160" stroke-width="1" stroke-dasharray="2,4" opacity="0.4"></circle>
+      </svg>
+    </div>
+  </section>
+
+  <!-- SECTION 3: ROADMAP WITH PARABOLIC DASHED ARCS & MILESTONES (EXACT SCREENSHOT 2) -->
+  <section id="roadmap" class="max-w-7xl mx-auto px-6 py-16 border-t border-white/20">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+      
+      <!-- CARD 1 (M1) -->
+      <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 flex flex-col justify-between h-56">
+        <div>
+          <div class="bracket-label mb-2">[ MVP Platform ]</div>
+          <p class="text-[11px] text-white/80 leading-relaxed font-medium">
+            Launch the quantitative compounding engine offering on-demand SIP simulation and decentralized multi-desk allocation.
+          </p>
+        </div>
+        <div class="inline-block bg-white text-slate-800 text-[11px] font-bold px-3 py-1 rounded-md w-fit">
+          2026 Nov
+        </div>
+      </div>
+
+      <!-- CARD 2 (M2) -->
+      <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 flex flex-col justify-between h-56">
+        <div>
+          <div class="bracket-label mb-2">[ Unlock EEE Moats ]</div>
+          <p class="text-[11px] text-white/80 leading-relaxed font-medium">
+            Roll out 100% tax-free sovereign execution buckets (PPF Section 14, SSY, SCSS) with automatic quarterly cash sweeps.
+          </p>
+        </div>
+        <div class="inline-block bg-white text-slate-800 text-[11px] font-bold px-3 py-1 rounded-md w-fit">
+          2026 Dec
+        </div>
+      </div>
+
+      <!-- CARD 3 (M3) -->
+      <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 flex flex-col justify-between h-56">
+        <div>
+          <div class="bracket-label mb-2">[ Platform Expansion ]</div>
+          <p class="text-[11px] text-white/80 leading-relaxed font-medium">
+            Implement 200-Module SQL quantitative directory with live keyword filter and institutional Fama-French alpha decomposition.
+          </p>
+        </div>
+        <div class="inline-block bg-white text-slate-800 text-[11px] font-bold px-3 py-1 rounded-md w-fit">
+          2027 Q1
+        </div>
+      </div>
+
+      <!-- CARD 4 (M4) -->
+      <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 flex flex-col justify-between h-56">
+        <div>
+          <div class="bracket-label mb-2">[ Full Protocol Launch ]</div>
+          <p class="text-[11px] text-white/80 leading-relaxed font-medium">
+            Deploy full sovereign wealth operating system with perpetual passive annuity distribution and global USD hedging.
+          </p>
+        </div>
+        <div class="inline-block bg-white text-slate-800 text-[11px] font-bold px-3 py-1 rounded-md w-fit">
+          2027 Q2
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PARABOLIC CONNECTING MILESTONE NODES (M1, M2, M3, M4) -->
+    <div class="relative py-8">
+      <svg class="w-full h-24 overflow-visible" viewBox="0 0 1000 80" fill="none">
+        <path d="M 125 70 Q 250 -10 375 70" stroke="#002BFF" stroke-width="2.5" class="parabolic-curve"></path>
+        <path d="M 375 70 Q 500 -10 625 70" stroke="#002BFF" stroke-width="2.5" class="parabolic-curve"></path>
+        <path d="M 625 70 Q 750 -10 875 70" stroke="#FFFFFF" stroke-width="2.5" stroke-dasharray="4,4" opacity="0.6"></path>
+        <path d="M 875 70 Q 950 10 1000 70" stroke="#FFFFFF" stroke-width="2.5" stroke-dasharray="4,4" opacity="0.6"></path>
+      </svg>
+      <div class="flex justify-around items-center -mt-5 font-mono text-xs font-black">
+        <span class="w-8 h-8 rounded-full bg-brandBlue text-white flex items-center justify-center shadow-lg">M1</span>
+        <span class="w-8 h-8 rounded-full bg-brandBlue text-white flex items-center justify-center shadow-lg">M2</span>
+        <span class="w-8 h-8 rounded-full bg-white/30 text-white flex items-center justify-center">M3</span>
+        <span class="w-8 h-8 rounded-full bg-white/30 text-white flex items-center justify-center">M4</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: DARK CONTRAST INSTITUTIONAL BANNER & STATS (EXACT SCREENSHOT 2) -->
+  <section id="stats" class="bg-dribbbleDark text-white py-24 px-6 border-t-2 border-white/20">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      
+      <div class="lg:col-span-8">
+        <h2 class="text-3xl sm:text-5xl font-normal leading-tight max-w-2xl mb-8">
+          qnt. decentralizes sovereign wealth architecture for sensitive capital in the same way that mathematics decentralizes trust.
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-400 max-w-xl font-medium leading-relaxed">
+          We're in the midst of a quantitative renaissance. Emerging sovereign ecosystems like personalized AI asset allocation and decentralized trading shield capital from the safety, taxation, and counterparty risks of entrusting wealth to a single entity.
+        </p>
+      </div>
+
+      <div class="lg:col-span-4 bg-black/40 p-8 rounded-3xl border border-white/10 space-y-8 font-sans">
+        <div class="border-b border-white/10 pb-6">
+          <div class="text-xs text-slate-400 font-mono mb-1">Statistics</div>
+          <div class="text-5xl font-normal tracking-tight text-white">65%</div>
+          <div class="text-xs text-slate-400 mt-1">Reduction in historical max drawdowns vs index</div>
+        </div>
+        <div class="border-b border-white/10 pb-6">
+          <div class="text-xs text-slate-400 font-mono mb-1">Statistics</div>
+          <div class="text-5xl font-normal tracking-tight text-white">90K+</div>
+          <div class="text-xs text-slate-400 mt-1">Institutional data points synthesized per second</div>
+        </div>
+        <div>
+          <div class="text-xs text-slate-400 font-mono mb-1">Average rating</div>
+          <div class="text-5xl font-normal tracking-tight text-white">4.9</div>
+          <div class="text-xs text-slate-400 mt-1">Verified SEBI &amp; SEC Impersonal standard</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER (EXACT DRIBBLE BRACKETED SPECIFICATION) -->
+  <footer class="bg-dribbbleDark text-white/80 py-16 px-6 border-t border-white/10 text-xs">
+    <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex items-center space-x-2 text-white font-brand font-black text-2xl mb-3">
+          <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+          <span>qnt.</span>
+        </div>
+        <p class="text-[11px] text-slate-400">Dribbble Master Suite #01</p>
+      </div>
+
+      <div>
+        <div class="bracket-label text-white mb-3">[ Menu ]</div>
+        <ul class="space-y-2 text-slate-400 font-medium">
+          <li><a href="#about" class="hover:text-white transition">Advantages</a></li>
+          <li><a href="#performance" class="hover:text-white transition">Service price</a></li>
+          <li><a href="#roadmap" class="hover:text-white transition">Roadmap</a></li>
+          <li><a href="#stats" class="hover:text-white transition">Partnership</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="bracket-label text-white mb-3">[ Documentation ]</div>
+        <ul class="space-y-2 text-slate-400 font-medium">
+          <li><a href="reports/qnt_Universal_Financial_Freedom_Institutional_Compendium.pdf" class="hover:text-white transition">Blue Whitepaper</a></li>
+          <li><a href="reports/qnt_Universal_Financial_Freedom_Institutional_Compendium.pdf" class="hover:text-white transition">Optimizer Whitepaper</a></li>
+          <li><a href="reports/qnt_Universal_Financial_Freedom_Institutional_Compendium.pdf" class="hover:text-white transition">General Specification</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="bracket-label text-white mb-3">[ Resources ]</div>
+        <ul class="space-y-2 text-slate-400 font-medium">
+          <li><a href="https://github.com/obsiagent-boop/qnt-wealth-platform" class="hover:text-white transition">GitHub</a></li>
+          <li><a href="#stats" class="hover:text-white transition">Audits</a></li>
+          <li><a href="#stats" class="hover:text-white transition">Brand Kit</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="bracket-label text-white mb-3">[ Community ]</div>
+        <div class="flex items-center space-x-2 mt-2">
+          <span class="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center font-bold text-xs">𝕏</span>
+          <span class="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center font-bold text-xs">🐙</span>
+          <span class="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center font-bold text-xs">💬</span>
+          <span class="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center font-bold text-xs">✈️</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto border-t border-white/10 pt-6 text-[11px] text-slate-500 flex justify-between">
+      <div>&copy; 2026 qnt. Quantitative Systems. Dribbble Architecture Suite 01.</div>
+      <div>Designed after Anatoliy Demyanchuk for Demyanchuk Art Team</div>
+    </div>
+  </footer>
+
+  <!-- THREE.JS 3D HEXAGONAL PRISM ENGINE (ANATOLIY DEMYANCHUK ASSET) -->
+  <script>
+    let scene, camera, renderer, hexGroup;
+    let isDragging = false, prevMouse = { x: 0, y: 0 };
+
+    function initHex3D() {
+      const container = document.getElementById('hero-3d-canvas');
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+      camera.position.z = 14;
+
+      renderer = new THREE.WebGLRenderer({ canvas: container, alpha: true, antialias: true, powerPreference: "high-performance" });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // Studio Lighting
+      const amb = new THREE.AmbientLight(0xffffff, 2.0);
+      scene.add(amb);
+      const keyLight = new THREE.DirectionalLight(0xffffff, 3.0);
+      keyLight.position.set(10, 15, 12);
+      scene.add(keyLight);
+      const blueLight = new THREE.PointLight(0x002BFF, 4.0, 30);
+      blueLight.position.set(-6, -4, 8);
+      scene.add(blueLight);
+
+      hexGroup = new THREE.Group();
+
+      // 3D Hexagonal Extruded Ring (Frosted Glass with Royal Blue Liquid Core)
+      const hexShape = new THREE.Shape();
+      const sides = 6;
+      const outerRad = 4.2;
+      for (let i = 0; i < sides; i++) {
+        const a = (i / sides) * Math.PI * 2;
+        const x = Math.cos(a) * outerRad;
+        const y = Math.sin(a) * outerRad;
+        if (i === 0) hexShape.moveTo(x, y);
+        else hexShape.lineTo(x, y);
+      }
+      hexShape.closePath();
+
+      // Inner Hole
+      const holePath = new THREE.Path();
+      const innerRad = 2.4;
+      for (let i = 0; i < sides; i++) {
+        const a = (i / sides) * Math.PI * 2;
+        const x = Math.cos(a) * innerRad;
+        const y = Math.sin(a) * innerRad;
+        if (i === 0) holePath.moveTo(x, y);
+        else holePath.lineTo(x, y);
+      }
+      holePath.closePath();
+      hexShape.holes.push(holePath);
+
+      const hexGeo = new THREE.ExtrudeGeometry(hexShape, {
+        depth: 2.2,
+        bevelEnabled: true,
+        bevelSegments: 8,
+        steps: 2,
+        bevelSize: 0.35,
+        bevelThickness: 0.35
+      });
+
+      const glassMat = new THREE.MeshPhysicalMaterial({
+        color: 0xCCE0FF,
+        metalness: 0.1,
+        roughness: 0.05,
+        transmission: 0.96,
+        thickness: 3.5,
+        ior: 1.54,
+        reflectivity: 0.9,
+        clearcoat: 1.0,
+        transparent: true,
+        opacity: 0.92
+      });
+
+      const hexMesh = new THREE.Mesh(hexGeo, glassMat);
+      hexMesh.position.set(0, 0, -1.1);
+      hexGroup.add(hexMesh);
+
+      // Inner Liquid Royal Blue Gradient Core
+      const coreGeo = new THREE.TorusGeometry(2.4, 0.45, 24, 6);
+      const coreMat = new THREE.MeshStandardMaterial({
+        color: 0x002BFF,
+        metalness: 0.8,
+        roughness: 0.2,
+        emissive: 0x00188F,
+        emissiveIntensity: 0.6
+      });
+      const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+      hexGroup.add(coreMesh);
+
+      scene.add(hexGroup);
+
+      // Mouse & Touch Drag Gestures
+      container.addEventListener('mousedown', (e) => { isDragging = true; prevMouse = { x: e.clientX, y: e.clientY }; });
+      window.addEventListener('mouseup', () => { isDragging = false; });
+      container.addEventListener('mousemove', (e) => {
+        if (isDragging && hexGroup) {
+          const deltaX = e.clientX - prevMouse.x;
+          const deltaY = e.clientY - prevMouse.y;
+          hexGroup.rotation.y += deltaX * 0.01;
+          hexGroup.rotation.x += deltaY * 0.01;
+          prevMouse = { x: e.clientX, y: e.clientY };
+        }
+      });
+
+      // Mobile Touch
+      container.addEventListener('touchstart', (e) => { if (e.touches.length === 1) { isDragging = true; prevMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY }; } });
+      container.addEventListener('touchmove', (e) => {
+        if (isDragging && hexGroup && e.touches.length === 1) {
+          const deltaX = e.touches[0].clientX - prevMouse.x;
+          const deltaY = e.touches[0].clientY - prevMouse.y;
+          hexGroup.rotation.y += deltaX * 0.01;
+          hexGroup.rotation.x += deltaY * 0.01;
+          prevMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        }
+      });
+      window.addEventListener('touchend', () => { isDragging = false; });
+
+      window.addEventListener('resize', () => {
+        const w = container.clientWidth;
+        const h = container.clientHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      });
+
+      animate();
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const t = Date.now() * 0.0015;
+      if (!isDragging && hexGroup) {
+        hexGroup.rotation.y = Math.sin(t * 1.2) * 0.35 + 0.2;
+        hexGroup.rotation.x = Math.cos(t * 0.9) * 0.25;
+        hexGroup.position.y = Math.sin(t * 1.4) * 0.25;
+      }
+      renderer.render(scene, camera);
+    }
+
+    window.addEventListener('DOMContentLoaded', initHex3D);
+  </script>
+</body>
+</html>
