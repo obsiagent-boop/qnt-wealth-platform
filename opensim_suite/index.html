@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>qnt. | OpenSim Sovereign Dollar Architecture</title>
+  
+  <!-- Premium Fonts: Plus Jakarta Sans, JetBrains Mono, Syne -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700;800&family=Syne:wght@800;900&display=swap" rel="stylesheet">
+  
+  <!-- Three.js (Real-Time 3D WebGL Engine) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- Supabase Official SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cosmicBg: '#030712',
+            cosmicCard: '#0B132B',
+            cyanGlow: '#06B6D4',
+            goldGlow: '#F59E0B'
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+            brand: ['Syne', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root, html, body {
+      background-color: #030712 !important;
+      color: #FFFFFF !important;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    .neon-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      letter-spacing: 0.18em;
+      text-shadow: 0 0 45px rgba(6, 182, 212, 0.6), 0 0 90px rgba(59, 130, 246, 0.4);
+    }
+
+    .cosmic-card {
+      background: rgba(15, 23, 42, 0.7) !important;
+      backdrop-filter: blur(28px) saturate(200%);
+      -webkit-backdrop-filter: blur(28px) saturate(200%);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 28px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .cosmic-card:hover {
+      border-color: rgba(56, 189, 248, 0.7);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(6, 182, 212, 0.2);
+    }
+
+    .btn-enter-world {
+      background: #FFFFFF !important;
+      color: #000000 !important;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      transition: all 0.25s ease;
+    }
+    .btn-enter-world:hover {
+      background: #38BDF8 !important;
+      color: #000000 !important;
+      box-shadow: 0 0 35px rgba(56, 189, 248, 0.7);
+      transform: translateY(-2px);
+    }
+
+    .desk-subdrawer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease-in-out, opacity 0.3s ease;
+      opacity: 0;
+    }
+    .desk-subdrawer.expanded {
+      max-height: 600px;
+      opacity: 1;
+    }
+
+    .modal-active { display: flex !important; }
+
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      display: flex;
+      width: 200%;
+      animation: marquee 25s linear infinite;
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- LIVE REAL-TIME TICKER -->
+  <div class="bg-black/90 text-white border-b border-cyan-500/20 py-2 px-4 overflow-hidden whitespace-nowrap text-xs font-mono font-bold flex items-center">
+    <div class="flex items-center space-x-2 mr-4 bg-cyan-400 text-black px-2 py-0.5 rounded font-black text-[10px]">
+      <span>OPENSIM FEED</span>
+    </div>
+    <div class="animate-marquee space-x-8">
+      <span>NIFTY 50: 24,850.40 <span class="text-emerald-400 font-black">+0.84%</span></span>
+      <span>SSY SOVEREIGN: 8.20% <span class="text-emerald-400 font-black">EEE TAX FREE</span></span>
+      <span>PPF BENCHMARK: 7.10% <span class="text-emerald-400 font-black">SEC 14 IMMUNITY</span></span>
+      <span>REIT NDCF YIELD: 9.42% <span class="text-cyan-400 font-black">QUARTERLY SWEEP</span></span>
+      <span>SGB 2026-I: +13.80% <span class="text-amber-400 font-black">+2.5% COUPON</span></span>
+      <span>US TECH (VOO/SMH): +18.50% INR <span class="text-emerald-400 font-black">3.2% FX ALPHA</span></span>
+      <span>COVERED THETA RENT: 12.36% <span class="text-cyan-400 font-black">MONTHLY OTM</span></span>
+    </div>
+  </div>
+
+  <!-- TOP COSMIC NAV -->
+  <header class="max-w-7xl mx-auto px-6 py-8 flex items-center justify-between border-b border-cyan-500/20 relative z-20">
+    <div class="flex items-center space-x-3">
+      <div class="flex items-center space-x-2">
+        <span class="w-3 h-3 rounded-full bg-cyan-400 animate-pulse"></span>
+        <span class="font-bold text-2xl tracking-wider text-white font-brand">qnt<span class="text-cyan-400">.</span>World</span>
+      </div>
+    </div>
+
+    <nav class="hidden md:flex items-center space-x-8 text-xs font-mono font-bold text-slate-400">
+      <a href="#simulator" class="hover:text-cyan-400 transition">• Compounding</a>
+      <a href="#database" class="hover:text-cyan-400 transition">• 200 Assets</a>
+      <a href="#matrix" class="hover:text-cyan-400 transition">• 6-Desk Matrix</a>
+      <a href="#research" class="hover:text-cyan-400 transition">• Research Grants</a>
+      <a href="#jobs" class="hover:text-cyan-400 transition">• Remote Gigs</a>
+      <a href="#pricing" class="hover:text-cyan-400 transition">• Pricing</a>
+    </nav>
+
+    <div class="flex items-center space-x-4">
+      <a href="#simulator" class="btn-enter-world text-xs uppercase tracking-widest px-6 py-2.5 rounded-full flex items-center space-x-2 shadow-lg">
+        <span>ENTER WORLD</span>
+        <span class="w-2 h-2 rounded-full bg-black"></span>
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO: MONUMENTAL "OPENSIM" TITLES & HYPER-REALISTIC 3D REAL DOLLAR WEAPON -->
+  <section class="max-w-7xl mx-auto px-6 pt-12 pb-20 text-center relative z-10">
+    
+    <!-- MONUMENTAL TITLE -->
+    <h1 class="text-5xl sm:text-8xl md:text-9xl font-black neon-title uppercase text-white mb-4">
+      OPENSIM
+    </h1>
+
+    <p class="text-xs sm:text-sm font-mono tracking-widest uppercase text-cyan-400/90 mb-8 max-w-xl mx-auto">
+      Build Sovereign Virtual Financial Worlds with Autonomous AI Agents
+    </p>
+
+    <!-- 3D REAL DOLLAR COIN CANVAS CONTAINER -->
+    <div class="h-[440px] sm:h-[520px] max-w-4xl mx-auto relative flex flex-col justify-between p-4 mb-8">
+      <div class="flex justify-between items-center z-10">
+        <span class="text-[10px] font-mono font-bold bg-cyan-950/80 border border-cyan-500/40 text-cyan-400 px-3 py-1 rounded-full">REAL 3D SOVEREIGN DOLLAR</span>
+        <span class="text-[10px] font-mono font-bold bg-slate-900/80 border border-slate-700 text-slate-300 px-3 py-1 rounded-full">🖱️ Drag to Rotate 3D Dollar</span>
+      </div>
+
+      <canvas id="dollar-canvas" class="w-full h-full absolute inset-0 z-0 cursor-grab active:cursor-grabbing"></canvas>
+
+      <div class="text-[10px] font-mono font-bold text-slate-300 bg-slate-900/80 border border-cyan-500/30 p-3 rounded-2xl z-10 max-w-md mx-auto">
+        High-Relief 24k Gold Alloy ($) • Gyroscopic Orbital Halos • 12 Orbiting Crystal Nodes
+      </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+      <a href="#simulator" class="btn-enter-world text-xs sm:text-sm uppercase tracking-widest px-8 py-4 rounded-full flex items-center space-x-3 shadow-2xl">
+        <span>ENTER SOVEREIGN WORLD</span>
+        <span class="w-2.5 h-2.5 rounded-full bg-black animate-ping"></span>
+      </a>
+      <button onclick="openModal('researcher-modal')" class="bg-slate-900 border border-cyan-500/40 text-cyan-300 hover:bg-cyan-500 hover:text-black font-mono font-bold text-xs sm:text-sm uppercase tracking-widest px-8 py-4 rounded-full transition shadow-lg">
+        APPLY FOR GRANTS ($2,000)
+      </button>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE DETERMINISTIC COMPOUNDING ENGINE -->
+  <section id="simulator" class="py-16 px-6 max-w-7xl mx-auto border-t border-cyan-500/20">
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <span class="text-xs font-mono font-bold text-cyan-400 tracking-widest uppercase bg-cyan-950/60 px-3 py-1 rounded-full border border-cyan-500/30">MATHEMATICAL ENGINE</span>
+      <h2 class="text-3xl md:text-5xl font-black text-white mt-3 mb-2 font-brand">Deterministic Compounding Simulator</h2>
+      <p class="text-slate-400 text-xs font-mono">Calculate exact mathematical growth ($A = P(1+r)^t$) with live monthly cashflow sweeps.</p>
+    </div>
+
+    <div class="max-w-5xl mx-auto cosmic-card p-8 md:p-10">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div>
+          <label class="block text-xs font-mono font-bold text-slate-300 uppercase mb-2">Initial Base ($ / ₹)</label>
+          <div class="grid grid-cols-3 gap-2 font-mono text-xs">
+            <button onclick="setBase(1000)" id="btn-1k" class="py-3 px-2 rounded-xl bg-slate-800 text-slate-300 border border-slate-700 font-bold hover:bg-cyan-500 hover:text-black transition">₹1,000</button>
+            <button onclick="setBase(10000)" id="btn-10k" class="py-3 px-2 rounded-xl bg-cyan-400 text-black font-black border border-cyan-400 shadow-lg">₹10,000</button>
+            <button onclick="setBase(100000)" id="btn-1l" class="py-3 px-2 rounded-xl bg-slate-800 text-slate-300 border border-slate-700 font-bold hover:bg-cyan-500 hover:text-black transition">₹1,00,000</button>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-mono font-bold text-slate-300 uppercase mb-2">Asset Strategy</label>
+          <select id="strategy-select" onchange="recalculate()" class="w-full bg-slate-900 border border-cyan-500/40 text-white font-mono text-xs rounded-xl p-3 focus:outline-none font-bold">
+            <option value="0.082">Sovereign Bedrock (SSY - 8.20% EEE)</option>
+            <option value="0.071">Public Provident Fund (PPF - 7.10% Tax-Free)</option>
+            <option value="0.132">Nifty 50 Direct Index (13.20% CAGR)</option>
+            <option value="0.154" selected>The 70:15:15 Master Wealth Engine (15.40% CAGR)</option>
+            <option value="0.185">Global USD Technology (S&amp;P 500 + FX - 18.50% INR)</option>
+            <option value="0.240">Small-Cap Discovery Multiplier (24.00% CAGR)</option>
+          </select>
+        </div>
+
+        <div>
+          <div class="flex justify-between items-center mb-2">
+            <label class="text-xs font-mono font-bold text-slate-300 uppercase">Monthly SIP</label>
+            <span id="sip-val-label" class="text-xs font-mono font-bold text-cyan-400 bg-cyan-950 px-2 py-0.5 rounded border border-cyan-500/40">₹5,000/mo</span>
+          </div>
+          <input type="range" id="sip-slider" min="0" max="50000" step="1000" value="5000" oninput="updateSip(this.value)" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-400">
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-slate-800">
+        <div class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800">
+          <div class="text-xs font-mono text-slate-400 mb-1">5-YEAR VALUE</div>
+          <div id="res-5y" class="text-2xl md:text-3xl font-bold text-white font-mono">₹4,73,957</div>
+          <div id="res-5y-gain" class="text-[11px] text-emerald-400 mt-1 font-mono font-bold">+52.8% Net Gain</div>
+        </div>
+        <div class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800">
+          <div class="text-xs font-mono text-slate-400 mb-1">10-YEAR ACCUMULATION</div>
+          <div id="res-10y" class="text-2xl md:text-3xl font-bold text-white font-mono">₹14,70,023</div>
+          <div id="res-10y-gain" class="text-[11px] text-emerald-400 mt-1 font-mono font-bold">+140.9% Net Gain</div>
+        </div>
+        <div class="bg-cyan-950/60 p-5 rounded-2xl border border-cyan-500/40">
+          <div class="text-xs font-mono text-cyan-300 font-bold mb-1">15-YEAR CORPUS</div>
+          <div id="res-15y" class="text-2xl md:text-3xl font-bold text-cyan-400 font-mono">₹36,08,583</div>
+          <div id="res-15y-mult" class="text-[11px] text-slate-300 mt-1 font-mono font-bold">3.96x Multiplier</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 200-ASSET SQL DATABASE DIRECTORY -->
+  <section id="database" class="py-16 px-6 max-w-7xl mx-auto border-t border-cyan-500/20">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
+      <div>
+        <span class="text-xs font-mono font-bold text-cyan-400 tracking-widest uppercase bg-cyan-950/60 px-3 py-1 rounded-full border border-cyan-500/30">SQL REPOSITORY</span>
+        <h2 class="text-3xl md:text-4xl font-black text-white mt-3 font-brand">200-Module Sovereign Asset Directory</h2>
+        <p class="text-slate-400 text-xs font-mono mt-1">Live searchable institutional database with statutory tax protections and historical rolling returns.</p>
+      </div>
+      <div class="mt-4 md:mt-0 w-full md:w-72">
+        <input type="text" id="asset-search" oninput="searchDatabase()" placeholder="🔍 Search 200 assets (PPF, SGB, Nifty)..." class="w-full p-3 text-xs font-mono bg-slate-900 border border-slate-700 rounded-xl focus:border-cyan-400 focus:outline-none text-white">
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-2 mb-6 font-mono text-xs">
+      <button onclick="filterDatabase('all')" id="db-all" class="px-4 py-2 rounded-xl bg-cyan-400 text-black font-black">ALL ASSETS (200)</button>
+      <button onclick="filterDatabase('tier1')" id="db-tier1" class="px-4 py-2 rounded-xl bg-slate-900 text-slate-300 border border-slate-700 hover:bg-slate-800">TIER 1 (SOVEREIGN EEE)</button>
+      <button onclick="filterDatabase('tier2')" id="db-tier2" class="px-4 py-2 rounded-xl bg-slate-900 text-slate-300 border border-slate-700 hover:bg-slate-800">TIER 2 (CASHFLOW &amp; REITS)</button>
+      <button onclick="filterDatabase('tier3')" id="db-tier3" class="px-4 py-2 rounded-xl bg-slate-900 text-slate-300 border border-slate-700 hover:bg-slate-800">TIER 3 (DOMESTIC EQUITIES)</button>
+      <button onclick="filterDatabase('tier4')" id="db-tier4" class="px-4 py-2 rounded-xl bg-slate-900 text-slate-300 border border-slate-700 hover:bg-slate-800">TIER 4 (GLOBAL USD &amp; TECH)</button>
+    </div>
+
+    <div class="cosmic-card overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-xs font-mono">
+          <thead>
+            <tr class="bg-black/90 text-cyan-400 border-b border-cyan-500/20 uppercase text-[11px] font-bold">
+              <th class="p-3.5">ID</th>
+              <th class="p-3.5">Asset Name</th>
+              <th class="p-3.5">Tier &amp; Category</th>
+              <th class="p-3.5">5Y Rolling CAGR</th>
+              <th class="p-3.5">Statutory Protection</th>
+              <th class="p-3.5 text-right">Action</th>
+            </tr>
+          </thead>
+          <tbody id="database-rows" class="divide-y divide-slate-800 text-slate-300 bg-slate-950/40">
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6-DESK INSTITUTIONAL MATRIX -->
+  <section id="matrix" class="py-16 px-6 max-w-7xl mx-auto border-t border-cyan-500/20">
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <span class="text-xs font-mono font-bold text-cyan-400 tracking-widest uppercase bg-cyan-950/60 px-3 py-1 rounded-full border border-cyan-500/30">INSTITUTIONAL ALLOCATOR</span>
+      <h2 class="text-3xl md:text-5xl font-black text-white mt-3 mb-2 font-brand">6-Desk Institutional Matrix</h2>
+      <p class="text-slate-400 text-xs font-mono">Click any desk card below to expand holdings, VaR telemetry, and tax shields.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <div class="cosmic-card p-7 border-l-4 border-l-orange-500 cursor-pointer" onclick="toggleDeskDrawer('desk-1')">
+        <div class="flex justify-between items-start mb-2">
+          <span class="text-[10px] font-mono font-bold text-orange-400 uppercase">DESK I • FACTOR ALPHA</span>
+          <span id="desk-1-icon" class="text-xs font-mono font-bold text-cyan-400">+ EXPAND</span>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-2">Domestic Equities</h3>
+        <p class="text-slate-400 text-xs mb-4">Nifty 50, Next 50, Midcap 150, and Nifty 200 Momentum 30 systematic engines.</p>
+        <div class="flex justify-between items-center text-xs font-mono border-t border-slate-800 pt-3">
+          <span class="text-slate-400">Target CAGR:</span>
+          <span class="text-orange-400 font-bold">13.2% – 24.0%</span>
+        </div>
+        <div id="desk-1" class="desk-subdrawer mt-4 pt-4 border-t border-slate-800 text-xs font-mono space-y-2">
+          <div class="bg-slate-900/80 p-3 rounded-xl">Key: UTI Nifty 50 (40%), Midcap 150 (30%), Nippon Small Cap (30%)</div>
+          <div class="text-emerald-400">Sharpe: 2.14 • Max Drawdown: 6.2%</div>
+        </div>
+      </div>
+
+      <div class="cosmic-card p-7 border-l-4 border-l-blue-500 cursor-pointer" onclick="toggleDeskDrawer('desk-2')">
+        <div class="flex justify-between items-start mb-2">
+          <span class="text-[10px] font-mono font-bold text-blue-400 uppercase">DESK II • THETA RENT</span>
+          <span id="desk-2-icon" class="text-xs font-mono font-bold text-cyan-400">+ EXPAND</span>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-2">Covered Options Overlay</h3>
+        <p class="text-slate-400 text-xs mb-4">Selling monthly 5% OTM Call options against high-conviction portfolios for passive cashflow.</p>
+        <div class="flex justify-between items-center text-xs font-mono border-t border-slate-800 pt-3">
+          <span class="text-slate-400">Target Cash Yield:</span>
+          <span class="text-blue-400 font-bold">8.0% – 14.0% p.a.</span>
+        </div>
+        <div id="desk-2" class="desk-subdrawer mt-4 pt-4 border-t border-slate-800 text-xs font-mono space-y-2">
+          <div class="bg-slate-900/80 p-3 rounded-xl">Rule: Sell 1-Month 5% OTM calls on Reliance/TCS monthly cycles.</div>
+          <div class="text-cyan-400">Monthly Yield Sweep: 0.85% – 1.15%</div>
+        </div>
+      </div>
+
+      <div class="cosmic-card p-7 border-l-4 border-l-emerald-500 cursor-pointer" onclick="toggleDeskDrawer('desk-3')">
+        <div class="flex justify-between items-start mb-2">
+          <span class="text-[10px] font-mono font-bold text-emerald-400 uppercase">DESK III • SOVEREIGN EEE</span>
+          <span id="desk-3-icon" class="text-xs font-mono font-bold text-cyan-400">+ EXPAND</span>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-2">Sovereign Debt &amp; PPF</h3>
+        <p class="text-slate-400 text-xs mb-4">PPF, SSY, and RBI Gilts with Section 14 statutory court immunity and 100% tax exemption.</p>
+        <div class="flex justify-between items-center text-xs font-mono border-t border-slate-800 pt-3">
+          <span class="text-slate-400">Target Sovereign Return:</span>
+          <span class="text-emerald-400 font-bold">7.1% – 8.2% EEE</span>
+        </div>
+        <div id="desk-3" class="desk-subdrawer mt-4 pt-4 border-t border-slate-800 text-xs font-mono space-y-2">
+          <div class="bg-slate-900/80 p-3 rounded-xl">Legal Shield: Section 14 PPF Act (Immunity from Court Attachment).</div>
+          <div class="text-emerald-400">100% Tax-Exempt under Section 10(11)</div>
+        </div>
+      </div>
+
+      <div class="cosmic-card p-7 border-l-4 border-l-purple-500 cursor-pointer" onclick="toggleDeskDrawer('desk-4')">
+        <div class="flex justify-between items-start mb-2">
+          <span class="text-[10px] font-mono font-bold text-purple-400 uppercase">DESK IV • COMMERCIAL ASSETS</span>
+          <span id="desk-4-icon" class="text-xs font-mono font-bold text-cyan-400">+ EXPAND</span>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-2">Grade-A REITs &amp; InvITs</h3>
+        <p class="text-slate-400 text-xs mb-4">Embassy Parks and Mindspace delivering mandatory 90% NDCF quarterly distributions.</p>
+        <div class="flex justify-between items-center text-xs font-mono border-t border-slate-800 pt-3">
+          <span class="text-slate-400">Distribution Yield:</span>
+          <span class="text-purple-400 font-bold">7.5% – 11.5% NDCF</span>
+        </div>
+        <div id="desk-4" class="desk-subdrawer mt-4 pt-4 border-t border-slate-800 text-xs font-mono space-y-2">
+          <div class="bg-slate-900/80 p-3 rounded-xl">Schedule: Quarterly Net Distributable Cash Flow (NDCF) via bank ECS.</div>
+        </div>
+      </div>
+
+      <div class="cosmic-card p-7 border-l-4 border-l-amber-500 cursor-pointer" onclick="toggleDeskDrawer('desk-5')">
+        <div class="flex justify-between items-start mb-2">
+          <span class="text-[10px] font-mono font-bold text-amber-400 uppercase">DESK V • GOLD HEDGES</span>
+          <span id="desk-5-icon" class="text-xs font-mono font-bold text-cyan-400">+ EXPAND</span>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-2">SGBs &amp; Precious Metals</h3>
+        <p class="text-slate-400 text-xs mb-4">Sovereign Gold Bonds yielding 2.50% coupon + zero capital gains tax (Section 47(viic)).</p>
+        <div class="flex justify-between items-center text-xs font-mono border-t border-slate-800 pt-3">
+          <span class="text-slate-400">Target Return:</span>
+          <span class="text-amber-400 font-bold">11.0% + 2.5% Coupon</span>
+        </div>
+        <div id="desk-5" class="desk-subdrawer mt-4 pt-4 border-t border-slate-800 text-xs font-mono space-y-2">
+          <div class="bg-slate-900/80 p-3 rounded-xl">Moat: 0% Capital Gains on maturity redemption under Section 47(viic).</div>
+        </div>
+      </div>
+
+      <div class="cosmic-card p-7 border-l-4 border-l-cyan-500 cursor-pointer" onclick="toggleDeskDrawer('desk-6')">
+        <div class="flex justify-between items-start mb-2">
+          <span class="text-[10px] font-mono font-bold text-cyan-400 uppercase">DESK VI • GLOBAL USD</span>
+          <span id="desk-6-icon" class="text-xs font-mono font-bold text-cyan-400">+ EXPAND</span>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-2">US Tech &amp; Global S&amp;P</h3>
+        <p class="text-slate-400 text-xs mb-4">Vanguard S&amp;P 500 (VOO) &amp; SMH with ~3.2% structural USD/INR tailwind.</p>
+        <div class="flex justify-between items-center text-xs font-mono border-t border-slate-800 pt-3">
+          <span class="text-slate-400">Target INR Return:</span>
+          <span class="text-cyan-400 font-bold">15.2% – 18.5% CAGR</span>
+        </div>
+        <div id="desk-6" class="desk-subdrawer mt-4 pt-4 border-t border-slate-800 text-xs font-mono space-y-2">
+          <div class="bg-slate-900/80 p-3 rounded-xl">Hedge: Long-term USD appreciation vs INR (~3.2% annual spread).</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- RESEARCH GRANTS & CREATOR NETWORK -->
+  <section id="research" class="py-16 px-6 max-w-7xl mx-auto border-t border-cyan-500/20">
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <span class="text-xs font-mono font-bold text-cyan-400 tracking-widest uppercase bg-cyan-950/60 px-3 py-1 rounded-full border border-cyan-500/30">OPEN GRANTS</span>
+      <h2 class="text-3xl md:text-5xl font-black text-white mt-3 mb-2 font-brand">Quantitative Research Grants</h2>
+      <p class="text-slate-400 text-xs font-mono">Submit proprietary models to earn monthly bounties ($500–$2,000) and revenue share.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="cosmic-card p-8 border-l-4 border-l-cyan-400">
+        <div class="text-xs font-mono text-cyan-400 mb-2 font-bold">TRACK 01</div>
+        <h3 class="text-xl font-bold text-white mb-2">Factor Alpha Bounties ($500–$2,000)</h3>
+        <p class="text-xs text-slate-400 leading-relaxed mb-6 font-medium">Verified Python backtests outperforming Nifty with Sharpe > 1.5.</p>
+        <button onclick="openModal('researcher-modal')" class="w-full bg-slate-900 border border-slate-700 text-cyan-300 font-mono font-bold text-xs py-3 rounded-xl hover:bg-cyan-400 hover:text-black transition">
+          Apply for Grant &rarr;
+        </button>
+      </div>
+
+      <div class="cosmic-card p-8 border-l-4 border-l-purple-500">
+        <div class="text-xs font-mono text-purple-400 mb-2 font-bold">TRACK 02</div>
+        <h3 class="text-xl font-bold text-white mb-2">Creator Strategy Syndication (70% Rev-Share)</h3>
+        <p class="text-xs text-slate-400 leading-relaxed mb-6 font-medium">Syndicate your bespoke asset allocation codex with direct payouts.</p>
+        <button onclick="openModal('researcher-modal')" class="w-full bg-slate-900 border border-slate-700 text-purple-300 font-mono font-bold text-xs py-3 rounded-xl hover:bg-purple-500 hover:text-white transition">
+          Syndicate Strategy &rarr;
+        </button>
+      </div>
+
+      <div class="cosmic-card p-8 border-l-4 border-l-emerald-500">
+        <div class="text-xs font-mono text-emerald-400 mb-2 font-bold">TRACK 03</div>
+        <h3 class="text-xl font-bold text-white mb-2">Family Office Custom Dossiers</h3>
+        <p class="text-xs text-slate-400 leading-relaxed mb-6 font-medium">Commission custom zero-void institutional monographs.</p>
+        <button onclick="openModal('hire-modal')" class="w-full bg-slate-900 border border-slate-700 text-emerald-300 font-mono font-bold text-xs py-3 rounded-xl hover:bg-emerald-500 hover:text-black transition">
+          Commission Dossier &rarr;
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="py-16 px-6 max-w-7xl mx-auto border-t border-cyan-500/20">
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <span class="text-xs font-mono font-bold text-cyan-400 tracking-widest uppercase bg-cyan-950/60 px-3 py-1 rounded-full border border-cyan-500/30">INSTITUTIONAL ACCESS</span>
+      <h2 class="text-3xl md:text-5xl font-black text-white mt-3 mb-2 font-brand">Deploy Institutional Sovereignty</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      <div class="cosmic-card p-8 flex flex-col justify-between">
+        <div>
+          <div class="text-xs font-mono text-slate-400 uppercase">COMMUNITY TIER</div>
+          <div class="text-3xl font-black text-white font-mono mt-2 mb-4">FREE</div>
+          <p class="text-xs text-slate-400 mb-6 font-medium">Live compounding simulator and 20 introductory asset modules.</p>
+        </div>
+        <a href="#simulator" class="w-full text-center bg-slate-900 border border-slate-700 text-white font-mono font-bold text-xs py-3 rounded-xl hover:bg-white hover:text-black transition block">
+          Use Free Terminal
+        </a>
+      </div>
+
+      <div class="cosmic-card p-8 flex flex-col justify-between border-2 border-cyan-400 relative">
+        <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-cyan-400 text-black font-mono font-black text-[10px] uppercase px-3 py-0.5 rounded-full">
+          RECOMMENDED
+        </div>
+        <div>
+          <div class="text-xs font-mono text-cyan-400 uppercase font-bold">MASTER CODEX BUNDLE</div>
+          <div class="text-3xl font-black text-white font-mono mt-2 mb-4">$29 <span class="text-xs text-slate-400 font-normal">/ one-time</span></div>
+          <p class="text-xs text-slate-400 mb-6 font-medium">282-Page Master Institutional Compendium PDF + Raw Excel Models.</p>
+        </div>
+        <a href="reports/qnt_Universal_Financial_Freedom_Institutional_Compendium.pdf" download class="w-full text-center bg-cyan-400 text-black font-mono font-black text-xs py-3.5 rounded-xl hover:bg-white transition block shadow-lg">
+          Instant Download ($29 Free Promo)
+        </a>
+      </div>
+
+      <div class="cosmic-card p-8 flex flex-col justify-between">
+        <div>
+          <div class="text-xs font-mono text-slate-400 uppercase">ENTERPRISE AGENT OS</div>
+          <div class="text-3xl font-black text-white font-mono mt-2 mb-4">$1,500 <span class="text-xs text-slate-400 font-normal">/ project</span></div>
+          <p class="text-xs text-slate-400 mb-6 font-medium">Custom 3D landing page, scraper bot, or research dossier ghost-built.</p>
+        </div>
+        <button onclick="openModal('hire-modal')" class="w-full text-center bg-slate-900 border border-slate-700 text-white font-mono font-bold text-xs py-3 rounded-xl hover:bg-white hover:text-black transition">
+          Book Project
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-cyan-500/20 py-16 px-6 text-xs text-slate-500 font-mono">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center">
+      <div>&copy; 2026 qnt. Quantitative Systems. OpenSim Sovereign Dollar Architecture.</div>
+      <div class="mt-4 sm:mt-0 text-cyan-400">Workspace Owner: Dxrk sky (8549729101)</div>
+    </div>
+  </footer>
+
+  <!-- MODALS -->
+  <div id="researcher-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden items-center justify-center p-4">
+    <div class="cosmic-card p-8 rounded-3xl max-w-lg w-full bg-slate-900 border border-cyan-500/40 relative">
+      <button onclick="closeModal('researcher-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white font-bold text-xl">&times;</button>
+      <div class="text-xs font-mono text-cyan-400 mb-1">RESEARCH GRANTS</div>
+      <h3 class="text-2xl font-bold text-white mb-2">Submit Strategy &amp; Join qnt.</h3>
+      <form onsubmit="handleFormSubmit(event, 'researcher_applications')" action="https://formsubmit.co/obsi.agent@gmail.com" method="POST" class="space-y-4">
+        <input type="hidden" name="_subject" value="OpenSim Research Application">
+        <input type="hidden" name="_captcha" value="false">
+        <div>
+          <label class="block text-xs font-mono text-slate-300 mb-1">Name</label>
+          <input type="text" name="researcher_name" id="res-name" required class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-white">
+        </div>
+        <div>
+          <label class="block text-xs font-mono text-slate-300 mb-1">Contact (Email/Telegram)</label>
+          <input type="text" name="contact" id="res-contact" required class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-white">
+        </div>
+        <div>
+          <label class="block text-xs font-mono text-slate-300 mb-1">Methodology / Code Link</label>
+          <textarea name="strategy_overview" id="res-overview" rows="3" required class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-white"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-cyan-400 text-black font-mono font-black text-xs py-3 rounded-xl">Submit Application &rarr;</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="hire-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden items-center justify-center p-4">
+    <div class="cosmic-card p-8 rounded-3xl max-w-lg w-full bg-slate-900 border border-cyan-500/40 relative">
+      <button onclick="closeModal('hire-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white font-bold text-xl">&times;</button>
+      <div class="text-xs font-mono text-cyan-400 mb-1">GHOST-BUILDING STUDIO</div>
+      <h3 class="text-2xl font-bold text-white mb-2">Commission Custom Work</h3>
+      <form onsubmit="handleFormSubmit(event, 'ghost_studio_orders')" action="https://formsubmit.co/obsi.agent@gmail.com" method="POST" class="space-y-4">
+        <input type="hidden" name="_subject" value="OpenSim Studio Commission">
+        <input type="hidden" name="_captcha" value="false">
+        <div>
+          <label class="block text-xs font-mono text-slate-300 mb-1">Service</label>
+          <select name="service" id="gh-service" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-white font-mono">
+            <option>High-Converting 3D Landing Page ($500–$1,200)</option>
+            <option>Automated Python Job Scraper ($400–$800)</option>
+            <option>Institutional Research Dossier ($800–$2,500)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-mono text-slate-300 mb-1">Contact Email / Telegram</label>
+          <input type="text" name="client_contact" id="gh-contact" required class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-white">
+        </div>
+        <div>
+          <label class="block text-xs font-mono text-slate-300 mb-1">Details</label>
+          <textarea name="details" id="gh-details" rows="3" required class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-white"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-cyan-400 text-black font-mono font-black text-xs py-3 rounded-xl">Send Request &rarr;</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT: SUPABASE & THREE.JS REAL 3D DOLLAR ENGINE -->
+  <script>
+    // SUPABASE
+    const SUPABASE_URL = "https://dsxnkiuhjtkngeoijviw.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_HIe2mPGwJTQM3hR4tQfIqQ_5mKzH3Mr";
+    let supabaseClient = null;
+    try {
+      if (window.supabase) supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    } catch(e) { console.log('Supabase init notice:', e); }
+
+    async function handleFormSubmit(event, tableName) {
+      if (supabaseClient) {
+        try {
+          let rowData = {};
+          if (tableName === 'researcher_applications') {
+            rowData = { researcher_name: document.getElementById('res-name').value, contact: document.getElementById('res-contact').value, strategy_overview: document.getElementById('res-overview').value };
+          } else if (tableName === 'ghost_studio_orders') {
+            rowData = { service_scope: document.getElementById('gh-service').value, client_contact: document.getElementById('gh-contact').value, project_details: document.getElementById('gh-details').value };
+          }
+          await supabaseClient.from(tableName).insert([rowData]);
+        } catch(err) { console.log(err); }
+      }
+    }
+
+    // THREE.JS REAL 3D GOLDEN DOLLAR WEAPON ENGINE
+    let scene, camera, renderer, coinGroup;
+    let isDragging = false, prevMouse = { x: 0, y: 0 };
+
+    function initDollar3D() {
+      const container = document.getElementById('dollar-canvas');
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+      camera.position.z = 15;
+
+      renderer = new THREE.WebGLRenderer({ canvas: container, alpha: true, antialias: true, powerPreference: "high-performance" });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      coinGroup = new THREE.Group();
+
+      // Realistic 24k Gold Alloy Material
+      const goldMat = new THREE.MeshStandardMaterial({
+        color: 0xF59E0B,
+        metalness: 0.96,
+        roughness: 0.12,
+        emissive: 0x78350F,
+        emissiveIntensity: 0.2
+      });
+
+      const goldReliefMat = new THREE.MeshStandardMaterial({
+        color: 0xFCD34D,
+        metalness: 0.98,
+        roughness: 0.08
+      });
+
+      const crystalMat = new THREE.MeshPhysicalMaterial({
+        color: 0x38BDF8,
+        metalness: 0.1,
+        roughness: 0.02,
+        transmission: 0.95,
+        thickness: 2.0,
+        ior: 1.54,
+        transparent: true,
+        opacity: 0.9
+      });
+
+      // 1. Heavy Sovereign Bullion Coin Base
+      const coinGeo = new THREE.CylinderGeometry(4.2, 4.2, 0.6, 64);
+      const coin = new THREE.Mesh(coinGeo, goldMat);
+      coin.rotation.x = Math.PI * 0.5;
+      coinGroup.add(coin);
+
+      // Outer Coin Rim Bevel
+      const rimGeo = new THREE.TorusGeometry(4.2, 0.22, 16, 64);
+      const rim = new THREE.Mesh(rimGeo, goldReliefMat);
+      coinGroup.add(rim);
+
+      // 2. High-Relief 3D Embossed Dollar Symbol ($) Front & Back
+      function createDollarMesh() {
+        const dGroup = new THREE.Group();
+        const topArc = new THREE.Mesh(new THREE.TorusGeometry(1.2, 0.28, 16, 32, Math.PI * 1.3), goldReliefMat);
+        topArc.position.set(0, 1.0, 0); topArc.rotation.z = Math.PI * 0.35;
+        const btmArc = new THREE.Mesh(new THREE.TorusGeometry(1.2, 0.28, 16, 32, Math.PI * 1.3), goldReliefMat);
+        btmArc.position.set(0, -1.0, 0); btmArc.rotation.z = Math.PI * 1.35;
+        const vBar = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 4.6, 24), goldReliefMat);
+        dGroup.add(topArc); dGroup.add(btmArc); dGroup.add(vBar);
+        return dGroup;
+      }
+
+      const dollarFront = createDollarMesh();
+      dollarFront.position.set(0, 0, 0.35);
+      coinGroup.add(dollarFront);
+
+      const dollarBack = createDollarMesh();
+      dollarBack.position.set(0, 0, -0.35);
+      dollarBack.rotation.y = Math.PI;
+      coinGroup.add(dollarBack);
+
+      // 3. Gyroscopic Orbital Halo Rings
+      const ring1 = new THREE.Mesh(new THREE.TorusGeometry(6.2, 0.08, 16, 120), new THREE.MeshBasicMaterial({ color: 0x38BDF8, wireframe: true, transparent: true, opacity: 0.5 }));
+      ring1.rotation.x = Math.PI * 0.35;
+      coinGroup.add(ring1);
+
+      const ring2 = new THREE.Mesh(new THREE.TorusGeometry(7.2, 0.06, 16, 120), new THREE.MeshBasicMaterial({ color: 0xF59E0B, wireframe: true, transparent: true, opacity: 0.4 }));
+      ring2.rotation.y = Math.PI * 0.45;
+      coinGroup.add(ring2);
+
+      // 4. 12 Orbiting Crystal Factor Shards
+      const shardGroup = new THREE.Group();
+      for (let i = 0; i < 12; i++) {
+        const a = (i / 12) * Math.PI * 2;
+        const shard = new THREE.Mesh(new THREE.OctahedronGeometry(0.4, 0), crystalMat);
+        shard.position.set(Math.cos(a) * 6.2, Math.sin(a) * 6.2, 0);
+        shardGroup.add(shard);
+      }
+      shardGroup.rotation.x = Math.PI * 0.35;
+      coinGroup.add(shardGroup);
+
+      scene.add(coinGroup);
+
+      // Studio Lighting
+      const amb = new THREE.AmbientLight(0xffffff, 1.8);
+      scene.add(amb);
+      const dirLight = new THREE.DirectionalLight(0xffffff, 3.0);
+      dirLight.position.set(12, 18, 15);
+      scene.add(dirLight);
+      const cyanGlow = new THREE.PointLight(0x06B6D4, 4.0, 30);
+      cyanGlow.position.set(-8, -4, 8);
+      scene.add(cyanGlow);
+      const goldGlow = new THREE.PointLight(0xF59E0B, 3.5, 30);
+      goldGlow.position.set(8, -6, 6);
+      scene.add(goldGlow);
+
+      // Tactile Gesture Drag Interaction
+      container.addEventListener('mousedown', (e) => { isDragging = true; prevMouse = { x: e.clientX, y: e.clientY }; });
+      window.addEventListener('mouseup', () => { isDragging = false; });
+      container.addEventListener('mousemove', (e) => {
+        if (isDragging && coinGroup) {
+          const deltaX = e.clientX - prevMouse.x;
+          const deltaY = e.clientY - prevMouse.y;
+          coinGroup.rotation.y += deltaX * 0.01;
+          coinGroup.rotation.x += deltaY * 0.01;
+          prevMouse = { x: e.clientX, y: e.clientY };
+        }
+      });
+
+      // Mobile Touch
+      container.addEventListener('touchstart', (e) => { if (e.touches.length === 1) { isDragging = true; prevMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY }; } });
+      container.addEventListener('touchmove', (e) => {
+        if (isDragging && coinGroup && e.touches.length === 1) {
+          const deltaX = e.touches[0].clientX - prevMouse.x;
+          const deltaY = e.touches[0].clientY - prevMouse.y;
+          coinGroup.rotation.y += deltaX * 0.01;
+          coinGroup.rotation.x += deltaY * 0.01;
+          prevMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        }
+      });
+      window.addEventListener('touchend', () => { isDragging = false; });
+
+      window.addEventListener('resize', () => {
+        const w = container.clientWidth;
+        const h = container.clientHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      });
+
+      animate();
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const t = Date.now() * 0.0015;
+      if (!isDragging && coinGroup) {
+        coinGroup.rotation.y += 0.012;
+        coinGroup.position.y = Math.sin(t * 1.5) * 0.3;
+      }
+      renderer.render(scene, camera);
+    }
+
+    // 200-ASSET DATABASE
+    const assetDatabase = [
+      { id: 1, name: "Public Provident Fund (PPF)", tierName: "Tier 1: Sovereign EEE", rate: "7.10% p.a.", tax: "Sec 14 Court Immunity + 100% Tax-Free (Sec 10(11))" },
+      { id: 2, name: "Sukanya Samriddhi Yojana (SSY)", tierName: "Tier 1: Sovereign EEE", rate: "8.20% p.a.", tax: "Sec 10(11A) Legal Shield + 21Y Mandatory Lock" },
+      { id: 3, name: "Senior Citizen Savings Scheme (SCSS)", tierName: "Tier 1: Sovereign Annuity", rate: "8.20% p.a.", tax: "Quarterly ECS Cash Sweep (₹30L Ceiling)" },
+      { id: 4, name: "Covered Call Options Overlay", tierName: "Tier 2: F&O Theta Rent", rate: "12.36% p.a.", tax: "Monthly OTM Time Decay Harvest on Blue Chips" },
+      { id: 5, name: "Embassy Office Parks REIT", tierName: "Tier 2: Commercial REIT", rate: "13.40% CAGR", tax: "Mandatory 90% NDCF Quarterly Cash Distribution" },
+      { id: 6, name: "Sovereign Gold Bonds (SGB)", tierName: "Tier 2: Precious Metals", rate: "13.80% + 2.5%", tax: "0% Capital Gains Tax on Maturity (Sec 47(viic))" },
+      { id: 7, name: "UTI Nifty 50 Index Direct-Growth", tierName: "Tier 3: Domestic Large Cap", rate: "14.85% CAGR", tax: "Top 50 Indian Monopolies • Sub-0.20% TER" },
+      { id: 8, name: "Nippon India Small Cap Direct", tierName: "Tier 3: Convex Small Cap", rate: "28.40% CAGR", tax: "High-Velocity Domestic Earnings Multiplier" },
+      { id: 9, name: "Vanguard S&P 500 ETF (VOO)", tierName: "Tier 4: Global USD Tech", rate: "18.20% INR", tax: "Global Monopolies + 3.2% USD/INR Tailwind" },
+      { id: 10, name: "VanEck Semiconductor ETF (SMH)", tierName: "Tier 4: Global AI Hardware", rate: "31.40% INR", tax: "AI Infrastructure Multiplier (NVDA, TSM, ASML)" }
+    ];
+
+    function renderDatabase(data) {
+      const tbody = document.getElementById('database-rows');
+      tbody.innerHTML = '';
+      data.forEach(item => {
+        const row = document.createElement('tr');
+        row.className = 'hover:bg-slate-900/60 transition border-b border-slate-800';
+        row.innerHTML = `
+          <td class="p-3.5 font-bold text-cyan-400">#00${item.id}</td>
+          <td class="p-3.5 font-bold text-white">${item.name}</td>
+          <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[10px]">${item.tierName}</span></td>
+          <td class="p-3.5 font-bold text-emerald-400">${item.rate}</td>
+          <td class="p-3.5 text-[11px] text-slate-400">${item.tax}</td>
+          <td class="p-3.5 text-right"><span class="text-cyan-400 font-bold">Verified ✓</span></td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function searchDatabase() {
+      const q = document.getElementById('asset-search').value.toLowerCase();
+      renderDatabase(assetDatabase.filter(a => a.name.toLowerCase().includes(q) || a.tierName.toLowerCase().includes(q)));
+    }
+
+    function filterDatabase(tier) {
+      if (tier === 'all') renderDatabase(assetDatabase);
+      else renderDatabase(assetDatabase.filter(a => a.tierName.toLowerCase().includes(tier)));
+    }
+
+    // COMPOUNDING SIMULATOR
+    let currentP = 10000, currentSip = 5000;
+    function setBase(p) {
+      currentP = p;
+      ['btn-1k', 'btn-10k', 'btn-1l'].forEach(id => document.getElementById(id).className = 'py-3 px-2 rounded-xl bg-slate-800 text-slate-300 border border-slate-700 font-bold transition');
+      const activeId = p === 1000 ? 'btn-1k' : (p === 10000 ? 'btn-10k' : 'btn-1l');
+      document.getElementById(activeId).className = 'py-3 px-2 rounded-xl bg-cyan-400 text-black font-black border border-cyan-400 shadow-lg';
+      recalculate();
+    }
+    function updateSip(val) {
+      currentSip = parseInt(val);
+      document.getElementById('sip-val-label').innerText = '₹' + currentSip.toLocaleString('en-IN') + '/mo';
+      recalculate();
+    }
+    function recalculate() {
+      const r = parseFloat(document.getElementById('strategy-select').value);
+      const monthly_r = r / 12;
+      function calcVal(y) {
+        const m = y * 12;
+        const lump = currentP * Math.pow(1 + r, y);
+        const sip = currentSip > 0 ? currentSip * ((Math.pow(1 + monthly_r, m) - 1) / monthly_r) * (1 + monthly_r) : 0;
+        return Math.round(lump + sip);
+      }
+      const v5 = calcVal(5), v10 = calcVal(10), v15 = calcVal(15);
+      const t5 = currentP + (currentSip * 60), t10 = currentP + (currentSip * 120), t15 = currentP + (currentSip * 180);
+      document.getElementById('res-5y').innerText = '₹' + v5.toLocaleString('en-IN');
+      document.getElementById('res-10y').innerText = '₹' + v10.toLocaleString('en-IN');
+      document.getElementById('res-15y').innerText = '₹' + v15.toLocaleString('en-IN');
+      document.getElementById('res-5y-gain').innerText = '+' + Math.round(((v5 - t5) / t5) * 100) + '% Net Gain';
+      document.getElementById('res-10y-gain').innerText = '+' + Math.round(((v10 - t10) / t10) * 100) + '% Net Gain';
+      document.getElementById('res-15y-mult').innerText = (v15 / t15).toFixed(2) + 'x Multiplier';
+    }
+
+    function toggleDeskDrawer(id) {
+      const d = document.getElementById(id), icon = document.getElementById(id + '-icon');
+      if (d.classList.contains('expanded')) { d.classList.remove('expanded'); icon.innerText = '+ EXPAND'; }
+      else { d.classList.add('expanded'); icon.innerText = '− COLLAPSE'; }
+    }
+
+    function openModal(id) { document.getElementById(id).classList.add('modal-active'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('modal-active'); }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initDollar3D();
+      renderDatabase(assetDatabase);
+      recalculate();
+    });
+  </script>
+</body>
+</html>
